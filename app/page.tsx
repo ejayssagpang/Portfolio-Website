@@ -111,6 +111,15 @@ const experience = [
 
 const projects = [
   {
+    title: "Swipe Pages -> Attentive Lead Sync",
+    description:
+      "Built an automation that captures new Swipe Pages form submissions, subscribes the lead in Attentive, and applies custom attributes so marketing follow-up starts with clean subscriber data.",
+    image: "/swipe-pages-attentive-lead-sync.png",
+    imageAlt:
+      "Automation workflow showing Swipe Pages new form submission followed by Attentive subscribe user and custom attributes steps.",
+    tags: ["Swipe Pages", "Attentive", "Lead Sync"],
+  },
+  {
     title: "Instagram #imadethis -> Manychat Auto-Tagging",
     description:
       "Built an automation that detects new tagged Instagram media, filters posts using the #imadethis condition, finds the matching Manychat user, and applies the right tag for follow-up segmentation.",
@@ -159,6 +168,11 @@ const credentials = [
 
 export default function Home() {
   const [theme, setTheme] = useState("dark");
+  const [activeImage, setActiveImage] = useState<{
+    alt: string;
+    src: string;
+    title: string;
+  } | null>(null);
 
   useEffect(() => {
     const savedTheme = window.localStorage.getItem("portfolio-theme");
@@ -167,6 +181,21 @@ export default function Home() {
     setTheme(nextTheme);
     document.documentElement.dataset.theme = nextTheme;
   }, []);
+
+  useEffect(() => {
+    if (!activeImage) {
+      return;
+    }
+
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setActiveImage(null);
+      }
+    }
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [activeImage]);
 
   function toggleTheme() {
     const nextTheme = theme === "dark" ? "light" : "dark";
@@ -329,20 +358,22 @@ export default function Home() {
           </div>
           <div className="project-grid">
             {projects.map((project) => (
-              <article
-                className={`project-card ${project.image ? "project-card-featured" : ""}`}
-                key={project.title}
-              >
+              <article className="project-card" key={project.title}>
                 {project.image ? (
-                  <a
-                    className="project-image-link"
-                    href={project.image}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <button
+                    className="project-image-button"
+                    type="button"
+                    onClick={() =>
+                      setActiveImage({
+                        alt: project.imageAlt,
+                        src: project.image,
+                        title: project.title,
+                      })
+                    }
                     aria-label={`Open full-size image for ${project.title}`}
                   >
                     <img src={project.image} alt={project.imageAlt} />
-                  </a>
+                  </button>
                 ) : null}
                 <div className="project-topline">
                   <span>Featured Project</span>
@@ -410,6 +441,34 @@ export default function Home() {
           <p>IT Service Manager & Automation Specialist</p>
         </div>
       </footer>
+
+      {activeImage ? (
+        <div
+          className="image-modal-backdrop"
+          role="presentation"
+          onClick={() => setActiveImage(null)}
+        >
+          <div
+            className="image-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-label={`Full-size image for ${activeImage.title}`}
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className="image-modal-header">
+              <h3>{activeImage.title}</h3>
+              <button
+                type="button"
+                onClick={() => setActiveImage(null)}
+                aria-label="Close image preview"
+              >
+                Close
+              </button>
+            </div>
+            <img src={activeImage.src} alt={activeImage.alt} />
+          </div>
+        </div>
+      ) : null}
     </main>
   );
 }

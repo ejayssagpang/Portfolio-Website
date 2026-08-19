@@ -485,10 +485,15 @@ h1 {
 }
 
 .service-grid,
-.project-grid,
 .credential-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 20px;
 }
 
@@ -631,41 +636,39 @@ h1 {
 }
 
 .project-card {
-  min-height: 320px;
+  min-height: 430px;
   padding: 28px;
   display: flex;
   flex-direction: column;
 }
 
-.project-card-featured {
-  grid-column: 1 / -1;
-}
-
-.project-image-link {
+.project-image-button {
   position: relative;
   margin-bottom: 28px;
   display: block;
+  width: 100%;
   overflow: hidden;
   border: 1px solid var(--border);
   border-radius: 10px;
   background: white;
+  cursor: zoom-in;
 }
 
-.project-image-link:hover {
+.project-image-button:hover {
   transform: translateY(-3px);
   box-shadow: 0 14px 30px rgba(240, 100, 47, 0.18);
 }
 
-.project-image-link img {
+.project-image-button img {
   width: 100%;
   min-height: 150px;
-  max-height: 320px;
+  height: 210px;
   display: block;
   object-fit: contain;
 }
 
-.project-image-link::after {
-  content: "Open full-size";
+.project-image-button::after {
+  content: "View image";
   position: absolute;
   right: 12px;
   bottom: 12px;
@@ -682,8 +685,8 @@ h1 {
     transform 0.2s ease;
 }
 
-.project-image-link:hover::after,
-.project-image-link:focus-visible::after {
+.project-image-button:hover::after,
+.project-image-button:focus-visible::after {
   opacity: 1;
   transform: translateY(0);
 }
@@ -793,6 +796,63 @@ h1 {
   color: var(--muted-text);
 }
 
+.image-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  padding: 24px;
+  display: grid;
+  place-items: center;
+  background: rgba(0, 0, 0, 0.78);
+  backdrop-filter: blur(10px);
+}
+
+.image-modal {
+  width: min(1100px, 100%);
+  max-height: min(86vh, 900px);
+  padding: 18px;
+  display: grid;
+  gap: 16px;
+  overflow: auto;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--card);
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.42);
+}
+
+.image-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.image-modal-header h3 {
+  margin: 0;
+  color: var(--ink);
+  font-size: clamp(1rem, 2vw, 1.25rem);
+}
+
+.image-modal-header button {
+  min-height: 38px;
+  padding: 9px 13px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--primary);
+  color: white;
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.image-modal img {
+  width: 100%;
+  max-height: 72vh;
+  display: block;
+  object-fit: contain;
+  border-radius: 10px;
+  background: white;
+}
+
 @media (max-width: 860px) {
   .nav {
     align-items: flex-start;
@@ -811,11 +871,14 @@ h1 {
   .hero-grid,
   .tool-groups,
   .service-grid,
-  .project-grid,
   .credential-grid,
   .contact-grid,
   .experience-card {
     grid-template-columns: 1fr;
+  }
+
+  .project-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .hero {
@@ -852,5 +915,13 @@ h1 {
 
   .note-two {
     left: 0;
+  }
+
+  .project-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .image-modal-backdrop {
+    padding: 12px;
   }
 }
