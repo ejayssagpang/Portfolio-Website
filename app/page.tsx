@@ -1,4 +1,6 @@
-import type { CSSProperties } from "react";
+"use client";
+
+import { useEffect, useState, type CSSProperties } from "react";
 
 type Tool = {
   name: string;
@@ -52,21 +54,25 @@ const toolGroups: ToolGroup[] = [
 const services = [
   {
     title: "Workflow Automation",
+    logo: "automation",
     description:
       "Design GoHighLevel workflows, pipelines, onboarding sequences, task routing, and Zapier integrations that remove repetitive manual work.",
   },
   {
     title: "IT Service Management",
+    logo: "service",
     description:
       "Keep request, incident, problem, and change records organized while improving documentation, portals, and service delivery visibility.",
   },
   {
     title: "CRM Architecture",
+    logo: "crm",
     description:
       "Configure CRM environments around the real business model, then refine automation, data flow, and reporting for daily operations.",
   },
   {
     title: "Systems Administration",
+    logo: "systems",
     description:
       "Manage access, credentials, integrations, technical support, and system reliability with a security-aware operational mindset.",
   },
@@ -125,6 +131,24 @@ const credentials = [
 ];
 
 export default function Home() {
+  const [theme, setTheme] = useState("dark");
+
+  useEffect(() => {
+    const savedTheme = window.localStorage.getItem("portfolio-theme");
+    const nextTheme = savedTheme === "light" ? "light" : "dark";
+
+    setTheme(nextTheme);
+    document.documentElement.dataset.theme = nextTheme;
+  }, []);
+
+  function toggleTheme() {
+    const nextTheme = theme === "dark" ? "light" : "dark";
+
+    setTheme(nextTheme);
+    document.documentElement.dataset.theme = nextTheme;
+    window.localStorage.setItem("portfolio-theme", nextTheme);
+  }
+
   return (
     <main>
       <div className="scroll-line" aria-hidden="true" />
@@ -140,6 +164,15 @@ export default function Home() {
             <a href="#projects">Projects</a>
             <a href="#contact">Contact</a>
           </div>
+          <button
+            className="theme-toggle"
+            type="button"
+            onClick={toggleTheme}
+            aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+            aria-pressed={theme === "dark"}
+          >
+            <span className="theme-icon" aria-hidden="true" />
+          </button>
           <a className="nav-cta" href="#contact">
             Get In Touch
           </a>
@@ -231,7 +264,7 @@ export default function Home() {
           <div className="service-grid">
             {services.map((service) => (
               <article className="modern-card" key={service.title}>
-                <span aria-hidden="true" />
+                <span className={`service-logo ${service.logo}`} aria-hidden="true" />
                 <h3>{service.title}</h3>
                 <p>{service.description}</p>
               </article>
