@@ -35,8 +35,44 @@ const toolGroups: ToolGroup[] = [
     tools: [
       { name: "Close CRM", initials: "C", color: "#0057ff" },
       { name: "Zoho CRM", icon: "https://cdn.simpleicons.org/zoho" },
-      { name: "Google Workspace", icon: "https://cdn.simpleicons.org/google" },
       { name: "Microsoft", initials: "MS", color: "#00a4ef" },
+    ],
+  },
+  {
+    title: "AI",
+    tools: [
+      { name: "OpenAI", icon: "https://cdn.simpleicons.org/openai" },
+      { name: "Google Gemini", icon: "https://cdn.simpleicons.org/googlegemini" },
+      { name: "Claude", icon: "https://cdn.simpleicons.org/claude" },
+      { name: "Relevance AI", initials: "RA", color: "#5b5ff0" },
+    ],
+  },
+  {
+    title: "Communication",
+    tools: [
+      { name: "Discord", icon: "https://cdn.simpleicons.org/discord" },
+      { name: "Microsoft Teams", initials: "T", color: "#6264a7" },
+      { name: "Zoom", icon: "https://cdn.simpleicons.org/zoom" },
+      { name: "WhatsApp", icon: "https://cdn.simpleicons.org/whatsapp" },
+      { name: "Google Workspace", initials: "G", color: "#4285f4" },
+      { name: "Slack", icon: "https://cdn.simpleicons.org/slack" },
+    ],
+  },
+  {
+    title: "Website & Dev",
+    tools: [
+      { name: "Swipe Pages", initials: "SP", color: "#2f7df6" },
+      { name: "Typeform", icon: "https://cdn.simpleicons.org/typeform" },
+      { name: "GoDaddy", icon: "https://cdn.simpleicons.org/godaddy" },
+      { name: "Wix", icon: "https://cdn.simpleicons.org/wix" },
+    ],
+  },
+  {
+    title: "Security",
+    tools: [
+      { name: "NordPass", initials: "N", color: "#00a3ff" },
+      { name: "LastPass", icon: "https://cdn.simpleicons.org/lastpass" },
+      { name: "1Password", icon: "https://cdn.simpleicons.org/1password" },
     ],
   },
   {
