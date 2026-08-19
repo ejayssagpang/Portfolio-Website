@@ -636,15 +636,15 @@ h1 {
 }
 
 .project-card {
-  min-height: 430px;
-  padding: 28px;
+  min-height: 0;
+  padding: 20px;
   display: flex;
   flex-direction: column;
 }
 
 .project-image-button {
   position: relative;
-  margin-bottom: 28px;
+  margin-bottom: 16px;
   display: block;
   width: 100%;
   overflow: hidden;
@@ -661,8 +661,8 @@ h1 {
 
 .project-image-button img {
   width: 100%;
-  min-height: 150px;
-  height: 210px;
+  min-height: 0;
+  height: 138px;
   display: block;
   object-fit: contain;
 }
@@ -692,7 +692,7 @@ h1 {
 }
 
 .project-topline {
-  margin-bottom: 40px;
+  margin-bottom: 14px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -701,34 +701,44 @@ h1 {
 
 .project-topline span {
   color: var(--primary);
-  font-size: 0.76rem;
+  font-size: 0.68rem;
   font-weight: 850;
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
 .project-topline small {
-  padding: 7px 10px;
+  padding: 5px 8px;
   border-radius: 999px;
   background: var(--muted);
   color: var(--muted-text);
+  font-size: 0.72rem;
   font-weight: 750;
 }
 
 .project-card h3 {
-  font-size: clamp(1.8rem, 4vw, 3rem);
+  margin-bottom: 10px;
+  font-size: clamp(1.18rem, 2vw, 1.45rem);
+  line-height: 1.16;
+}
+
+.project-card > p {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
 }
 
 .tag-row {
   margin-top: auto;
-  padding-top: 28px;
+  padding-top: 18px;
 }
 
 .tag-row span {
-  min-height: 34px;
-  padding: 7px 10px;
+  min-height: 30px;
+  padding: 6px 9px;
   border-radius: 999px;
-  font-size: 0.86rem;
+  font-size: 0.78rem;
 }
 
 .credential-grid article {
