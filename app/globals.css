@@ -637,6 +637,57 @@ h1 {
   flex-direction: column;
 }
 
+.project-card-featured {
+  grid-column: 1 / -1;
+}
+
+.project-image-link {
+  position: relative;
+  margin-bottom: 28px;
+  display: block;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: white;
+}
+
+.project-image-link:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 30px rgba(240, 100, 47, 0.18);
+}
+
+.project-image-link img {
+  width: 100%;
+  min-height: 150px;
+  max-height: 320px;
+  display: block;
+  object-fit: contain;
+}
+
+.project-image-link::after {
+  content: "Open full-size";
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  padding: 7px 10px;
+  border-radius: 999px;
+  background: rgba(16, 17, 20, 0.76);
+  color: white;
+  font-size: 0.78rem;
+  font-weight: 800;
+  opacity: 0;
+  transform: translateY(6px);
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+.project-image-link:hover::after,
+.project-image-link:focus-visible::after {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .project-topline {
   margin-bottom: 40px;
   display: flex;

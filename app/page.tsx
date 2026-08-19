@@ -111,6 +111,33 @@ const experience = [
 
 const projects = [
   {
+    title: "Instagram #imadethis -> Manychat Auto-Tagging",
+    description:
+      "Built an automation that detects new tagged Instagram media, filters posts using the #imadethis condition, finds the matching Manychat user, and applies the right tag for follow-up segmentation.",
+    image: "/instagram-imadethis-manychat-auto-tagging.png",
+    imageAlt:
+      "Automation workflow showing Instagram tagged media, Zapier filters, Manychat find user by name, and Manychat add tag to user steps.",
+    tags: ["Instagram", "Zapier", "Manychat"],
+  },
+  {
+    title: "Google Sheets -> GHL Lead Sync with Team Notification",
+    description:
+      "Built an automation that watches for new or updated spreadsheet rows, creates or updates the matching lead in GoHighLevel, and sends a Google Chat notification so the team can act quickly.",
+    image: "/google-sheets-ghl-lead-sync-team-notification.png",
+    imageAlt:
+      "Automation workflow showing Google Sheets new or updated spreadsheet row, LeadConnector add or update contact, and Google Chat create message steps.",
+    tags: ["Google Sheets", "GoHighLevel", "Team Notification"],
+  },
+  {
+    title: "GHL Email Campaign Follow-up & Pipeline Cleanup",
+    description:
+      "Automated a GoHighLevel follow-up path that sends timed email touches after engagement, waits between steps, and removes the campaign tag once the sequence is complete to keep the pipeline clean.",
+    image: "/ghl-email-followup-pipeline-cleanup.png",
+    imageAlt:
+      "GoHighLevel workflow showing clicked or opened trigger, first follow-up, wait, second follow-up, wait, third follow-up, and remove tag steps.",
+    tags: ["GoHighLevel", "Email Follow-up", "Pipeline Cleanup"],
+  },
+  {
     title: "Scale Smart Dashboard",
     description:
       "A GoHighLevel dashboard for real-time lead visibility, campaign performance, pipeline health, KPI tracking, and integrated business reporting.",
@@ -302,7 +329,21 @@ export default function Home() {
           </div>
           <div className="project-grid">
             {projects.map((project) => (
-              <article className="project-card" key={project.title}>
+              <article
+                className={`project-card ${project.image ? "project-card-featured" : ""}`}
+                key={project.title}
+              >
+                {project.image ? (
+                  <a
+                    className="project-image-link"
+                    href={project.image}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Open full-size image for ${project.title}`}
+                  >
+                    <img src={project.image} alt={project.imageAlt} />
+                  </a>
+                ) : null}
                 <div className="project-topline">
                   <span>Featured Project</span>
                   <small>Operations</small>
