@@ -161,9 +161,21 @@ const projects = [
 ];
 
 const credentials = [
-  "Google IT Support - Aug 2023",
-  "Google Penetration Testing Intern - Mar 2022",
-  "Secuna Web Application Penetration Testing - Dec 2021",
+  {
+    title: "Google IT Support",
+    issuer: "Google",
+    date: "Aug 2023",
+  },
+  {
+    title: "Penetration Testing Intern",
+    issuer: "Google",
+    date: "Mar 2022",
+  },
+  {
+    title: "Web Application Penetration Testing",
+    issuer: "Secuna",
+    date: "Dec 2021",
+  },
 ];
 
 export default function Home() {
@@ -392,21 +404,59 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section muted">
-        <div className="container credential-grid">
-          <article>
-            <h2>Education</h2>
-            <p>Bachelor&apos;s Degree in Information Technology - Cybersecurity</p>
-            <span>Ateneo de Davao University - Jan 2019 to Apr 2022</span>
-          </article>
-          <article>
-            <h2>Certifications</h2>
-            <ul>
-              {credentials.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          </article>
+      <section className="section muted credential-section">
+        <div className="container">
+          <div className="section-heading centered">
+            <h2>Education & Certifications</h2>
+            <p>Formal IT training with certifications across support, cybersecurity, and application security.</p>
+          </div>
+          <div className="credential-grid">
+            <article className="credential-panel education-panel">
+              <div className="credential-header">
+                <span className="credential-icon education-icon" aria-hidden="true" />
+                <div>
+                  <span>Education</span>
+                  <h3>Bachelor&apos;s Degree</h3>
+                </div>
+              </div>
+              <p>Information Technology - Cybersecurity</p>
+              <div className="education-meta">
+                <div>
+                  <span>School</span>
+                  <strong>Ateneo de Davao University</strong>
+                </div>
+                <div>
+                  <span>Timeline</span>
+                  <strong>Jan 2019 to Apr 2022</strong>
+                </div>
+              </div>
+              <div className="credential-tags" aria-label="Education focus areas">
+                <span>Cybersecurity</span>
+                <span>IT Operations</span>
+                <span>Systems Support</span>
+              </div>
+            </article>
+            <article className="credential-panel certification-panel">
+              <div className="credential-header">
+                <span className="credential-icon certification-icon" aria-hidden="true" />
+                <div>
+                  <span>Certifications</span>
+                  <h3>Professional Credentials</h3>
+                </div>
+              </div>
+              <div className="certification-list">
+                {credentials.map((item) => (
+                  <div className="certification-item" key={`${item.issuer}-${item.title}`}>
+                    <div>
+                      <strong>{item.title}</strong>
+                      <span>{item.issuer}</span>
+                    </div>
+                    <time>{item.date}</time>
+                  </div>
+                ))}
+              </div>
+            </article>
+          </div>
         </div>
       </section>
 

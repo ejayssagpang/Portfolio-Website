@@ -741,23 +741,186 @@ h1 {
   font-size: 0.78rem;
 }
 
-.credential-grid article {
-  padding: 28px;
+.credential-section .section-heading {
+  margin-bottom: 34px;
 }
 
-.credential-grid h2 {
-  font-size: clamp(1.8rem, 3.4vw, 2.5rem);
+.credential-panel {
+  position: relative;
+  padding: 26px;
+  overflow: hidden;
 }
 
-.credential-grid ul {
-  margin: 14px 0 0;
-  padding: 0;
-  list-style: none;
+.credential-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
 }
 
-.credential-grid li {
-  padding: 12px 0;
+.credential-header {
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.credential-header div > span {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--primary);
+  font-size: 0.72rem;
+  font-weight: 850;
+  letter-spacing: 0.1em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.credential-header h3 {
+  color: var(--ink);
+  font-size: clamp(1.35rem, 2.4vw, 1.8rem);
+  font-weight: 850;
+  line-height: 1.12;
+}
+
+.credential-icon {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  flex: 0 0 50px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: var(--icon-surface);
+}
+
+.credential-icon::before,
+.credential-icon::after {
+  content: "";
+  position: absolute;
+  display: block;
+}
+
+.education-icon::before {
+  width: 27px;
+  height: 18px;
+  border: 3px solid var(--primary);
+  border-top: 0;
+  border-radius: 0 0 6px 6px;
+}
+
+.education-icon::after {
+  top: 14px;
+  width: 30px;
+  height: 30px;
+  border: 3px solid var(--primary);
+  border-right: 0;
+  border-bottom: 0;
+  transform: rotate(45deg);
+}
+
+.certification-icon::before {
+  width: 24px;
+  height: 30px;
+  border: 3px solid var(--primary);
+  border-radius: 8px;
+}
+
+.certification-icon::after {
+  width: 11px;
+  height: 6px;
+  border-left: 3px solid var(--primary);
+  border-bottom: 3px solid var(--primary);
+  transform: rotate(-45deg);
+}
+
+.credential-panel > p {
+  max-width: 520px;
+  color: var(--ink);
+  font-size: clamp(1.08rem, 2vw, 1.35rem);
+  font-weight: 750;
+  line-height: 1.45;
+}
+
+.education-meta {
+  margin: 24px 0 20px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.education-meta div {
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--muted);
+}
+
+.education-meta span,
+.certification-item span {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--muted-text);
+  font-size: 0.76rem;
+  font-weight: 750;
+  line-height: 1.2;
+}
+
+.education-meta strong,
+.certification-item strong {
+  color: var(--ink);
+  font-size: 0.95rem;
+  line-height: 1.35;
+}
+
+.credential-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.credential-tags span {
+  min-height: 32px;
+  padding: 7px 10px;
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid color-mix(in srgb, var(--primary) 26%, var(--border));
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--primary) 10%, transparent);
+  color: var(--ink);
+  font-size: 0.78rem;
+  font-weight: 780;
+  line-height: 1.2;
+}
+
+.certification-list {
+  display: grid;
+  gap: 12px;
+}
+
+.certification-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 15px 0;
   border-top: 1px solid var(--border);
+}
+
+.certification-item:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.certification-item time {
+  flex: 0 0 auto;
+  padding: 7px 10px;
+  border-radius: 999px;
+  background: var(--muted);
+  color: var(--primary);
+  font-size: 0.78rem;
+  font-weight: 850;
 }
 
 .contact-grid {
@@ -929,6 +1092,20 @@ h1 {
 
   .project-grid {
     grid-template-columns: 1fr;
+  }
+
+  .education-meta {
+    grid-template-columns: 1fr;
+  }
+
+  .credential-panel {
+    padding: 22px;
+  }
+
+  .certification-item {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
   }
 
   .image-modal-backdrop {
