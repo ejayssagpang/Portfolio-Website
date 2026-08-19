@@ -1,21 +1,51 @@
+import type { CSSProperties } from "react";
+
+type Tool = {
+  name: string;
+  icon?: string;
+  initials?: string;
+  color?: string;
+};
+
+type ToolGroup = {
+  title: string;
+  tools: Tool[];
+};
+
 const contactLinks = [
   { label: "Email", value: "ejssagpang@gmail.com", href: "mailto:ejssagpang@gmail.com" },
   { label: "Phone", value: "+63 993 763 1538", href: "tel:+639937631538" },
   { label: "Location", value: "Davao City, Philippines", href: "#contact" },
 ];
 
-const toolGroups = [
+const toolGroups: ToolGroup[] = [
   {
     title: "Automation Platforms",
-    tools: ["GoHighLevel", "Zapier", "Omnisend", "Google Tags"],
+    tools: [
+      { name: "GoHighLevel", initials: "HL", color: "#20c997" },
+      { name: "Zapier", icon: "https://cdn.simpleicons.org/zapier" },
+      { name: "Omnisend", initials: "O", color: "#5f46f7" },
+      { name: "Google Tags", icon: "https://cdn.simpleicons.org/googletagmanager" },
+    ],
   },
   {
     title: "CRM & Operations",
-    tools: ["Close CRM", "Zoho CRM", "Google Workspace", "Microsoft"],
+    tools: [
+      { name: "Close CRM", initials: "C", color: "#0057ff" },
+      { name: "Zoho CRM", icon: "https://cdn.simpleicons.org/zoho" },
+      { name: "Google Workspace", icon: "https://cdn.simpleicons.org/google" },
+      { name: "Microsoft", initials: "MS", color: "#00a4ef" },
+    ],
   },
   {
     title: "Technical Stack",
-    tools: ["MySQL", "Python", "JavaScript", "HTML/CSS", "Linux"],
+    tools: [
+      { name: "MySQL", icon: "https://cdn.simpleicons.org/mysql" },
+      { name: "Python", icon: "https://cdn.simpleicons.org/python" },
+      { name: "JavaScript", icon: "https://cdn.simpleicons.org/javascript" },
+      { name: "HTML/CSS", icon: "https://cdn.simpleicons.org/html5" },
+      { name: "Linux", icon: "https://cdn.simpleicons.org/linux" },
+    ],
   },
 ];
 
@@ -170,7 +200,20 @@ export default function Home() {
                 <h3>{group.title}</h3>
                 <div>
                   {group.tools.map((tool) => (
-                    <span key={tool}>{tool}</span>
+                    <span className="tool-chip" key={tool.name}>
+                      <span
+                        className="tool-icon"
+                        style={{ "--logo-color": tool.color } as CSSProperties}
+                        aria-hidden="true"
+                      >
+                        {tool.icon ? (
+                          <img src={tool.icon} alt="" width="20" height="20" />
+                        ) : (
+                          tool.initials
+                        )}
+                      </span>
+                      {tool.name}
+                    </span>
                   ))}
                 </div>
               </article>

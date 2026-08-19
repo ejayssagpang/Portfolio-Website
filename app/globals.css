@@ -198,7 +198,7 @@ h1 {
 .project-card:hover,
 .experience-card:hover,
 .contact-card:hover,
-.tool-group span:hover {
+.tool-chip:hover {
   transform: translateY(-4px);
   box-shadow: 0 12px 24px rgba(240, 100, 47, 0.16);
 }
@@ -375,17 +375,37 @@ h1 {
   gap: 10px;
 }
 
-.tool-group span,
+.tool-chip,
 .tag-row span {
   min-height: 42px;
   padding: 10px 14px;
   display: inline-flex;
   align-items: center;
+  gap: 10px;
   border: 1px solid var(--border);
   border-radius: 10px;
   background: var(--card);
   color: var(--ink);
   font-weight: 700;
+}
+
+.tool-icon {
+  width: 28px;
+  height: 28px;
+  flex: 0 0 28px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--logo-color, var(--primary)) 14%, white);
+  color: var(--logo-color, var(--primary));
+  font-size: 0.72rem;
+  font-weight: 900;
+}
+
+.tool-icon img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
 }
 
 .service-grid,
