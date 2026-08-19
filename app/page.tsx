@@ -1,31 +1,45 @@
-const stats = [
-  { value: "4+", label: "Years in IT operations" },
-  { value: "12", label: "Core tools mastered" },
-  { value: "5", label: "Recent technical roles" },
+const contactLinks = [
+  { label: "Email", value: "ejssagpang@gmail.com", href: "mailto:ejssagpang@gmail.com" },
+  { label: "Phone", value: "+63 993 763 1538", href: "tel:+639937631538" },
+  { label: "Location", value: "Davao City, Philippines", href: "#contact" },
 ];
 
-const skills = [
-  "GoHighLevel",
-  "Zapier",
-  "MySQL",
-  "Python",
-  "JavaScript",
-  "HTML/CSS",
-  "Linux",
-  "Google Workspace",
-  "Close CRM",
-  "Zoho CRM",
-  "Omnisend",
-  "Google Tags",
+const toolGroups = [
+  {
+    title: "Automation Platforms",
+    tools: ["GoHighLevel", "Zapier", "Omnisend", "Google Tags"],
+  },
+  {
+    title: "CRM & Operations",
+    tools: ["Close CRM", "Zoho CRM", "Google Workspace", "Microsoft"],
+  },
+  {
+    title: "Technical Stack",
+    tools: ["MySQL", "Python", "JavaScript", "HTML/CSS", "Linux"],
+  },
 ];
 
 const services = [
-  "IT service management",
-  "CRM setup and optimization",
-  "Workflow automation",
-  "Systems administration",
-  "Technical documentation",
-  "Security testing support",
+  {
+    title: "Workflow Automation",
+    description:
+      "Design GoHighLevel workflows, pipelines, onboarding sequences, task routing, and Zapier integrations that remove repetitive manual work.",
+  },
+  {
+    title: "IT Service Management",
+    description:
+      "Keep request, incident, problem, and change records organized while improving documentation, portals, and service delivery visibility.",
+  },
+  {
+    title: "CRM Architecture",
+    description:
+      "Configure CRM environments around the real business model, then refine automation, data flow, and reporting for daily operations.",
+  },
+  {
+    title: "Systems Administration",
+    description:
+      "Manage access, credentials, integrations, technical support, and system reliability with a security-aware operational mindset.",
+  },
 ];
 
 const experience = [
@@ -33,210 +47,250 @@ const experience = [
     company: "Outsourcing and Recruitment Company",
     role: "Information Technology Service Management I",
     period: "Mar 2025 - Apr 2026",
-    tags: ["ITSM", "Automation", "Documentation"],
+    description:
+      "Managed infrastructure lifecycle, GHL workflows, service records, technical documentation, portals, process improvements, and compliance-aware solutions.",
   },
   {
     company: "Living Mulch, LLC",
     role: "IT Virtual Assistant",
     period: "Mar 2025 - Aug 2025",
-    tags: ["GoHighLevel", "Zapier", "CRM"],
+    description:
+      "Configured GoHighLevel environments, built automations, connected third-party tools, troubleshot campaigns, and optimized pipeline performance.",
   },
   {
     company: "Simply Earth",
     role: "System Administrator",
     period: "Apr 2024 - Mar 2025",
-    tags: ["Admin", "Integration", "Access"],
+    description:
+      "Led technical support, access management, systems integration, project launch tech stacks, and CRM automation platform maintenance.",
   },
   {
     company: "Coredev Solutions, Inc.",
     role: "Jr. Software Implementer",
     period: "Sep 2022 - Apr 2024",
-    tags: ["MySQL", "QA", "Deployment"],
-  },
-  {
-    company: "Secuna Technologies, Inc.",
-    role: "Web Application Penetration Tester Intern",
-    period: "Dec 2021 - Mar 2022",
-    tags: ["Kali Linux", "Security", "Reports"],
+    description:
+      "Installed enterprise software, tested systems, migrated MySQL datasets, documented implementations, and managed least-privilege access.",
   },
 ];
 
 const projects = [
   {
     title: "Scale Smart Dashboard",
-    type: "CRM analytics",
     description:
-      "A GoHighLevel dashboard giving teams real-time visibility into leads, pipelines, campaigns, KPIs, and integrated performance data.",
-    stack: ["GoHighLevel", "KPI Tracking", "Integrations"],
+      "A GoHighLevel dashboard for real-time lead visibility, campaign performance, pipeline health, KPI tracking, and integrated business reporting.",
+    tags: ["Dashboard", "CRM", "Analytics"],
   },
   {
     title: "Onboarding Automation",
-    type: "Workflow system",
     description:
-      "An automated client onboarding flow that sends welcome messages, collects information, schedules calls, and assigns tasks across tools.",
-    stack: ["GoHighLevel", "Zapier", "Automation"],
+      "A structured onboarding workflow that sends welcome messages, collects client details, schedules calls, and assigns tasks automatically.",
+    tags: ["Automation", "Zapier", "Client Ops"],
   },
+];
+
+const credentials = [
+  "Google IT Support - Aug 2023",
+  "Google Penetration Testing Intern - Mar 2022",
+  "Secuna Web Application Penetration Testing - Dec 2021",
 ];
 
 export default function Home() {
   return (
     <main>
-      <nav className="nav" aria-label="Primary navigation">
-        <a className="brand" href="#home" aria-label="Elijah Jake Sagpang home">
-          EJS
-        </a>
-        <div className="nav-links">
-          <a href="#about">About</a>
-          <a href="#skills">Skills</a>
-          <a href="#projects">Projects</a>
-          <a href="#contact">Contact</a>
-        </div>
-      </nav>
+      <div className="scroll-line" aria-hidden="true" />
+
+      <header className="site-header">
+        <nav className="nav" aria-label="Primary navigation">
+          <a className="logo" href="#home" aria-label="Elijah Jake Sagpang home">
+            Elijah Sagpang
+          </a>
+          <div className="nav-links">
+            <a href="#services">Services</a>
+            <a href="#experience">Experience</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+          </div>
+          <a className="nav-cta" href="#contact">
+            Get In Touch
+          </a>
+        </nav>
+      </header>
 
       <section className="hero" id="home">
-        <div className="hero-copy">
-          <p className="eyebrow">IT Service Manager • Automation Specialist</p>
-          <h1>
-            Hi, I&apos;m <span>Elijah</span>
-          </h1>
-          <p className="lead">
-            I build reliable technical operations for growing teams, from
-            GoHighLevel automations and CRM architecture to systems
-            administration, documentation, data migration, and security-minded
-            support.
-          </p>
-          <div className="hero-actions">
-            <a className="button primary" href="mailto:ejssagpang@gmail.com">
-              Hire Me
-            </a>
-            <a className="button secondary" href="#projects">
-              View Projects
-            </a>
+        <div className="container hero-grid">
+          <div className="hero-copy reveal">
+            <p className="eyebrow">IT Service Manager & Automation Specialist</p>
+            <h1>Building cleaner systems for growing teams.</h1>
+            <p className="lead">
+              I help businesses streamline operations through GoHighLevel
+              automation, CRM setup, IT service management, systems
+              administration, implementation support, and security-minded
+              troubleshooting.
+            </p>
+            <div className="hero-actions">
+              <a className="button primary" href="mailto:ejssagpang@gmail.com">
+                Hire Me
+              </a>
+              <a className="button secondary" href="#projects">
+                View My Projects
+              </a>
+            </div>
+            <div className="quick-contact" aria-label="Quick contact details">
+              {contactLinks.map((item) => (
+                <a key={item.label} href={item.href}>
+                  <strong>{item.label}</strong>
+                  <span>{item.value}</span>
+                </a>
+              ))}
+            </div>
           </div>
-        </div>
 
-        <div className="hero-visual" aria-label="Elijah profile summary">
-          <div className="portrait">
-            <span>EJ</span>
+          <div className="hero-photo reveal" aria-label="Profile visual">
+            <div className="portrait-wrap">
+              <div className="portrait">
+                <span>EJ</span>
+              </div>
+            </div>
+            <div className="floating-note note-one">GHL</div>
+            <div className="floating-note note-two">CRM</div>
+            <div className="floating-note note-three">ITSM</div>
           </div>
-          <div className="orbit-card card-one">CRM</div>
-          <div className="orbit-card card-two">ITSM</div>
-          <div className="orbit-card card-three">SEC</div>
         </div>
       </section>
 
-      <section className="stats" aria-label="Portfolio highlights">
-        {stats.map((stat) => (
-          <div key={stat.label}>
-            <strong>{stat.value}</strong>
-            <span>{stat.label}</span>
+      <section className="tools-section" id="skills">
+        <div className="container">
+          <div className="section-heading centered">
+            <h2>Tools & Technologies</h2>
+            <p>Platforms and technologies I use to build, automate, and support operations.</p>
           </div>
-        ))}
-      </section>
-
-      <section className="section about" id="about">
-        <div className="section-copy">
-          <p className="section-kicker">About Me</p>
-          <h2>Technical operator for systems that need to work cleanly.</h2>
-        </div>
-        <div className="about-panel">
-          <p>
-            Based in Davao City, Philippines, I help teams turn scattered tools,
-            manual handoffs, and unclear technical processes into dependable
-            systems. My background combines IT service management, CRM
-            automation, implementation support, and web application security.
-          </p>
-          <div className="service-grid">
-            {services.map((service) => (
-              <span key={service}>{service}</span>
+          <div className="tool-groups">
+            {toolGroups.map((group) => (
+              <article className="tool-group" key={group.title}>
+                <h3>{group.title}</h3>
+                <div>
+                  {group.tools.map((tool) => (
+                    <span key={tool}>{tool}</span>
+                  ))}
+                </div>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="section" id="skills">
-        <div className="section-copy centered">
-          <p className="section-kicker">Tech Stack</p>
-          <h2>Tools I use to build, connect, and support operations.</h2>
+      <section className="section" id="services">
+        <div className="container">
+          <div className="section-heading centered">
+            <h2>Services</h2>
+            <p>Focused technical support for teams that need less friction and better visibility.</p>
+          </div>
+          <div className="service-grid">
+            {services.map((service) => (
+              <article className="modern-card" key={service.title}>
+                <span aria-hidden="true" />
+                <h3>{service.title}</h3>
+                <p>{service.description}</p>
+              </article>
+            ))}
+          </div>
         </div>
-        <div className="skill-grid">
-          {skills.map((skill) => (
-            <span key={skill}>{skill}</span>
-          ))}
+      </section>
+
+      <section className="section muted" id="experience">
+        <div className="container">
+          <div className="section-heading centered">
+            <h2>Experience</h2>
+            <p>Recent roles across IT operations, automation, administration, implementation, and security.</p>
+          </div>
+          <div className="experience-list">
+            {experience.map((job) => (
+              <article className="experience-card" key={`${job.company}-${job.role}`}>
+                <div>
+                  <p>{job.period}</p>
+                  <h3>{job.role}</h3>
+                  <span>{job.company}</span>
+                </div>
+                <p>{job.description}</p>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
       <section className="section" id="projects">
-        <div className="section-copy centered">
-          <p className="section-kicker">Projects</p>
-          <h2>Selected automation and operations work.</h2>
-        </div>
-        <div className="project-grid">
-          {projects.map((project) => (
-            <article className="project-card" key={project.title}>
-              <p>{project.type}</p>
-              <h3>{project.title}</h3>
-              <span>{project.description}</span>
-              <div>
-                {project.stack.map((item) => (
-                  <small key={item}>{item}</small>
-                ))}
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="section experience" id="experience">
-        <div className="section-copy">
-          <p className="section-kicker">Experience</p>
-          <h2>Recent roles and responsibilities.</h2>
-        </div>
-        <div className="experience-list">
-          {experience.map((job) => (
-            <article key={`${job.company}-${job.role}`}>
-              <p>{job.period}</p>
-              <h3>{job.role}</h3>
-              <span>{job.company}</span>
-              <div>
-                {job.tags.map((tag) => (
-                  <small key={tag}>{tag}</small>
-                ))}
-              </div>
-            </article>
-          ))}
+        <div className="container">
+          <div className="section-heading centered">
+            <h2>Projects</h2>
+            <p>Practical automation work built around business operations and measurable workflows.</p>
+          </div>
+          <div className="project-grid">
+            {projects.map((project) => (
+              <article className="project-card" key={project.title}>
+                <div className="project-topline">
+                  <span>Featured Project</span>
+                  <small>Operations</small>
+                </div>
+                <h3>{project.title}</h3>
+                <p>{project.description}</p>
+                <div className="tag-row">
+                  {project.tags.map((tag) => (
+                    <span key={tag}>{tag}</span>
+                  ))}
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
-      <section className="section credentials">
-        <div>
-          <p className="section-kicker">Education</p>
-          <h2>Bachelor&apos;s Degree in Information Technology - Cybersecurity</h2>
-          <span>Ateneo de Davao University • Jan 2019 - Apr 2022</span>
-        </div>
-        <div>
-          <p className="section-kicker">Certifications</p>
-          <ul>
-            <li>Google IT Support • Aug 2023</li>
-            <li>Google Penetration Testing Intern • Mar 2022</li>
-            <li>Secuna Web Application Penetration Testing • Dec 2021</li>
-          </ul>
+      <section className="section muted">
+        <div className="container credential-grid">
+          <article>
+            <h2>Education</h2>
+            <p>Bachelor&apos;s Degree in Information Technology - Cybersecurity</p>
+            <span>Ateneo de Davao University - Jan 2019 to Apr 2022</span>
+          </article>
+          <article>
+            <h2>Certifications</h2>
+            <ul>
+              {credentials.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </article>
         </div>
       </section>
 
-      <footer className="footer" id="contact">
-        <p className="section-kicker">Contact</p>
-        <h2>Have a system, workflow, or CRM that needs cleaning up?</h2>
-        <div className="contact-actions">
-          <a className="button primary" href="mailto:ejssagpang@gmail.com">
-            ejssagpang@gmail.com
-          </a>
-          <a className="button secondary" href="tel:+639937631538">
-            +63 993 763 1538
-          </a>
-          <a className="button secondary" href="https://linkedin.com/in/ejssagpang">
-            LinkedIn
-          </a>
+      <section className="section contact-section" id="contact">
+        <div className="container contact-grid">
+          <div>
+            <h2>Get In Touch</h2>
+            <p>
+              Ready to clean up a workflow, improve a CRM, or make technical
+              operations easier to manage? Let&apos;s talk about what your team
+              needs next.
+            </p>
+          </div>
+          <div className="contact-cards">
+            {contactLinks.map((item) => (
+              <a key={item.label} href={item.href} className="contact-card">
+                <span>{item.label}</span>
+                <strong>{item.value}</strong>
+              </a>
+            ))}
+            <a className="contact-card" href="https://linkedin.com/in/ejssagpang">
+              <span>LinkedIn</span>
+              <strong>linkedin.com/in/ejssagpang</strong>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <footer className="footer">
+        <div className="container">
+          <strong>Elijah Jake Sagpang</strong>
+          <p>IT Service Manager & Automation Specialist</p>
         </div>
       </footer>
     </main>
