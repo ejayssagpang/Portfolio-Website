@@ -259,8 +259,13 @@ export default function Home() {
               troubleshooting.
             </p>
             <div className="hero-actions">
-              <a className="button primary" href="mailto:ejssagpang@gmail.com">
-                Hire Me
+              <a
+                className="button primary"
+                href="https://calendar.app.google/xHq85XixLKvPgzhW9"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Book a Call
               </a>
               <a className="button secondary" href="#projects">
                 View My Projects
