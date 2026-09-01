@@ -201,16 +201,19 @@ const credentials = [
     title: "Google IT Support",
     issuer: "Google",
     date: "Aug 2023",
+    href: "https://www.coursera.org/account/accomplishments/specialization/certificate/3NTLBERKZJZM",
   },
   {
     title: "Penetration Testing Intern",
     issuer: "Google",
     date: "Mar 2022",
+    href: "https://www.credential.net/400e40f0-5af3-43c8-8277-081dd7e07ac5",
   },
   {
     title: "Web Application Penetration Testing",
     issuer: "Secuna",
     date: "Dec 2021",
+    href: "https://www.udemy.com/certificate/UC-bfd57ece-8b96-4afc-a44e-0a43221d4b5e/",
   },
 ];
 
@@ -492,7 +495,18 @@ export default function Home() {
                       <strong>{item.title}</strong>
                       <span>{item.issuer}</span>
                     </div>
-                    <time>{item.date}</time>
+                    <div className="certification-action">
+                      <time>{item.date}</time>
+                      <a
+                        className="credential-link"
+                        href={item.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label={`View credential for ${item.title}`}
+                      >
+                        View credential
+                      </a>
+                    </div>
                   </div>
                 ))}
               </div>
