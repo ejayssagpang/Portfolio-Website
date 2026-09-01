@@ -323,7 +323,7 @@ export default function Home() {
           <div className="hero-photo reveal" aria-label="Profile visual">
             <div className="portrait-wrap">
               <div className="portrait">
-                <span>EJ</span>
+                <img src="/profile-photo.jpg" alt="Portrait of Elijah Jake Sagpang" />
               </div>
             </div>
             <div className="floating-note note-one">GHL</div>
