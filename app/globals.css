@@ -447,7 +447,12 @@ h1 {
   text-transform: uppercase;
 }
 
-.tool-group div,
+.tool-group div {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(142px, 1fr));
+  gap: 10px;
+}
+
 .tag-row {
   display: flex;
   flex-wrap: wrap;
@@ -466,6 +471,12 @@ h1 {
   background: var(--card);
   color: var(--ink);
   font-weight: 700;
+}
+
+.tool-chip {
+  width: 100%;
+  justify-content: flex-start;
+  font-size: 0.9rem;
 }
 
 .tool-icon {

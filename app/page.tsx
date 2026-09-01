@@ -22,12 +22,16 @@ const contactLinks = [
 
 const toolGroups: ToolGroup[] = [
   {
-    title: "Automation Platforms",
+    title: "Automation & AI",
     tools: [
       { name: "GoHighLevel", initials: "HL", color: "#20c997" },
       { name: "Zapier", icon: "https://cdn.simpleicons.org/zapier" },
       { name: "Omnisend", initials: "O", color: "#5f46f7" },
       { name: "Google Tags", icon: "https://cdn.simpleicons.org/googletagmanager" },
+      { name: "OpenAI", icon: "https://cdn.simpleicons.org/openai" },
+      { name: "Google Gemini", icon: "https://cdn.simpleicons.org/googlegemini" },
+      { name: "Claude", icon: "https://cdn.simpleicons.org/claude" },
+      { name: "Relevance AI", initials: "RA", color: "#5b5ff0" },
     ],
   },
   {
@@ -36,15 +40,6 @@ const toolGroups: ToolGroup[] = [
       { name: "Close CRM", initials: "C", color: "#0057ff" },
       { name: "Zoho CRM", icon: "https://cdn.simpleicons.org/zoho" },
       { name: "Microsoft", initials: "MS", color: "#00a4ef" },
-    ],
-  },
-  {
-    title: "AI",
-    tools: [
-      { name: "OpenAI", icon: "https://cdn.simpleicons.org/openai" },
-      { name: "Google Gemini", icon: "https://cdn.simpleicons.org/googlegemini" },
-      { name: "Claude", icon: "https://cdn.simpleicons.org/claude" },
-      { name: "Relevance AI", initials: "RA", color: "#5b5ff0" },
     ],
   },
   {
