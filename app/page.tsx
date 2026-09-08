@@ -275,8 +275,12 @@ export default function Home() {
           >
             <span className="theme-icon" aria-hidden="true" />
           </button>
-          <a className="nav-cta" href="#contact">
-            Get In Touch
+          <a
+            className="nav-cta"
+            href="/elijah-sagpang-cv.pdf"
+            download="Elijah Sagpang - CV.pdf"
+          >
+            Download CV
           </a>
         </nav>
       </header>
