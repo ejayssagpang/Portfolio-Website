@@ -14,6 +14,17 @@ type ToolGroup = {
   tools: Tool[];
 };
 
+type Project = {
+  title: string;
+  description: string;
+  details: string;
+  problem: string;
+  fixed: string;
+  image?: string;
+  imageAlt?: string;
+  tags: string[];
+};
+
 const contactLinks = [
   { label: "Email", value: "ejssagpang@gmail.com", href: "mailto:ejssagpang@gmail.com" },
   { label: "Phone", value: "+63 993 763 1538", href: "tel:+639937631538" },
@@ -140,11 +151,17 @@ const experience = [
   },
 ];
 
-const projects = [
+const projects: Project[] = [
   {
     title: "Swipe Pages -> Attentive Lead Sync",
     description:
       "Built an automation that captures new Swipe Pages form submissions, subscribes the lead in Attentive, and applies custom attributes so marketing follow-up starts with clean subscriber data.",
+    details:
+      "A lead-capture workflow connecting Swipe Pages form submissions to Attentive so new contacts move into the right marketing system without manual entry.",
+    problem:
+      "New form submissions needed to be copied into Attentive by hand, which slowed down follow-up and created a risk of missing custom lead details.",
+    fixed:
+      "Connected the form trigger to Attentive subscription actions, then mapped custom attributes so every new subscriber arrives with useful context for segmentation.",
     image: "/swipe-pages-attentive-lead-sync.png",
     imageAlt:
       "Automation workflow showing Swipe Pages new form submission followed by Attentive subscribe user and custom attributes steps.",
@@ -154,6 +171,12 @@ const projects = [
     title: "Instagram #imadethis -> Manychat Auto-Tagging",
     description:
       "Built an automation that detects new tagged Instagram media, filters posts using the #imadethis condition, finds the matching Manychat user, and applies the right tag for follow-up segmentation.",
+    details:
+      "An Instagram-to-Manychat automation that watches tagged media, checks for campaign-specific conditions, and updates the matching contact for follow-up.",
+    problem:
+      "Campaign participants using #imadethis had to be reviewed and tagged manually, making audience segmentation slower and less consistent.",
+    fixed:
+      "Added filtering steps to qualify posts, found the matching Manychat user by name, and applied the correct tag automatically for cleaner follow-up flows.",
     image: "/instagram-imadethis-manychat-auto-tagging.png",
     imageAlt:
       "Automation workflow showing Instagram tagged media, Zapier filters, Manychat find user by name, and Manychat add tag to user steps.",
@@ -163,6 +186,12 @@ const projects = [
     title: "Google Sheets -> GHL Lead Sync with Team Notification",
     description:
       "Built an automation that watches for new or updated spreadsheet rows, creates or updates the matching lead in GoHighLevel, and sends a Google Chat notification so the team can act quickly.",
+    details:
+      "A lead-sync system that uses Google Sheets as the intake source, keeps GoHighLevel contacts updated, and alerts the team when action is needed.",
+    problem:
+      "Lead updates in spreadsheets were disconnected from the CRM, so the team had to check sheets manually and risked acting on outdated records.",
+    fixed:
+      "Synced new and updated spreadsheet rows into GoHighLevel, then added a Google Chat notification so the team receives timely updates after each change.",
     image: "/google-sheets-ghl-lead-sync-team-notification.png",
     imageAlt:
       "Automation workflow showing Google Sheets new or updated spreadsheet row, LeadConnector add or update contact, and Google Chat create message steps.",
@@ -172,6 +201,12 @@ const projects = [
     title: "GHL Email Campaign Follow-up & Pipeline Cleanup",
     description:
       "Automated a GoHighLevel follow-up path that sends timed email touches after engagement, waits between steps, and removes the campaign tag once the sequence is complete to keep the pipeline clean.",
+    details:
+      "A GoHighLevel sequence that handles engagement-based email follow-ups and removes completed campaign tags at the end of the workflow.",
+    problem:
+      "Contacts who clicked or opened emails needed follow-up, but completed sequences could leave extra tags behind and make pipeline reporting messy.",
+    fixed:
+      "Built a timed follow-up path with wait steps, multiple email touches, and a final tag-removal step to keep campaign status and pipeline data clean.",
     image: "/ghl-email-followup-pipeline-cleanup.png",
     imageAlt:
       "GoHighLevel workflow showing clicked or opened trigger, first follow-up, wait, second follow-up, wait, third follow-up, and remove tag steps.",
@@ -181,12 +216,24 @@ const projects = [
     title: "Scale Smart Dashboard",
     description:
       "A GoHighLevel dashboard for real-time lead visibility, campaign performance, pipeline health, KPI tracking, and integrated business reporting.",
+    details:
+      "A CRM reporting dashboard built around pipeline visibility, lead performance, and operational metrics that teams can review quickly.",
+    problem:
+      "Key CRM and campaign numbers were spread across multiple views, making it hard to spot pipeline movement and performance issues fast.",
+    fixed:
+      "Organized lead, campaign, pipeline, and KPI views into one dashboard so reporting is easier to scan and decisions can be made with cleaner context.",
     tags: ["Dashboard", "CRM", "Analytics"],
   },
   {
     title: "Onboarding Automation",
     description:
       "A structured onboarding workflow that sends welcome messages, collects client details, schedules calls, and assigns tasks automatically.",
+    details:
+      "A client onboarding workflow designed to reduce repetitive admin work and give each new client a consistent start.",
+    problem:
+      "New client handoffs required repeated manual messages, detail collection, scheduling, and task assignment, which could delay kickoff.",
+    fixed:
+      "Created an automated onboarding sequence for welcome messages, information collection, call scheduling, and task routing so the process stays consistent.",
     tags: ["Automation", "Zapier", "Client Ops"],
   },
 ];
@@ -214,6 +261,7 @@ const credentials = [
 
 export default function Home() {
   const [theme, setTheme] = useState("dark");
+  const [activeProject, setActiveProject] = useState<(typeof projects)[number] | null>(null);
   const [activeImage, setActiveImage] = useState<{
     alt: string;
     src: string;
@@ -229,19 +277,21 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    if (!activeImage) {
+    if (!activeImage && !activeProject) {
       return;
     }
 
     function handleKeyDown(event: KeyboardEvent) {
-      if (event.key === "Escape") {
+      if (event.key === "Escape" && activeImage) {
         setActiveImage(null);
+      } else if (event.key === "Escape") {
+        setActiveProject(null);
       }
     }
 
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [activeImage]);
+  }, [activeImage, activeProject]);
 
   function toggleTheme() {
     const nextTheme = theme === "dark" ? "light" : "dark";
@@ -413,22 +463,24 @@ export default function Home() {
           </div>
           <div className="project-grid">
             {projects.map((project) => (
-              <article className="project-card" key={project.title}>
+              <article
+                className="project-card"
+                key={project.title}
+                role="button"
+                tabIndex={0}
+                onClick={() => setActiveProject(project)}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault();
+                    setActiveProject(project);
+                  }
+                }}
+                aria-label={`Open project details for ${project.title}`}
+              >
                 {project.image ? (
-                  <button
-                    className="project-image-button"
-                    type="button"
-                    onClick={() =>
-                      setActiveImage({
-                        alt: project.imageAlt,
-                        src: project.image,
-                        title: project.title,
-                      })
-                    }
-                    aria-label={`Open full-size image for ${project.title}`}
-                  >
-                    <img src={project.image} alt={project.imageAlt} />
-                  </button>
+                  <div className="project-image-button" aria-hidden="true">
+                    <img src={project.image} alt={project.imageAlt ?? `${project.title} project preview`} />
+                  </div>
                 ) : null}
                 <div className="project-topline">
                   <span>Featured Project</span>
@@ -545,6 +597,74 @@ export default function Home() {
           <p>IT Service Manager & Automation Specialist</p>
         </div>
       </footer>
+
+      {activeProject ? (
+        <div
+          className="project-modal-backdrop"
+          role="presentation"
+          onClick={() => setActiveProject(null)}
+        >
+          <div
+            className="project-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-label={`Project details for ${activeProject.title}`}
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className="project-modal-header">
+              <div>
+                <span>Featured Project</span>
+                <h3>{activeProject.title}</h3>
+              </div>
+              <button
+                type="button"
+                onClick={() => setActiveProject(null)}
+                aria-label="Close project details"
+              >
+                Close
+              </button>
+            </div>
+            {activeProject.image ? (
+              <button
+                className="project-modal-image"
+                type="button"
+                onClick={() =>
+                  setActiveImage({
+                    alt: activeProject.imageAlt ?? `${activeProject.title} project screenshot`,
+                    src: activeProject.image,
+                    title: activeProject.title,
+                  })
+                }
+                aria-label={`Open full-size image for ${activeProject.title}`}
+              >
+                <img
+                  src={activeProject.image}
+                  alt={activeProject.imageAlt ?? `${activeProject.title} project screenshot`}
+                />
+              </button>
+            ) : null}
+            <div className="project-modal-content">
+              <section>
+                <span>Details</span>
+                <p>{activeProject.details}</p>
+              </section>
+              <section>
+                <span>Problem</span>
+                <p>{activeProject.problem}</p>
+              </section>
+              <section>
+                <span>What Was Fixed</span>
+                <p>{activeProject.fixed}</p>
+              </section>
+            </div>
+            <div className="tag-row project-modal-tags">
+              {activeProject.tags.map((tag) => (
+                <span key={tag}>{tag}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+      ) : null}
 
       {activeImage ? (
         <div

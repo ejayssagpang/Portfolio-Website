@@ -654,6 +654,7 @@ h1 {
   padding: 20px;
   display: flex;
   flex-direction: column;
+  cursor: pointer;
 }
 
 .project-image-button {
@@ -665,7 +666,12 @@ h1 {
   border: 1px solid var(--border);
   border-radius: 10px;
   background: white;
-  cursor: zoom-in;
+}
+
+.project-card:focus-visible,
+.project-image-button:hover {
+  outline: 2px solid var(--primary);
+  outline-offset: 4px;
 }
 
 .project-image-button:hover {
@@ -682,7 +688,7 @@ h1 {
 }
 
 .project-image-button::after {
-  content: "View image";
+  content: "View details";
   position: absolute;
   right: 12px;
   bottom: 12px;
@@ -753,6 +759,133 @@ h1 {
   padding: 6px 9px;
   border-radius: 999px;
   font-size: 0.78rem;
+}
+
+.project-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 210;
+  padding: 24px;
+  display: grid;
+  place-items: center;
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(10px);
+}
+
+.project-modal {
+  width: min(980px, 100%);
+  max-height: min(88vh, 900px);
+  padding: clamp(18px, 3vw, 30px);
+  overflow: auto;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--card);
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.42);
+}
+
+.project-modal-header {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.project-modal-header span,
+.project-modal-content span {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--primary);
+  font-size: 0.74rem;
+  font-weight: 850;
+  letter-spacing: 0.1em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.project-modal-header h3 {
+  color: var(--ink);
+  font-size: clamp(1.45rem, 3vw, 2.4rem);
+  font-weight: 850;
+  line-height: 1.08;
+}
+
+.project-modal-header button {
+  min-height: 38px;
+  padding: 9px 13px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--primary);
+  color: white;
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.project-modal-image {
+  position: relative;
+  width: 100%;
+  margin-bottom: 22px;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: white;
+  cursor: zoom-in;
+}
+
+.project-modal-image img {
+  width: 100%;
+  max-height: 420px;
+  display: block;
+  object-fit: contain;
+}
+
+.project-modal-image::after {
+  content: "View larger";
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  padding: 8px 11px;
+  border-radius: 999px;
+  background: rgba(16, 17, 20, 0.78);
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 800;
+  opacity: 0;
+  transform: translateY(6px);
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+.project-modal-image:hover::after,
+.project-modal-image:focus-visible::after {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.project-modal-content {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.project-modal-content section {
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--muted);
+}
+
+.project-modal-content p {
+  color: var(--muted-text);
+  font-size: 0.98rem;
+  line-height: 1.65;
+}
+
+.project-modal-tags {
+  margin-top: 20px;
+  padding-top: 0;
 }
 
 .credential-section .section-heading {
@@ -1019,7 +1152,7 @@ h1 {
 .image-modal-backdrop {
   position: fixed;
   inset: 0;
-  z-index: 200;
+  z-index: 260;
   padding: 24px;
   display: grid;
   place-items: center;
@@ -1141,18 +1274,27 @@ h1 {
     grid-template-columns: 1fr;
   }
 
+  .project-modal-backdrop {
+    padding: 12px;
+  }
+
+  .project-modal-header,
+  .certification-item {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .project-modal-content {
+    grid-template-columns: 1fr;
+  }
+
   .education-meta {
     grid-template-columns: 1fr;
   }
 
   .credential-panel {
     padding: 22px;
-  }
-
-  .certification-item {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 10px;
   }
 
   .certification-action {
