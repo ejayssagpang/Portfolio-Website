@@ -41,7 +41,7 @@ const toolGroups: ToolGroup[] = [
       { name: "Zapier", icon: "https://cdn.simpleicons.org/zapier" },
       { name: "Omnisend", initials: "O", color: "#5f46f7" },
       { name: "Google Tags", icon: "https://cdn.simpleicons.org/googletagmanager" },
-      { name: "OpenAI", icon: "https://cdn.simpleicons.org/openai" },
+      { name: "OpenAI", icon: "/openai-logo.svg" },
       { name: "Google Gemini", icon: "https://cdn.simpleicons.org/googlegemini" },
       { name: "Claude", icon: "https://cdn.simpleicons.org/claude" },
       { name: "Relevance AI", initials: "RA", color: "#5b5ff0" },
@@ -337,7 +337,28 @@ export default function Home() {
             aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
             aria-pressed={theme === "dark"}
           >
-            <span className="theme-icon" aria-hidden="true" />
+            <span className="theme-symbol theme-symbol-moon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M20.25 15.35A8.5 8.5 0 0 1 8.65 3.75 8.75 8.75 0 1 0 20.25 15.35Z"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                />
+              </svg>
+            </span>
+            <span className="theme-symbol theme-symbol-sun" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M12 7.5a4.5 4.5 0 1 1 0 9 4.5 4.5 0 0 1 0-9ZM12 2.75v2M12 19.25v2M4.75 4.75l1.42 1.42M17.83 17.83l1.42 1.42M2.75 12h2M19.25 12h2M4.75 19.25l1.42-1.42M17.83 6.17l1.42-1.42"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                />
+              </svg>
+            </span>
           </button>
           <a
             className="nav-cta"
