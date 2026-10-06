@@ -155,24 +155,6 @@ const experience = [
 
 const projects: Project[] = [
   {
-    title: "AI-Powered Multi-Channel Content Engine",
-    tagline: "Consistent content everywhere, with zero extra effort.",
-    description:
-      "Built an AI-assisted content workflow that turns one topic into platform-ready posts for LinkedIn, Twitter (X), and Instagram, then prepares the content for scheduling.",
-    details:
-      "An advanced social content engine that converts one content idea into tailored posts for LinkedIn, Twitter (X), and Instagram.",
-    problem:
-      "Maintaining consistent, platform-specific content across multiple channels is time-consuming and error-prone.",
-    fixed:
-      "The automation sends a topic from Google Sheets to Google Gemini, generates posts optimized for each platform, and routes the output toward Buffer for scheduling.",
-    impact:
-      "Demonstrates how AI-driven automation can maintain consistency and reduce social content production time by up to 80%.",
-    image: "/ai-powered-content-engine.png",
-    imageAlt:
-      "Project modal reference showing a Google Sheets to AI by Zapier content workflow and case study details.",
-    tags: ["Zapier", "Google Sheets", "Google Gemini", "Buffer", "LinkedIn", "Twitter (X)", "Instagram"],
-  },
-  {
     title: "Swipe Pages -> Attentive Lead Sync",
     description:
       "Built an automation that captures new Swipe Pages form submissions, subscribes the lead in Attentive, and applies custom attributes so marketing follow-up starts with clean subscriber data.",
