@@ -176,12 +176,12 @@ p {
   display: block;
 }
 
-[data-theme="dark"] .theme-symbol-moon,
-:root:not([data-theme="light"]) .theme-symbol-moon {
+[data-theme="dark"] .theme-symbol-sun,
+:root:not([data-theme="light"]) .theme-symbol-sun {
   display: block;
 }
 
-[data-theme="light"] .theme-symbol-sun {
+[data-theme="light"] .theme-symbol-moon {
   display: block;
 }
 
