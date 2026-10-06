@@ -20,6 +20,8 @@ type Project = {
   details: string;
   problem: string;
   fixed: string;
+  impact: string;
+  tagline?: string;
   image?: string;
   imageAlt?: string;
   tags: string[];
@@ -153,6 +155,24 @@ const experience = [
 
 const projects: Project[] = [
   {
+    title: "AI-Powered Multi-Channel Content Engine",
+    tagline: "Consistent content everywhere, with zero extra effort.",
+    description:
+      "Built an AI-assisted content workflow that turns one topic into platform-ready posts for LinkedIn, Twitter (X), and Instagram, then prepares the content for scheduling.",
+    details:
+      "An advanced social content engine that converts one content idea into tailored posts for LinkedIn, Twitter (X), and Instagram.",
+    problem:
+      "Maintaining consistent, platform-specific content across multiple channels is time-consuming and error-prone.",
+    fixed:
+      "The automation sends a topic from Google Sheets to Google Gemini, generates posts optimized for each platform, and routes the output toward Buffer for scheduling.",
+    impact:
+      "Demonstrates how AI-driven automation can maintain consistency and reduce social content production time by up to 80%.",
+    image: "/ai-powered-content-engine.png",
+    imageAlt:
+      "Project modal reference showing a Google Sheets to AI by Zapier content workflow and case study details.",
+    tags: ["Zapier", "Google Sheets", "Google Gemini", "Buffer", "LinkedIn", "Twitter (X)", "Instagram"],
+  },
+  {
     title: "Swipe Pages -> Attentive Lead Sync",
     description:
       "Built an automation that captures new Swipe Pages form submissions, subscribes the lead in Attentive, and applies custom attributes so marketing follow-up starts with clean subscriber data.",
@@ -162,6 +182,8 @@ const projects: Project[] = [
       "New form submissions needed to be copied into Attentive by hand, which slowed down follow-up and created a risk of missing custom lead details.",
     fixed:
       "Connected the form trigger to Attentive subscription actions, then mapped custom attributes so every new subscriber arrives with useful context for segmentation.",
+    impact:
+      "Reduced manual subscriber entry and made new lead records more complete before marketing follow-up begins.",
     image: "/swipe-pages-attentive-lead-sync.png",
     imageAlt:
       "Automation workflow showing Swipe Pages new form submission followed by Attentive subscribe user and custom attributes steps.",
@@ -177,6 +199,8 @@ const projects: Project[] = [
       "Campaign participants using #imadethis had to be reviewed and tagged manually, making audience segmentation slower and less consistent.",
     fixed:
       "Added filtering steps to qualify posts, found the matching Manychat user by name, and applied the correct tag automatically for cleaner follow-up flows.",
+    impact:
+      "Improved campaign tracking by making participant tagging faster, cleaner, and less dependent on manual review.",
     image: "/instagram-imadethis-manychat-auto-tagging.png",
     imageAlt:
       "Automation workflow showing Instagram tagged media, Zapier filters, Manychat find user by name, and Manychat add tag to user steps.",
@@ -192,6 +216,8 @@ const projects: Project[] = [
       "Lead updates in spreadsheets were disconnected from the CRM, so the team had to check sheets manually and risked acting on outdated records.",
     fixed:
       "Synced new and updated spreadsheet rows into GoHighLevel, then added a Google Chat notification so the team receives timely updates after each change.",
+    impact:
+      "Kept the CRM and team alerts aligned so lead changes could be acted on quickly without checking spreadsheets repeatedly.",
     image: "/google-sheets-ghl-lead-sync-team-notification.png",
     imageAlt:
       "Automation workflow showing Google Sheets new or updated spreadsheet row, LeadConnector add or update contact, and Google Chat create message steps.",
@@ -207,6 +233,8 @@ const projects: Project[] = [
       "Contacts who clicked or opened emails needed follow-up, but completed sequences could leave extra tags behind and make pipeline reporting messy.",
     fixed:
       "Built a timed follow-up path with wait steps, multiple email touches, and a final tag-removal step to keep campaign status and pipeline data clean.",
+    impact:
+      "Created a more reliable follow-up process while keeping campaign tags and pipeline reporting easier to maintain.",
     image: "/ghl-email-followup-pipeline-cleanup.png",
     imageAlt:
       "GoHighLevel workflow showing clicked or opened trigger, first follow-up, wait, second follow-up, wait, third follow-up, and remove tag steps.",
@@ -222,6 +250,8 @@ const projects: Project[] = [
       "Key CRM and campaign numbers were spread across multiple views, making it hard to spot pipeline movement and performance issues fast.",
     fixed:
       "Organized lead, campaign, pipeline, and KPI views into one dashboard so reporting is easier to scan and decisions can be made with cleaner context.",
+    impact:
+      "Gave operators a faster way to review sales and campaign health without jumping between disconnected CRM screens.",
     tags: ["Dashboard", "CRM", "Analytics"],
   },
   {
@@ -234,6 +264,8 @@ const projects: Project[] = [
       "New client handoffs required repeated manual messages, detail collection, scheduling, and task assignment, which could delay kickoff.",
     fixed:
       "Created an automated onboarding sequence for welcome messages, information collection, call scheduling, and task routing so the process stays consistent.",
+    impact:
+      "Reduced kickoff delays and helped every new client receive the same organized onboarding experience.",
     tags: ["Automation", "Zapier", "Client Ops"],
   },
 ];
@@ -611,56 +643,71 @@ export default function Home() {
             aria-label={`Project details for ${activeProject.title}`}
             onClick={(event) => event.stopPropagation()}
           >
-            <div className="project-modal-header">
-              <div>
-                <span>Featured Project</span>
-                <h3>{activeProject.title}</h3>
+            <button
+              className="project-modal-close"
+              type="button"
+              onClick={() => setActiveProject(null)}
+              aria-label="Close project details"
+            >
+              x
+            </button>
+            <div className="project-modal-media">
+              {activeProject.image ? (
+                <button
+                  className="project-modal-image"
+                  type="button"
+                  onClick={() =>
+                    setActiveImage({
+                      alt: activeProject.imageAlt ?? `${activeProject.title} project screenshot`,
+                      src: activeProject.image,
+                      title: activeProject.title,
+                    })
+                  }
+                  aria-label={`Open full-size image for ${activeProject.title}`}
+                >
+                  <img
+                    src={activeProject.image}
+                    alt={activeProject.imageAlt ?? `${activeProject.title} project screenshot`}
+                  />
+                </button>
+              ) : (
+                <div className="project-modal-placeholder" aria-hidden="true">
+                  <span>{activeProject.title}</span>
+                </div>
+              )}
+            </div>
+            <div className="project-modal-body">
+              <p className="project-modal-kicker">Featured Project</p>
+              <h3>{activeProject.title}</h3>
+              {activeProject.tagline ? (
+                <p className="project-modal-tagline">{activeProject.tagline}</p>
+              ) : null}
+              <div className="project-modal-sections">
+                <section>
+                  <h4>Overview</h4>
+                  <p>{activeProject.details}</p>
+                </section>
+                <section>
+                  <h4>Problem</h4>
+                  <p>{activeProject.problem}</p>
+                </section>
+                <section>
+                  <h4>Solution</h4>
+                  <p>{activeProject.fixed}</p>
+                </section>
+                <section>
+                  <h4>Results & Impact</h4>
+                  <p>{activeProject.impact}</p>
+                </section>
               </div>
-              <button
-                type="button"
-                onClick={() => setActiveProject(null)}
-                aria-label="Close project details"
-              >
-                Close
-              </button>
-            </div>
-            {activeProject.image ? (
-              <button
-                className="project-modal-image"
-                type="button"
-                onClick={() =>
-                  setActiveImage({
-                    alt: activeProject.imageAlt ?? `${activeProject.title} project screenshot`,
-                    src: activeProject.image,
-                    title: activeProject.title,
-                  })
-                }
-                aria-label={`Open full-size image for ${activeProject.title}`}
-              >
-                <img
-                  src={activeProject.image}
-                  alt={activeProject.imageAlt ?? `${activeProject.title} project screenshot`}
-                />
-              </button>
-            ) : null}
-            <div className="project-modal-content">
-              <section>
-                <span>Details</span>
-                <p>{activeProject.details}</p>
+              <section className="project-modal-tools">
+                <h4>Tools Used</h4>
+                <div className="tag-row project-modal-tags">
+                  {activeProject.tags.map((tag) => (
+                    <span key={tag}>{tag}</span>
+                  ))}
+                </div>
               </section>
-              <section>
-                <span>Problem</span>
-                <p>{activeProject.problem}</p>
-              </section>
-              <section>
-                <span>What Was Fixed</span>
-                <p>{activeProject.fixed}</p>
-              </section>
-            </div>
-            <div className="tag-row project-modal-tags">
-              {activeProject.tags.map((tag) => (
-                <span key={tag}>{tag}</span>
-              ))}
             </div>
           </div>
         </div>
