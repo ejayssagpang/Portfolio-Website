@@ -63,7 +63,7 @@ const toolGroups: ToolGroup[] = [
       { name: "Zoom", icon: "https://cdn.simpleicons.org/zoom" },
       { name: "WhatsApp", icon: "https://cdn.simpleicons.org/whatsapp" },
       { name: "Google Workspace", initials: "G", color: "#4285f4" },
-      { name: "Slack", icon: "https://cdn.simpleicons.org/slack" },
+      { name: "Slack", icon: "/slack-logo.svg" },
     ],
   },
   {
