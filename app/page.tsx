@@ -323,7 +323,7 @@ export default function Home() {
   const [theme, setTheme] = useState("dark");
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] =
-    useState<NavigationSection>("services");
+    useState<NavigationSection | null>(null);
   const projectDialog = useRef<HTMLDivElement>(null);
   const imageDialog = useRef<HTMLDivElement>(null);
   const [activeProject, setActiveProject] = useState<
@@ -354,7 +354,7 @@ export default function Home() {
       const activationLine =
         (document.querySelector(".site-header")?.getBoundingClientRect()
           .bottom ?? 80) + 32;
-      let nextSection: NavigationSection = "services";
+      let nextSection: NavigationSection | null = null;
       let nearestTop = -Infinity;
 
       for (const section of sections) {
