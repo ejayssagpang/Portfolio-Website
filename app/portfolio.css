@@ -1,41 +1,41 @@
 @import "tailwindcss";
 
 :root {
-  --background: #160e23;
-  --foreground: #f3effa;
-  --muted: #1e142e;
-  --muted-text: #b6aac8;
-  --card: #46237a;
-  --border: #423253;
-  --primary: #26ffa0;
-  --primary-dark: #3ddc97;
-  --accent: #9b76e3;
-  --detail: #9b76e3;
-  --secondary: #6f41c2;
-  --action: #26ffa0;
-  --hero-surface: #46237a;
-  --button-ink: #160e23;
-  --ink: #faf7ff;
-  --header-bg: rgba(22, 14, 35, 0.94);
-  --icon-surface: #46237a;
+  --background: #0e0e12;
+  --foreground: #ffffff;
+  --muted: #141419;
+  --muted-text: #aaaab5;
+  --card: #1b1b22;
+  --border: #2d2d36;
+  --primary: #ff5e00;
+  --primary-dark: #e65300;
+  --accent: #ff5e00;
+  --detail: #ff5e00;
+  --secondary: #19191f;
+  --action: #ff5e00;
+  --hero-surface: #0e0e12;
+  --button-ink: #0e0e12;
+  --ink: #ffffff;
+  --header-bg: rgba(14, 14, 18, 0.94);
+  --icon-surface: #222228;
   color-scheme: dark;
 }
 [data-theme="light"] {
   --background: #ffffff;
-  --foreground: #2e2041;
-  --muted: #f6f2fb;
-  --muted-text: #6b5b7b;
+  --foreground: #0e0e12;
+  --muted: #f6f6f7;
+  --muted-text: #64646f;
   --card: #ffffff;
-  --border: #e2d8ef;
-  --primary: #46237a;
-  --primary-dark: #3ddc97;
-  --accent: #6f41c2;
-  --detail: #6f41c2;
-  --secondary: #eee5fc;
-  --hero-surface: #f2ecfa;
-  --ink: #28163f;
+  --border: #e3e3e8;
+  --primary: #b84400;
+  --primary-dark: #e65300;
+  --accent: #b84400;
+  --detail: #b84400;
+  --secondary: #f2f2f4;
+  --hero-surface: #ffffff;
+  --ink: #0e0e12;
   --header-bg: rgba(255, 255, 255, 0.94);
-  --icon-surface: #eee5fc;
+  --icon-surface: #f2f2f4;
   color-scheme: light;
 }
 @theme inline {
@@ -199,15 +199,12 @@ svg {
 }
 
 .hero {
-  --accent: #3ddc97;
+  --accent: var(--primary);
   position: relative;
   min-height: 580px;
   overflow: hidden;
   isolation: isolate;
   background: var(--background);
-}
-[data-theme="light"] .hero {
-  --accent: #6f41c2;
 }
 .hero-background {
   position: absolute;
@@ -215,18 +212,27 @@ svg {
   z-index: -1;
   background: var(--hero-surface);
 }
-.hero-background img {
+.hero-background img,
+.hero-background::before {
   position: absolute;
   top: 50%;
   right: max(40px, calc((100% - 1200px) / 2 + 45px));
   width: 320px;
   height: 320px;
   display: block;
+  border-radius: 44% 44% 16% 44%;
+  transform: translateY(-50%);
+}
+.hero-background::before {
+  content: "";
+  background: var(--action);
+  translate: 10px 10px;
+}
+.hero-background img {
   object-fit: cover;
   object-position: center 36%;
-  border-radius: 50%;
   background: #fff;
-  transform: translateY(-50%);
+  filter: grayscale(1) contrast(1.03);
 }
 .hero-grid {
   display: flex;
@@ -457,7 +463,7 @@ h1 > span {
   place-items: center;
   border-radius: 50%;
   background: #f8f7fc;
-  color: var(--logo-color, #46237a);
+  color: var(--logo-color, #0e0e12);
   font-size: 9px;
   font-weight: 750;
 }
@@ -945,7 +951,7 @@ h1 > span {
   align-items: center;
   gap: 6px;
   padding: 7px 10px;
-  background: #46237a;
+  background: #0e0e12;
   border-radius: 4px;
   color: #fff;
   font-size: 11px;
@@ -1129,7 +1135,8 @@ h1 > span {
   .lead {
     font-size: 13px;
   }
-  .hero-background img {
+  .hero-background img,
+  .hero-background::before {
     width: 220px;
     height: 220px;
     right: 24px;
@@ -1214,13 +1221,17 @@ h1 > span {
     width: 100%;
     max-width: none;
   }
-  .hero-background img {
+  .hero-background img,
+  .hero-background::before {
     top: auto;
     bottom: 24px;
     right: calc(50% - 90px);
     width: 180px;
     height: 180px;
     transform: none;
+  }
+  .hero-background::before {
+    translate: 7px 7px;
   }
   h1 {
     font-size: 52px;
@@ -1379,7 +1390,8 @@ h1 > span {
     padding-top: 36px;
     padding-bottom: 220px;
   }
-  .hero-background img {
+  .hero-background img,
+  .hero-background::before {
     width: 160px;
     height: 160px;
     right: calc(50% - 80px);
