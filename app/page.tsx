@@ -353,7 +353,7 @@ export default function Home() {
       frame = null;
       const activationLine =
         (document.querySelector(".site-header")?.getBoundingClientRect()
-          .bottom ?? 80) + 120;
+          .bottom ?? 80) + 32;
       let nextSection: NavigationSection = "services";
       let nearestTop = -Infinity;
 
@@ -596,11 +596,7 @@ export default function Home() {
         </div>
       </div>
 
-      <section
-        className="tools-section"
-        id="skills"
-        onPointerMove={() => setActiveSection("skills")}
-      >
+      <section className="tools-section" id="skills">
         <div className="container">
           <div className="section-heading centered">
             <p className="section-kicker">The toolkit</p>
@@ -644,11 +640,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section
-        className="section"
-        id="services"
-        onPointerMove={() => setActiveSection("services")}
-      >
+      <section className="section" id="services">
         <div className="container">
           <div className="section-heading centered">
             <p className="section-kicker">01 / Expertise</p>
@@ -682,11 +674,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section
-        className="section muted"
-        id="experience"
-        onPointerMove={() => setActiveSection("experience")}
-      >
+      <section className="section muted" id="experience">
         <div className="container">
           <div className="section-heading centered">
             <p className="section-kicker">02 / Career</p>
@@ -714,11 +702,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section
-        className="section"
-        id="projects"
-        onPointerMove={() => setActiveSection("projects")}
-      >
+      <section className="section" id="projects">
         <div className="container">
           <div className="section-heading centered">
             <p className="section-kicker">03 / Selected work</p>
@@ -871,11 +855,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section
-        className="section contact-section"
-        id="contact"
-        onPointerMove={() => setActiveSection("contact")}
-      >
+      <section className="section contact-section" id="contact">
         <div className="container contact-grid">
           <div>
             <p className="section-kicker">05 / Let&apos;s connect</p>
