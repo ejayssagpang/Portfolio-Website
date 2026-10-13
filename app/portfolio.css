@@ -1,37 +1,41 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0c0c10;
-  --foreground: #f0f0f5;
-  --muted: #101016;
-  --muted-text: #aaa9b7;
-  --card: #181820;
-  --border: #2b2935;
-  --primary: #fcee09;
-  --primary-dark: #dfd20a;
-  --accent: #00e5f0;
-  --magenta: #ff4a91;
-  --signal-yellow: #fcee09;
-  --button-ink: #0c0c10;
-  --ink: #f8f7fc;
-  --header-bg: rgba(12, 12, 16, 0.94);
-  --icon-surface: #211f17;
+  --background: #160e23;
+  --foreground: #f3effa;
+  --muted: #1e142e;
+  --muted-text: #b6aac8;
+  --card: #46237a;
+  --border: #423253;
+  --primary: #26ffa0;
+  --primary-dark: #3ddc97;
+  --accent: #9b76e3;
+  --detail: #9b76e3;
+  --secondary: #6f41c2;
+  --action: #26ffa0;
+  --hero-surface: #46237a;
+  --button-ink: #160e23;
+  --ink: #faf7ff;
+  --header-bg: rgba(22, 14, 35, 0.94);
+  --icon-surface: #46237a;
   color-scheme: dark;
 }
 [data-theme="light"] {
   --background: #ffffff;
-  --foreground: #23212b;
-  --muted: #f5f4f8;
-  --muted-text: #62606e;
+  --foreground: #2e2041;
+  --muted: #f6f2fb;
+  --muted-text: #6b5b7b;
   --card: #ffffff;
-  --border: #dedce6;
-  --primary: #746600;
-  --primary-dark: #dfd20a;
-  --accent: #006b78;
-  --magenta: #b92160;
-  --ink: #17151f;
+  --border: #e2d8ef;
+  --primary: #46237a;
+  --primary-dark: #3ddc97;
+  --accent: #6f41c2;
+  --detail: #6f41c2;
+  --secondary: #eee5fc;
+  --hero-surface: #f2ecfa;
+  --ink: #28163f;
   --header-bg: rgba(255, 255, 255, 0.94);
-  --icon-surface: #faf7db;
+  --icon-surface: #eee5fc;
   color-scheme: light;
 }
 @theme inline {
@@ -195,36 +199,34 @@ svg {
 }
 
 .hero {
+  --accent: #3ddc97;
   position: relative;
   min-height: 580px;
   overflow: hidden;
   isolation: isolate;
   background: var(--background);
 }
+[data-theme="light"] .hero {
+  --accent: #6f41c2;
+}
 .hero-background {
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: var(--signal-yellow);
+  background: var(--hero-surface);
 }
 .hero-background img {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: contain;
-  object-position: right center;
-  mix-blend-mode: multiply;
-}
-.hero-background::after {
-  content: "";
   position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    90deg,
-    var(--background) 0%,
-    var(--background) 38%,
-    transparent 72%
-  );
+  top: 50%;
+  right: max(40px, calc((100% - 1200px) / 2 + 45px));
+  width: 320px;
+  height: 320px;
+  display: block;
+  object-fit: cover;
+  object-position: center 36%;
+  border-radius: 50%;
+  background: #fff;
+  transform: translateY(-50%);
 }
 .hero-grid {
   display: flex;
@@ -295,8 +297,8 @@ h1 > span {
     border-color 0.2s ease;
 }
 .button.primary {
-  background: var(--signal-yellow);
-  border-color: var(--signal-yellow);
+  background: var(--action);
+  border-color: var(--action);
   color: var(--button-ink);
 }
 .button.primary:hover {
@@ -324,7 +326,7 @@ h1 > span {
   content: "/";
   position: absolute;
   left: -12px;
-  color: var(--magenta);
+  color: var(--detail);
 }
 .intro-strip {
   border-block: 1px solid var(--border);
@@ -455,7 +457,7 @@ h1 > span {
   place-items: center;
   border-radius: 50%;
   background: #f8f7fc;
-  color: var(--logo-color, #006b78);
+  color: var(--logo-color, #46237a);
   font-size: 9px;
   font-weight: 750;
 }
@@ -483,7 +485,7 @@ h1 > span {
 }
 .service-number {
   font-size: 11px;
-  color: var(--magenta);
+  color: var(--detail);
   font-family: var(--font-geist-mono, "Consolas"), monospace;
 }
 .service-logo {
@@ -498,7 +500,7 @@ h1 > span {
   color: var(--primary);
 }
 .service-logo.crm {
-  color: var(--magenta);
+  color: var(--detail);
 }
 .service-logo.systems {
   color: var(--accent);
@@ -616,11 +618,11 @@ h1 > span {
   justify-content: center;
   align-items: center;
   gap: 12px;
-  background: var(--muted);
-  color: var(--accent);
+  background: var(--secondary);
+  color: var(--primary);
 }
 .project-illustration span {
-  color: var(--muted-text);
+  color: var(--foreground);
   font-size: 11px;
 }
 .project-topline {
@@ -673,7 +675,7 @@ h1 > span {
 .tag-row span::before {
   content: "/";
   margin-right: 6px;
-  color: var(--magenta);
+  color: var(--detail);
 }
 
 .credential-grid {
@@ -749,7 +751,7 @@ h1 > span {
 .credential-tags span + span::before {
   content: "/";
   margin-right: 8px;
-  color: var(--magenta);
+  color: var(--detail);
 }
 .certification-item {
   display: flex;
@@ -943,7 +945,7 @@ h1 > span {
   align-items: center;
   gap: 6px;
   padding: 7px 10px;
-  background: #18241d;
+  background: #46237a;
   border-radius: 4px;
   color: #fff;
   font-size: 11px;
@@ -1042,19 +1044,6 @@ h1 > span {
   border-radius: 4px;
 }
 
-@media (min-width: 1600px) {
-  .hero-background img {
-    object-position: calc(50% + 340px) center;
-  }
-  .hero-background::after {
-    background: linear-gradient(
-      90deg,
-      var(--background) 0%,
-      var(--background) 42%,
-      transparent 68%
-    );
-  }
-}
 @media (max-width: 1100px) {
   .nav-links {
     gap: 16px;
@@ -1140,13 +1129,10 @@ h1 > span {
   .lead {
     font-size: 13px;
   }
-  .hero-background::after {
-    background: linear-gradient(
-      90deg,
-      var(--background) 0%,
-      var(--background) 42%,
-      transparent 100%
-    );
+  .hero-background img {
+    width: 220px;
+    height: 220px;
+    right: 24px;
   }
   .tool-groups {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1216,36 +1202,25 @@ h1 > span {
     display: none;
   }
   .hero {
-    min-height: 700px;
+    min-height: 620px;
   }
   .hero-grid {
     align-items: start;
-    min-height: 700px;
+    min-height: 620px;
     padding-top: 42px;
-    padding-bottom: 280px;
+    padding-bottom: 220px;
   }
   .hero-copy {
     width: 100%;
     max-width: none;
   }
   .hero-background img {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 300px;
-    object-fit: cover;
-    object-position: center top;
-  }
-  .hero-background {
-    background: var(--signal-yellow);
-  }
-  .hero-background::after {
-    background: linear-gradient(
-      180deg,
-      var(--background) 0%,
-      var(--background) 53%,
-      transparent 78%
-    );
+    top: auto;
+    bottom: 24px;
+    right: calc(50% - 90px);
+    width: 180px;
+    height: 180px;
+    transform: none;
   }
   h1 {
     font-size: 52px;
@@ -1405,7 +1380,9 @@ h1 > span {
     padding-bottom: 220px;
   }
   .hero-background img {
-    height: 240px;
+    width: 160px;
+    height: 160px;
+    right: calc(50% - 80px);
   }
   .service-grid {
     grid-template-columns: 1fr;
