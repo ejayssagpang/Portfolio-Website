@@ -324,6 +324,7 @@ const navigationItems = [
 type NavigationSection = (typeof navigationItems)[number]["id"];
 
 export default function Home() {
+  const pageRoot = useRef<HTMLElement>(null);
   const [theme, setTheme] = useState("dark");
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] =
@@ -345,6 +346,64 @@ export default function Home() {
 
     setTheme(nextTheme);
     document.documentElement.dataset.theme = nextTheme;
+  }, []);
+
+  useEffect(() => {
+    const root = pageRoot.current;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (!root || reducedMotion.matches || !window.IntersectionObserver) return;
+
+    const selector =
+      ".section-heading, .tool-group h3, .tool-chip, .modern-card, .experience-card, .project-card, .education-panel, .certification-item, .contact-grid > div:first-child, .contact-card";
+    const elements = Array.from(root.querySelectorAll<HTMLElement>(selector));
+    const reveal = (element: HTMLElement) => {
+      element.dataset.reveal = "visible";
+      observer.unobserve(element);
+    };
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) reveal(entry.target as HTMLElement);
+        }
+      },
+      { threshold: 0.08, rootMargin: "0px 0px -24px 0px" },
+    );
+
+    for (const element of elements) {
+      const siblings = Array.from(element.parentElement?.children ?? []).filter(
+        (sibling) => sibling.matches(selector),
+      );
+      element.style.setProperty(
+        "--reveal-delay",
+        `${Math.min(siblings.indexOf(element) * 75, 375)}ms`,
+      );
+      element.classList.add("scroll-reveal");
+      element.dataset.reveal = "pending";
+      observer.observe(element);
+    }
+
+    function revealFocused(event: FocusEvent) {
+      if (!(event.target instanceof Element)) return;
+      const element = event.target.closest<HTMLElement>(".scroll-reveal");
+      if (element) reveal(element);
+    }
+    function honorReducedMotion() {
+      if (!reducedMotion.matches) return;
+      elements.forEach(reveal);
+      observer.disconnect();
+    }
+    root.addEventListener("focusin", revealFocused);
+    reducedMotion.addEventListener("change", honorReducedMotion);
+    return () => {
+      observer.disconnect();
+      root.removeEventListener("focusin", revealFocused);
+      reducedMotion.removeEventListener("change", honorReducedMotion);
+      for (const element of elements) {
+        element.classList.remove("scroll-reveal");
+        delete element.dataset.reveal;
+        element.style.removeProperty("--reveal-delay");
+      }
+    };
   }, []);
 
   useEffect(() => {
@@ -451,7 +510,7 @@ export default function Home() {
   }
 
   return (
-    <main>
+    <main ref={pageRoot}>
       <a className="skip-link" href="#home">
         Skip to content
       </a>
@@ -549,9 +608,9 @@ export default function Home() {
         <div className="container hero-grid">
           <div className="hero-copy">
             <h1>
-              Elijah Jake
+              <span className="hero-name-line">Elijah Jake</span>
               <br />
-              <span>Sagpang.</span>
+              <span className="hero-name-line hero-name-accent">Sagpang.</span>
             </h1>
             <p className="hero-role">
               IT Service Manager & Automation Specialist

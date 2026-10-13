@@ -1240,6 +1240,127 @@ h1 > span {
   transform: translateY(1px);
 }
 
+@keyframes hero-enter {
+  from {
+    opacity: 0;
+    translate: 0 32px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+.hero-name-line {
+  display: inline-block;
+  animation: hero-enter 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+h1 > .hero-name-line {
+  color: var(--ink);
+}
+h1 > .hero-name-accent {
+  color: var(--primary);
+  animation-delay: 0.15s;
+}
+.hero-role,
+.hero .lead,
+.hero-actions,
+.hero .quick-contact,
+.hero-specialties {
+  animation: hero-enter 0.75s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.hero-role { animation-delay: 0.25s; }
+.hero .lead { animation-delay: 0.35s; }
+.hero-actions { animation-delay: 0.45s; }
+.hero .quick-contact { animation-delay: 0.55s; }
+.hero-specialties { animation-delay: 0.65s; }
+
+.scroll-reveal {
+  opacity: 1;
+  translate: 0 0;
+  transition:
+    opacity 0.65s ease var(--reveal-delay, 0ms),
+    translate 0.7s cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0ms),
+    color 0.18s ease,
+    border-color 0.18s ease,
+    background 0.18s ease,
+    transform 0.22s ease,
+    box-shadow 0.22s ease;
+}
+.scroll-reveal[data-reveal="pending"] {
+  opacity: 0;
+  translate: 0 32px;
+  transition: none;
+}
+.scroll-reveal:focus-within {
+  opacity: 1;
+  translate: 0 0;
+  transition-delay: 0s;
+}
+
+.button.primary {
+  position: relative;
+  overflow: hidden;
+}
+.button.primary::after {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 -45%;
+  width: 28%;
+  background: rgba(255, 255, 255, 0.4);
+  opacity: 0;
+  pointer-events: none;
+  animation: button-sweep 5.5s ease-in-out 1.6s infinite;
+}
+@keyframes button-sweep {
+  0%,
+  72% {
+    opacity: 0;
+    transform: translateX(0) skewX(-18deg);
+  }
+  78% { opacity: 1; }
+  93%,
+  100% {
+    opacity: 0;
+    transform: translateX(650%) skewX(-18deg);
+  }
+}
+.project-image-button img {
+  transition: transform 0.35s ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .tool-chip:hover,
+  .modern-card:hover,
+  .project-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 28px rgba(255, 94, 0, 0.16);
+  }
+  .tool-chip:hover .tool-icon {
+    transform: scale(1.14) rotate(-6deg);
+  }
+  .modern-card:hover .service-logo {
+    transform: translateY(-3px) rotate(-8deg) scale(1.08);
+  }
+  .project-card:hover .project-image-button img {
+    transform: scale(1.05);
+  }
+}
+.project-modal,
+.image-modal {
+  animation: dialog-enter 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes dialog-enter {
+  from {
+    opacity: 0;
+    translate: 0 20px;
+    scale: 0.97;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+    scale: 1;
+  }
+}
+
 @media (max-width: 1100px) {
   .quick-contact a + a::before {
     display: none;
@@ -1622,6 +1743,13 @@ h1 > span {
   }
 }
 @media (prefers-reduced-motion: reduce) {
+  .scroll-reveal {
+    opacity: 1 !important;
+    translate: none !important;
+  }
+  .project-image-button img {
+    transform: none !important;
+  }
   html {
     scroll-behavior: auto;
   }
