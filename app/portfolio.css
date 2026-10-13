@@ -232,7 +232,6 @@ svg {
   object-fit: cover;
   object-position: center 36%;
   background: #fff;
-  filter: grayscale(1) contrast(1.03);
 }
 .hero-grid {
   display: flex;

@@ -470,7 +470,7 @@ export default function Home() {
       <section className="hero" id="home">
         <div className="hero-background">
           <img
-            src="/profile-photo.jpg"
+            src="/elijah-portrait.png"
             alt="Portrait of Elijah Jake Sagpang"
             fetchPriority="high"
           />
