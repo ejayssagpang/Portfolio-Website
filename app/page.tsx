@@ -596,7 +596,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section className="tools-section" id="skills">
+      <section className="tools-section muted" id="skills">
         <div className="container">
           <div className="section-heading centered">
             <p className="section-kicker">The toolkit</p>

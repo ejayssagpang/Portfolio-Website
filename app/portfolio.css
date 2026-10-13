@@ -406,15 +406,7 @@ h1 > span {
   border-block: 1px solid var(--border);
 }
 .tools-section {
-  --tool-surface: #19191f;
-  --tool-dot: rgba(255, 255, 255, 0.07);
   padding-block: 60px;
-  background-image: radial-gradient(var(--tool-dot) 0.8px, transparent 0.8px);
-  background-size: 28px 28px;
-}
-[data-theme="light"] .tools-section {
-  --tool-surface: #ffffff;
-  --tool-dot: rgba(14, 14, 18, 0.12);
 }
 .section-heading {
   margin-bottom: 36px;
@@ -488,8 +480,8 @@ h1 > span {
   gap: 10px;
   border: 1px solid var(--border);
   border-radius: 8px;
-  background: var(--tool-surface);
-  color: var(--ink);
+  background: var(--card);
+  color: var(--foreground);
   font-size: 14px;
   font-weight: 500;
   overflow-wrap: anywhere;
