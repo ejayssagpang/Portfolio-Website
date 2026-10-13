@@ -309,9 +309,21 @@ const credentials = [
   },
 ];
 
+const navigationItems = [
+  { id: "services", label: "Services" },
+  { id: "experience", label: "Experience" },
+  { id: "projects", label: "Projects" },
+  { id: "skills", label: "Tools" },
+  { id: "contact", label: "Contact" },
+] as const;
+
+type NavigationSection = (typeof navigationItems)[number]["id"];
+
 export default function Home() {
   const [theme, setTheme] = useState("dark");
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] =
+    useState<NavigationSection>("services");
   const projectDialog = useRef<HTMLDivElement>(null);
   const imageDialog = useRef<HTMLDivElement>(null);
   const [activeProject, setActiveProject] = useState<
@@ -329,6 +341,54 @@ export default function Home() {
 
     setTheme(nextTheme);
     document.documentElement.dataset.theme = nextTheme;
+  }, []);
+
+  useEffect(() => {
+    const sections = navigationItems
+      .map((item) => document.getElementById(item.id))
+      .filter((section): section is HTMLElement => section !== null);
+    let frame: number | null = null;
+
+    function updateActiveSection() {
+      frame = null;
+      const activationLine =
+        (document.querySelector(".site-header")?.getBoundingClientRect()
+          .bottom ?? 80) + 120;
+      let nextSection: NavigationSection = "services";
+      let nearestTop = -Infinity;
+
+      for (const section of sections) {
+        const top = section.getBoundingClientRect().top;
+        if (top <= activationLine && top >= nearestTop) {
+          nearestTop = top;
+          nextSection = section.id as NavigationSection;
+        }
+      }
+
+      if (
+        window.scrollY + window.innerHeight >=
+        document.documentElement.scrollHeight - 2
+      ) {
+        nextSection = "contact";
+      }
+      setActiveSection(nextSection);
+    }
+
+    function scheduleUpdate() {
+      if (frame === null)
+        frame = window.requestAnimationFrame(updateActiveSection);
+    }
+
+    scheduleUpdate();
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", scheduleUpdate);
+    window.addEventListener("hashchange", scheduleUpdate);
+    return () => {
+      if (frame !== null) window.cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", scheduleUpdate);
+      window.removeEventListener("resize", scheduleUpdate);
+      window.removeEventListener("hashchange", scheduleUpdate);
+    };
   }, []);
 
   useEffect(() => {
@@ -409,11 +469,18 @@ export default function Home() {
             id="nav-links"
             onClick={() => setMenuOpen(false)}
           >
-            <a href="#services">Services</a>
-            <a href="#experience">Experience</a>
-            <a href="#projects">Projects</a>
-            <a href="#skills">Tools</a>
-            <a href="#contact">Contact</a>
+            {navigationItems.map((item) => (
+              <a
+                key={item.id}
+                href={`#${item.id}`}
+                aria-current={
+                  activeSection === item.id ? "location" : undefined
+                }
+                onClick={() => setActiveSection(item.id)}
+              >
+                {item.label}
+              </a>
+            ))}
             <a
               className="mobile-cv"
               href="/elijah-sagpang-cv.pdf"
@@ -529,7 +596,11 @@ export default function Home() {
         </div>
       </div>
 
-      <section className="tools-section" id="skills">
+      <section
+        className="tools-section"
+        id="skills"
+        onPointerEnter={() => setActiveSection("skills")}
+      >
         <div className="container">
           <div className="section-heading centered">
             <p className="section-kicker">The toolkit</p>
@@ -573,7 +644,11 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section" id="services">
+      <section
+        className="section"
+        id="services"
+        onPointerEnter={() => setActiveSection("services")}
+      >
         <div className="container">
           <div className="section-heading centered">
             <p className="section-kicker">01 / Expertise</p>
@@ -607,7 +682,11 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section muted" id="experience">
+      <section
+        className="section muted"
+        id="experience"
+        onPointerEnter={() => setActiveSection("experience")}
+      >
         <div className="container">
           <div className="section-heading centered">
             <p className="section-kicker">02 / Career</p>
@@ -635,7 +714,11 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section" id="projects">
+      <section
+        className="section"
+        id="projects"
+        onPointerEnter={() => setActiveSection("projects")}
+      >
         <div className="container">
           <div className="section-heading centered">
             <p className="section-kicker">03 / Selected work</p>
@@ -788,7 +871,11 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section contact-section" id="contact">
+      <section
+        className="section contact-section"
+        id="contact"
+        onPointerEnter={() => setActiveSection("contact")}
+      >
         <div className="container contact-grid">
           <div>
             <p className="section-kicker">05 / Let&apos;s connect</p>

@@ -151,12 +151,14 @@ svg {
 }
 .nav-links a {
   padding-block: 12px;
+  transition: color 0.18s ease;
 }
 .nav-links .mobile-cv {
   display: none;
 }
-.nav-links a:hover {
-  color: var(--accent);
+.nav-links a:hover,
+.nav-links a[aria-current="location"] {
+  color: var(--primary);
 }
 .nav-actions {
   display: flex;
