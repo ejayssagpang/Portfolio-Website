@@ -548,9 +548,6 @@ export default function Home() {
         </div>
         <div className="container hero-grid">
           <div className="hero-copy">
-            <p className="eyebrow">
-              <span aria-hidden="true" /> Davao City, Philippines
-            </p>
             <h1>
               Elijah Jake
               <br />
