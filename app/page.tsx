@@ -310,10 +310,10 @@ const credentials = [
 ];
 
 const navigationItems = [
+  { id: "skills", label: "Tools" },
   { id: "services", label: "Services" },
   { id: "experience", label: "Experience" },
   { id: "projects", label: "Projects" },
-  { id: "skills", label: "Tools" },
   { id: "contact", label: "Contact" },
 ] as const;
 
