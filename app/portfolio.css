@@ -254,6 +254,25 @@ svg {
   object-fit: cover;
   object-position: center 36%;
   background: #fff;
+  box-shadow: 0 0 0 2px rgba(255, 94, 0, 0.55);
+  animation:
+    portrait-float 4.8s ease-in-out infinite,
+    portrait-border-pulse 3.6s ease-in-out infinite;
+}
+@keyframes portrait-border-pulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 2px rgba(255, 94, 0, 0.55),
+      0 0 0 2px rgba(255, 94, 0, 0),
+      0 0 12px rgba(255, 94, 0, 0.06);
+  }
+  50% {
+    box-shadow:
+      0 0 0 2px rgba(255, 94, 0, 1),
+      0 0 0 6px rgba(255, 94, 0, 0.08),
+      0 0 26px rgba(255, 94, 0, 0.18);
+  }
 }
 .hero-grid {
   display: flex;
