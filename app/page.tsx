@@ -1,6 +1,25 @@
 "use client";
 
-import { useEffect, useState, type CSSProperties } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
+import {
+  ArrowDown,
+  ArrowDownToLine,
+  ArrowRight,
+  ArrowUpRight,
+  Award,
+  CalendarDays,
+  GraduationCap,
+  LayoutDashboard,
+  Menu,
+  Moon,
+  Network,
+  Server,
+  ShieldCheck,
+  Sun,
+  Workflow,
+  X,
+  ZoomIn,
+} from "lucide-react";
 
 type Tool = {
   name: string;
@@ -28,7 +47,11 @@ type Project = {
 };
 
 const contactLinks = [
-  { label: "Email", value: "ejssagpang@gmail.com", href: "mailto:ejssagpang@gmail.com" },
+  {
+    label: "Email",
+    value: "ejssagpang@gmail.com",
+    href: "mailto:ejssagpang@gmail.com",
+  },
   { label: "Phone", value: "+63 993 763 1538", href: "tel:+639937631538" },
   { label: "Location", value: "Davao City, Philippines", href: "#contact" },
 ];
@@ -40,9 +63,15 @@ const toolGroups: ToolGroup[] = [
       { name: "GoHighLevel", initials: "HL", color: "#20c997" },
       { name: "Zapier", icon: "https://cdn.simpleicons.org/zapier" },
       { name: "Omnisend", initials: "O", color: "#5f46f7" },
-      { name: "Google Tags", icon: "https://cdn.simpleicons.org/googletagmanager" },
+      {
+        name: "Google Tags",
+        icon: "https://cdn.simpleicons.org/googletagmanager",
+      },
       { name: "OpenAI", icon: "/openai-logo.svg" },
-      { name: "Google Gemini", icon: "https://cdn.simpleicons.org/googlegemini" },
+      {
+        name: "Google Gemini",
+        icon: "https://cdn.simpleicons.org/googlegemini",
+      },
       { name: "Claude", icon: "https://cdn.simpleicons.org/claude" },
       { name: "Relevance AI", initials: "RA", color: "#5b5ff0" },
     ],
@@ -121,6 +150,13 @@ const services = [
       "Manage access, credentials, integrations, technical support, and system reliability with a security-aware operational mindset.",
   },
 ];
+
+const serviceIcons = {
+  automation: Workflow,
+  service: ShieldCheck,
+  crm: Network,
+  systems: Server,
+};
 
 const experience = [
   {
@@ -275,7 +311,12 @@ const credentials = [
 
 export default function Home() {
   const [theme, setTheme] = useState("dark");
-  const [activeProject, setActiveProject] = useState<(typeof projects)[number] | null>(null);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const projectDialog = useRef<HTMLDivElement>(null);
+  const imageDialog = useRef<HTMLDivElement>(null);
+  const [activeProject, setActiveProject] = useState<
+    (typeof projects)[number] | null
+  >(null);
   const [activeImage, setActiveImage] = useState<{
     alt: string;
     src: string;
@@ -295,16 +336,46 @@ export default function Home() {
       return;
     }
 
+    const previousFocus = document.activeElement as HTMLElement | null;
+    const previousOverflow = document.body.style.overflow;
+    const dialog = activeImage ? imageDialog.current : projectDialog.current;
+    document.body.style.overflow = "hidden";
+    dialog?.focus();
     function handleKeyDown(event: KeyboardEvent) {
-      if (event.key === "Escape" && activeImage) {
-        setActiveImage(null);
-      } else if (event.key === "Escape") {
-        setActiveProject(null);
+      if (event.key === "Escape") {
+        if (activeImage) setActiveImage(null);
+        else setActiveProject(null);
+      }
+      if (event.key === "Tab" && dialog) {
+        const elements = Array.from(
+          dialog.querySelectorAll<HTMLElement>(
+            'button, a[href], [tabindex="0"]',
+          ),
+        );
+        const first = elements[0];
+        const last = elements[elements.length - 1];
+        if (
+          event.shiftKey &&
+          (document.activeElement === first ||
+            document.activeElement === dialog)
+        ) {
+          event.preventDefault();
+          last?.focus();
+        } else if (
+          !event.shiftKey &&
+          (document.activeElement === last || document.activeElement === dialog)
+        ) {
+          event.preventDefault();
+          first?.focus();
+        }
       }
     }
-
     document.addEventListener("keydown", handleKeyDown);
-    return () => document.removeEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = previousOverflow;
+      previousFocus?.focus();
+    };
   }, [activeImage, activeProject]);
 
   function toggleTheme() {
@@ -317,69 +388,110 @@ export default function Home() {
 
   return (
     <main>
-      <div className="scroll-line" aria-hidden="true" />
+      <a className="skip-link" href="#home">
+        Skip to content
+      </a>
 
       <header className="site-header">
         <nav className="nav" aria-label="Primary navigation">
-          <a className="logo" href="#home" aria-label="Elijah Jake Sagpang home">
-            Elijah Sagpang
+          <a
+            className="logo"
+            href="#home"
+            aria-label="Elijah Jake Sagpang home"
+          >
+            <span className="logo-mark" aria-hidden="true">
+              es.
+            </span>
+            <span>Elijah Sagpang</span>
           </a>
-          <div className="nav-links">
+          <div
+            className={`nav-links ${menuOpen ? "is-open" : ""}`}
+            id="nav-links"
+            onClick={() => setMenuOpen(false)}
+          >
             <a href="#services">Services</a>
             <a href="#experience">Experience</a>
             <a href="#projects">Projects</a>
+            <a href="#skills">Tools</a>
             <a href="#contact">Contact</a>
+            <a
+              className="mobile-cv"
+              href="/elijah-sagpang-cv.pdf"
+              download="Elijah Sagpang - CV.pdf"
+            >
+              <ArrowDownToLine size={16} aria-hidden="true" /> Download CV
+            </a>
           </div>
-          <button
-            className="theme-toggle"
-            type="button"
-            onClick={toggleTheme}
-            aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-            aria-pressed={theme === "dark"}
-          >
-            <span className="theme-symbol theme-symbol-moon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M20.25 15.35A8.5 8.5 0 0 1 8.65 3.75 8.75 8.75 0 1 0 20.25 15.35Z"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                />
-              </svg>
-            </span>
-            <span className="theme-symbol theme-symbol-sun" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M12 7.5a4.5 4.5 0 1 1 0 9 4.5 4.5 0 0 1 0-9ZM12 2.75v2M12 19.25v2M4.75 4.75l1.42 1.42M17.83 17.83l1.42 1.42M2.75 12h2M19.25 12h2M4.75 19.25l1.42-1.42M17.83 6.17l1.42-1.42"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                />
-              </svg>
-            </span>
-          </button>
-          <a
-            className="nav-cta"
-            href="/elijah-sagpang-cv.pdf"
-            download="Elijah Sagpang - CV.pdf"
-          >
-            Download CV
-          </a>
+          <div className="nav-actions">
+            <button
+              className="theme-toggle"
+              type="button"
+              onClick={toggleTheme}
+              aria-label={
+                theme === "dark"
+                  ? "Switch to light mode"
+                  : "Switch to dark mode"
+              }
+              aria-pressed={theme === "dark"}
+              title={
+                theme === "dark"
+                  ? "Switch to light mode"
+                  : "Switch to dark mode"
+              }
+            >
+              {theme === "dark" ? (
+                <Sun size={19} aria-hidden="true" />
+              ) : (
+                <Moon size={19} aria-hidden="true" />
+              )}
+            </button>
+            <a
+              className="nav-cta"
+              href="/elijah-sagpang-cv.pdf"
+              download="Elijah Sagpang - CV.pdf"
+            >
+              <ArrowDownToLine size={16} aria-hidden="true" /> Download CV
+            </a>
+            <button
+              className="menu-toggle"
+              type="button"
+              onClick={() => setMenuOpen(!menuOpen)}
+              aria-expanded={menuOpen}
+              aria-controls="nav-links"
+              aria-label={menuOpen ? "Close navigation" : "Open navigation"}
+              title={menuOpen ? "Close navigation" : "Open navigation"}
+            >
+              {menuOpen ? <X size={21} /> : <Menu size={21} />}
+            </button>
+          </div>
         </nav>
       </header>
 
       <section className="hero" id="home">
+        <div className="hero-background">
+          <img
+            src="/profile-photo.jpg"
+            alt="Portrait of Elijah Jake Sagpang"
+            fetchPriority="high"
+          />
+        </div>
         <div className="container hero-grid">
-          <div className="hero-copy reveal">
-            <p className="eyebrow">IT Service Manager & Automation Specialist</p>
-            <h1>Building cleaner systems for growing teams.</h1>
+          <div className="hero-copy">
+            <p className="eyebrow">
+              <span aria-hidden="true" /> Davao City, Philippines
+            </p>
+            <h1>
+              Elijah Jake
+              <br />
+              <span>Sagpang.</span>
+            </h1>
+            <p className="hero-role">
+              IT Service Manager & Automation Specialist
+            </p>
             <p className="lead">
-              I help businesses streamline operations through GoHighLevel
-              automation, CRM setup, IT service management, systems
-              administration, implementation support, and security-minded
-              troubleshooting.
+              I build cleaner systems for growing teams. From CRM workflows to
+              IT operations, I turn everyday complexity into processes that
+              work.
             </p>
             <div className="hero-actions">
               <a
@@ -388,40 +500,44 @@ export default function Home() {
                 target="_blank"
                 rel="noreferrer"
               >
-                Book a Call
+                Book a Call <ArrowUpRight size={18} aria-hidden="true" />
               </a>
               <a className="button secondary" href="#projects">
-                View My Projects
+                View Projects <ArrowDown size={18} aria-hidden="true" />
               </a>
             </div>
-            <div className="quick-contact" aria-label="Quick contact details">
-              {contactLinks.map((item) => (
-                <a key={item.label} href={item.href}>
-                  <strong>{item.label}</strong>
-                  <span>{item.value}</span>
-                </a>
-              ))}
+            <div className="hero-specialties">
+              <span>Automation</span>
+              <span>CRM Systems</span>
+              <span>IT Operations</span>
             </div>
-          </div>
-
-          <div className="hero-photo reveal" aria-label="Profile visual">
-            <div className="portrait-wrap">
-              <div className="portrait">
-                <img src="/profile-photo.jpg" alt="Portrait of Elijah Jake Sagpang" />
-              </div>
-            </div>
-            <div className="floating-note note-one">GHL</div>
-            <div className="floating-note note-two">CRM</div>
-            <div className="floating-note note-three">ITSM</div>
           </div>
         </div>
       </section>
+      <div className="intro-strip">
+        <div
+          className="container quick-contact"
+          aria-label="Quick contact details"
+        >
+          {contactLinks.map((item) => (
+            <a key={item.label} href={item.href}>
+              <span>{item.label}</span>
+              <strong>{item.value}</strong>
+              <ArrowUpRight size={16} aria-hidden="true" />
+            </a>
+          ))}
+        </div>
+      </div>
 
       <section className="tools-section" id="skills">
         <div className="container">
           <div className="section-heading centered">
+            <p className="section-kicker">The toolkit</p>
             <h2>Tools & Technologies</h2>
-            <p>Platforms and technologies I use to build, automate, and support operations.</p>
+            <p>
+              Platforms and technologies I use to build, automate, and support
+              operations.
+            </p>
           </div>
           <div className="tool-groups">
             {toolGroups.map((group) => (
@@ -436,7 +552,13 @@ export default function Home() {
                         aria-hidden="true"
                       >
                         {tool.icon ? (
-                          <img src={tool.icon} alt="" width="20" height="20" />
+                          <img
+                            src={tool.icon}
+                            alt=""
+                            width="20"
+                            height="20"
+                            loading="lazy"
+                          />
                         ) : (
                           tool.initials
                         )}
@@ -454,17 +576,33 @@ export default function Home() {
       <section className="section" id="services">
         <div className="container">
           <div className="section-heading centered">
+            <p className="section-kicker">01 / Expertise</p>
             <h2>Services</h2>
-            <p>Focused technical support for teams that need less friction and better visibility.</p>
+            <p>
+              Focused technical support for teams that need less friction and
+              better visibility.
+            </p>
           </div>
           <div className="service-grid">
-            {services.map((service) => (
-              <article className="modern-card" key={service.title}>
-                <span className={`service-logo ${service.logo}`} aria-hidden="true" />
-                <h3>{service.title}</h3>
-                <p>{service.description}</p>
-              </article>
-            ))}
+            {services.map((service, index) => {
+              const Icon =
+                serviceIcons[service.logo as keyof typeof serviceIcons];
+              return (
+                <article className="modern-card" key={service.title}>
+                  <div className="service-topline">
+                    <span
+                      className={`service-logo ${service.logo}`}
+                      aria-hidden="true"
+                    >
+                      <Icon size={25} strokeWidth={1.6} />
+                    </span>
+                    <span className="service-number">0{index + 1}</span>
+                  </div>
+                  <h3>{service.title}</h3>
+                  <p>{service.description}</p>
+                </article>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -472,12 +610,19 @@ export default function Home() {
       <section className="section muted" id="experience">
         <div className="container">
           <div className="section-heading centered">
+            <p className="section-kicker">02 / Career</p>
             <h2>Experience</h2>
-            <p>Recent roles across IT operations, automation, administration, implementation, and security.</p>
+            <p>
+              Recent roles across IT operations, automation, administration,
+              implementation, and security.
+            </p>
           </div>
           <div className="experience-list">
             {experience.map((job) => (
-              <article className="experience-card" key={`${job.company}-${job.role}`}>
+              <article
+                className="experience-card"
+                key={`${job.company}-${job.role}`}
+              >
                 <div>
                   <p>{job.period}</p>
                   <h3>{job.role}</h3>
@@ -493,11 +638,15 @@ export default function Home() {
       <section className="section" id="projects">
         <div className="container">
           <div className="section-heading centered">
-            <h2>Projects</h2>
-            <p>Practical automation work built around business operations and measurable workflows.</p>
+            <p className="section-kicker">03 / Selected work</p>
+            <h2>Featured Projects</h2>
+            <p>
+              Practical automation work built around business operations and
+              measurable workflows.
+            </p>
           </div>
           <div className="project-grid">
-            {projects.map((project) => (
+            {projects.map((project, index) => (
               <article
                 className="project-card"
                 key={project.title}
@@ -514,12 +663,29 @@ export default function Home() {
               >
                 {project.image ? (
                   <div className="project-image-button" aria-hidden="true">
-                    <img src={project.image} alt={project.imageAlt ?? `${project.title} project preview`} />
+                    <img
+                      src={project.image}
+                      alt={
+                        project.imageAlt ?? `${project.title} project preview`
+                      }
+                      loading="lazy"
+                    />
                   </div>
-                ) : null}
+                ) : (
+                  <div className="project-illustration" aria-hidden="true">
+                    {index === 4 ? (
+                      <LayoutDashboard size={46} strokeWidth={1.2} />
+                    ) : (
+                      <Workflow size={46} strokeWidth={1.2} />
+                    )}
+                    <span>
+                      {index === 4 ? "CRM & Analytics" : "Client Operations"}
+                    </span>
+                  </div>
+                )}
                 <div className="project-topline">
-                  <span>Featured Project</span>
-                  <small>Operations</small>
+                  <span>Case Study / 0{index + 1}</span>
+                  <ArrowUpRight size={18} aria-hidden="true" />
                 </div>
                 <h3>{project.title}</h3>
                 <p>{project.description}</p>
@@ -537,13 +703,22 @@ export default function Home() {
       <section className="section muted credential-section">
         <div className="container">
           <div className="section-heading centered">
+            <p className="section-kicker">04 / Foundation</p>
             <h2>Education & Certifications</h2>
-            <p>Formal IT training with certifications across support, cybersecurity, and application security.</p>
+            <p>
+              Formal IT training with certifications across support,
+              cybersecurity, and application security.
+            </p>
           </div>
           <div className="credential-grid">
             <article className="credential-panel education-panel">
               <div className="credential-header">
-                <span className="credential-icon education-icon" aria-hidden="true" />
+                <span
+                  className="credential-icon education-icon"
+                  aria-hidden="true"
+                >
+                  <GraduationCap size={25} strokeWidth={1.6} />
+                </span>
                 <div>
                   <span>Education</span>
                   <h3>Bachelor&apos;s Degree</h3>
@@ -560,7 +735,10 @@ export default function Home() {
                   <strong>Jan 2019 to Apr 2022</strong>
                 </div>
               </div>
-              <div className="credential-tags" aria-label="Education focus areas">
+              <div
+                className="credential-tags"
+                aria-label="Education focus areas"
+              >
                 <span>Cybersecurity</span>
                 <span>IT Operations</span>
                 <span>Systems Support</span>
@@ -568,7 +746,12 @@ export default function Home() {
             </article>
             <article className="credential-panel certification-panel">
               <div className="credential-header">
-                <span className="credential-icon certification-icon" aria-hidden="true" />
+                <span
+                  className="credential-icon certification-icon"
+                  aria-hidden="true"
+                >
+                  <Award size={25} strokeWidth={1.6} />
+                </span>
                 <div>
                   <span>Certifications</span>
                   <h3>Professional Credentials</h3>
@@ -576,7 +759,10 @@ export default function Home() {
               </div>
               <div className="certification-list">
                 {credentials.map((item) => (
-                  <div className="certification-item" key={`${item.issuer}-${item.title}`}>
+                  <div
+                    className="certification-item"
+                    key={`${item.issuer}-${item.title}`}
+                  >
                     <div>
                       <strong>{item.title}</strong>
                       <span>{item.issuer}</span>
@@ -590,7 +776,8 @@ export default function Home() {
                         rel="noreferrer"
                         aria-label={`View credential for ${item.title}`}
                       >
-                        View credential
+                        View credential{" "}
+                        <ArrowUpRight size={14} aria-hidden="true" />
                       </a>
                     </div>
                   </div>
@@ -604,23 +791,42 @@ export default function Home() {
       <section className="section contact-section" id="contact">
         <div className="container contact-grid">
           <div>
-            <h2>Get In Touch</h2>
+            <p className="section-kicker">05 / Let&apos;s connect</p>
+            <h2>
+              Let&apos;s make your
+              <br />
+              systems work better.
+            </h2>
             <p>
               Ready to clean up a workflow, improve a CRM, or make technical
               operations easier to manage? Let&apos;s talk about what your team
               needs next.
             </p>
+            <a
+              className="button primary"
+              href="https://calendar.app.google/xHq85XixLKvPgzhW9"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <CalendarDays size={18} aria-hidden="true" /> Book a Call{" "}
+              <ArrowUpRight size={18} aria-hidden="true" />
+            </a>
           </div>
           <div className="contact-cards">
             {contactLinks.map((item) => (
               <a key={item.label} href={item.href} className="contact-card">
                 <span>{item.label}</span>
                 <strong>{item.value}</strong>
+                <ArrowUpRight size={18} aria-hidden="true" />
               </a>
             ))}
-            <a className="contact-card" href="https://linkedin.com/in/ejssagpang">
+            <a
+              className="contact-card"
+              href="https://linkedin.com/in/ejssagpang"
+            >
               <span>LinkedIn</span>
               <strong>linkedin.com/in/ejssagpang</strong>
+              <ArrowUpRight size={18} aria-hidden="true" />
             </a>
           </div>
         </div>
@@ -630,6 +836,9 @@ export default function Home() {
         <div className="container">
           <strong>Elijah Jake Sagpang</strong>
           <p>IT Service Manager & Automation Specialist</p>
+          <a href="#home">
+            Back to top <ArrowRight size={16} aria-hidden="true" />
+          </a>
         </div>
       </footer>
 
@@ -638,9 +847,12 @@ export default function Home() {
           className="project-modal-backdrop"
           role="presentation"
           onClick={() => setActiveProject(null)}
+          aria-hidden={activeImage ? true : undefined}
         >
           <div
             className="project-modal"
+            ref={projectDialog}
+            tabIndex={-1}
             role="dialog"
             aria-modal="true"
             aria-label={`Project details for ${activeProject.title}`}
@@ -652,26 +864,35 @@ export default function Home() {
               onClick={() => setActiveProject(null)}
               aria-label="Close project details"
             >
-              x
+              <X size={20} aria-hidden="true" />
             </button>
             <div className="project-modal-media">
               {activeProject.image ? (
                 <button
                   className="project-modal-image"
                   type="button"
-                  onClick={() =>
+                  onClick={() => {
+                    if (!activeProject.image) return;
                     setActiveImage({
-                      alt: activeProject.imageAlt ?? `${activeProject.title} project screenshot`,
+                      alt:
+                        activeProject.imageAlt ??
+                        `${activeProject.title} project screenshot`,
                       src: activeProject.image,
                       title: activeProject.title,
-                    })
-                  }
+                    });
+                  }}
                   aria-label={`Open full-size image for ${activeProject.title}`}
                 >
                   <img
                     src={activeProject.image}
-                    alt={activeProject.imageAlt ?? `${activeProject.title} project screenshot`}
+                    alt={
+                      activeProject.imageAlt ??
+                      `${activeProject.title} project screenshot`
+                    }
                   />
+                  <span className="image-zoom">
+                    <ZoomIn size={17} aria-hidden="true" /> View full image
+                  </span>
                 </button>
               ) : (
                 <div className="project-modal-placeholder" aria-hidden="true">
@@ -724,6 +945,8 @@ export default function Home() {
         >
           <div
             className="image-modal"
+            ref={imageDialog}
+            tabIndex={-1}
             role="dialog"
             aria-modal="true"
             aria-label={`Full-size image for ${activeImage.title}`}
@@ -735,8 +958,9 @@ export default function Home() {
                 type="button"
                 onClick={() => setActiveImage(null)}
                 aria-label="Close image preview"
+                title="Close image preview"
               >
-                Close
+                <X size={20} aria-hidden="true" />
               </button>
             </div>
             <img src={activeImage.src} alt={activeImage.alt} />
