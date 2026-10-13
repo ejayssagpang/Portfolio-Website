@@ -599,7 +599,7 @@ export default function Home() {
       <section
         className="tools-section"
         id="skills"
-        onPointerEnter={() => setActiveSection("skills")}
+        onPointerMove={() => setActiveSection("skills")}
       >
         <div className="container">
           <div className="section-heading centered">
@@ -647,7 +647,7 @@ export default function Home() {
       <section
         className="section"
         id="services"
-        onPointerEnter={() => setActiveSection("services")}
+        onPointerMove={() => setActiveSection("services")}
       >
         <div className="container">
           <div className="section-heading centered">
@@ -685,7 +685,7 @@ export default function Home() {
       <section
         className="section muted"
         id="experience"
-        onPointerEnter={() => setActiveSection("experience")}
+        onPointerMove={() => setActiveSection("experience")}
       >
         <div className="container">
           <div className="section-heading centered">
@@ -717,7 +717,7 @@ export default function Home() {
       <section
         className="section"
         id="projects"
-        onPointerEnter={() => setActiveSection("projects")}
+        onPointerMove={() => setActiveSection("projects")}
       >
         <div className="container">
           <div className="section-heading centered">
@@ -874,7 +874,7 @@ export default function Home() {
       <section
         className="section contact-section"
         id="contact"
-        onPointerEnter={() => setActiveSection("contact")}
+        onPointerMove={() => setActiveSection("contact")}
       >
         <div className="container contact-grid">
           <div>
