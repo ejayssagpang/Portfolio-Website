@@ -10,9 +10,12 @@ import {
   CalendarDays,
   GraduationCap,
   LayoutDashboard,
+  Mail,
+  MapPin,
   Menu,
   Moon,
   Network,
+  Phone,
   Server,
   ShieldCheck,
   Sun,
@@ -51,9 +54,10 @@ const contactLinks = [
     label: "Email",
     value: "ejssagpang@gmail.com",
     href: "mailto:ejssagpang@gmail.com",
+    icon: Mail,
   },
-  { label: "Phone", value: "+63 993 763 1538", href: "tel:+639937631538" },
-  { label: "Location", value: "Davao City, Philippines", href: "#contact" },
+  { label: "Phone", value: "+63 993 763 1538", href: "tel:+639937631538", icon: Phone },
+  { label: "Location", value: "Davao City, Philippines", href: "#contact", icon: MapPin },
 ];
 
 const toolGroups: ToolGroup[] = [
@@ -586,13 +590,15 @@ export default function Home() {
           className="container quick-contact"
           aria-label="Quick contact details"
         >
-          {contactLinks.map((item) => (
-            <a key={item.label} href={item.href}>
-              <span>{item.label}</span>
-              <strong>{item.value}</strong>
-              <ArrowUpRight size={16} aria-hidden="true" />
-            </a>
-          ))}
+          {contactLinks.map((item) => {
+            const Icon = item.icon;
+            return (
+              <a key={item.label} href={item.href} aria-label={`${item.label}: ${item.value}`}>
+                <Icon size={16} aria-hidden="true" />
+                <span>{item.value}</span>
+              </a>
+            );
+          })}
         </div>
       </div>
 

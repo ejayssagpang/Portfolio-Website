@@ -357,37 +357,48 @@ h1 > span {
 }
 .intro-strip {
   border-block: 1px solid var(--border);
+  background: var(--muted);
 }
 .quick-contact {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 14px;
-  padding-block: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 20px;
+  padding-block: 14px;
 }
 .quick-contact a {
   position: relative;
-  display: grid;
-  gap: 6px;
-  padding: 18px 16px;
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 8px;
+  border-radius: 8px;
+  color: var(--muted-text);
+}
+.quick-contact a + a::before {
+  content: "";
+  position: absolute;
+  left: -10px;
+  width: 1px;
+  height: 16px;
+  background: var(--border);
 }
 .quick-contact span {
-  color: var(--muted-text);
-  font-size: 11px;
-}
-.quick-contact strong {
-  color: var(--foreground);
   font-size: 13px;
-  font-weight: 500;
-  overflow-wrap: anywhere;
+  white-space: nowrap;
 }
 .quick-contact svg {
-  position: absolute;
-  right: 16px;
-  top: 22px;
-  color: var(--accent);
+  flex: 0 0 16px;
+  color: var(--foreground);
+  transition: color 0.18s ease;
 }
-.quick-contact a:hover strong {
+.quick-contact a:hover,
+.quick-contact a:hover svg {
   color: var(--primary);
+}
+.quick-contact a:hover {
+  background: color-mix(in srgb, var(--action) 8%, var(--muted));
 }
 
 .section,
@@ -1075,8 +1086,7 @@ h1 > span {
 .project-card,
 .education-panel,
 .certification-item,
-.contact-card,
-.quick-contact a {
+.contact-card {
   border: 1px solid var(--border);
   border-radius: 8px;
   background: var(--card);
@@ -1151,8 +1161,7 @@ h1 > span {
   .project-card:hover,
   .education-panel:hover,
   .certification-item:hover,
-  .contact-card:hover,
-  .quick-contact a:hover {
+  .contact-card:hover {
     border-color: var(--primary);
     background: color-mix(in srgb, var(--action) 8%, var(--card));
     box-shadow: 0 8px 22px rgba(255, 94, 0, 0.1);
@@ -1189,6 +1198,7 @@ h1 > span {
   }
   .button:hover,
   .nav-cta:hover,
+  .quick-contact a:hover,
   .footer a:hover {
     transform: translateY(-2px);
   }
@@ -1250,6 +1260,9 @@ h1 > span {
   }
 }
 @media (max-width: 900px) {
+  .quick-contact a + a::before {
+    display: none;
+  }
   .container,
   .nav {
     width: calc(100% - 48px);
@@ -1319,15 +1332,6 @@ h1 > span {
   }
   .project-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-  .quick-contact a {
-    padding: 18px 14px;
-  }
-  .quick-contact svg {
-    display: none;
-  }
-  .quick-contact strong {
-    font-size: 11px;
   }
   .credential-grid,
   .contact-grid {
@@ -1437,15 +1441,14 @@ h1 > span {
     gap: 8px;
   }
   .quick-contact {
-    grid-template-columns: 1fr;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
   }
-  .quick-contact a,
-  .quick-contact a:first-child {
-    grid-template-columns: 70px minmax(0, 1fr);
-    align-items: center;
-    padding: 14px 12px;
+  .quick-contact a + a::before {
+    display: none;
   }
-  .quick-contact strong {
+  .quick-contact span {
     font-size: 12px;
   }
   .section,
