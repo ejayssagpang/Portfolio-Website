@@ -382,7 +382,15 @@ h1 > span {
   border-block: 1px solid var(--border);
 }
 .tools-section {
+  --tool-surface: #19191f;
+  --tool-dot: rgba(255, 255, 255, 0.07);
   padding-block: 60px;
+  background-image: radial-gradient(var(--tool-dot) 0.8px, transparent 0.8px);
+  background-size: 28px 28px;
+}
+[data-theme="light"] .tools-section {
+  --tool-surface: #ffffff;
+  --tool-dot: rgba(14, 14, 18, 0.12);
 }
 .section-heading {
   margin-bottom: 36px;
@@ -424,44 +432,52 @@ h1 > span {
 .tool-groups {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 28px 36px;
+  gap: 40px 36px;
+  align-items: start;
 }
 .tool-group {
   min-width: 0;
 }
 .tool-group h3 {
-  margin-bottom: 12px;
-  padding-bottom: 10px;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
   border-bottom: 1px solid var(--border);
   color: var(--primary);
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 13px;
+  font-weight: 650;
+  line-height: 1.5;
+  text-transform: uppercase;
 }
 .tool-group > div {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 10px;
 }
 .tool-chip {
   min-width: 0;
-  min-height: 42px;
-  padding: 6px 0;
-  display: flex;
+  max-width: 100%;
+  min-height: 46px;
+  padding: 10px 14px;
+  display: inline-flex;
   align-items: center;
-  gap: 8px;
-  border: 0;
-  font-size: 12px;
+  gap: 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--tool-surface);
+  color: var(--ink);
+  font-size: 14px;
   font-weight: 500;
   overflow-wrap: anywhere;
 }
 .tool-icon {
-  width: 26px;
-  height: 26px;
-  flex: 0 0 26px;
+  width: 22px;
+  height: 22px;
+  flex: 0 0 22px;
   display: grid;
   place-items: center;
-  border-radius: 50%;
-  background: #f8f7fc;
+  border-radius: 3px;
+  background: #ffffff;
   color: var(--logo-color, #0e0e12);
   font-size: 9px;
   font-weight: 750;
@@ -1069,7 +1085,7 @@ h1 > span {
     min-height: 0;
   }
   .tool-groups {
-    gap: 24px;
+    gap: 36px 24px;
   }
   .credential-grid {
     gap: 36px;
@@ -1295,10 +1311,10 @@ h1 > span {
   }
   .tool-groups {
     grid-template-columns: 1fr;
-    gap: 26px;
+    gap: 30px;
   }
   .tool-chip {
-    font-size: 12px;
+    font-size: 13px;
   }
   .service-grid {
     gap: 12px;
