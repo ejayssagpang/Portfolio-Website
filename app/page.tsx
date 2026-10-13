@@ -630,7 +630,7 @@ export default function Home() {
                           tool.initials
                         )}
                       </span>
-                      {tool.name}
+                      <span className="tool-name">{tool.name}</span>
                     </span>
                   ))}
                 </div>
