@@ -577,6 +577,17 @@ export default function Home() {
                 View Projects <ArrowDown size={18} aria-hidden="true" />
               </a>
             </div>
+            <div className="quick-contact" aria-label="Quick contact details">
+              {contactLinks.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <a key={item.label} href={item.href} aria-label={`${item.label}: ${item.value}`}>
+                    <Icon size={16} aria-hidden="true" />
+                    <span>{item.value}</span>
+                  </a>
+                );
+              })}
+            </div>
             <div className="hero-specialties">
               <span>Automation</span>
               <span>CRM Systems</span>
@@ -585,23 +596,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <div className="intro-strip">
-        <div
-          className="container quick-contact"
-          aria-label="Quick contact details"
-        >
-          {contactLinks.map((item) => {
-            const Icon = item.icon;
-            return (
-              <a key={item.label} href={item.href} aria-label={`${item.label}: ${item.value}`}>
-                <Icon size={16} aria-hidden="true" />
-                <span>{item.value}</span>
-              </a>
-            );
-          })}
-        </div>
-      </div>
-
       <section className="tools-section" id="skills">
         <div className="container">
           <div className="section-heading centered">
