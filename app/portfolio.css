@@ -225,6 +225,7 @@ svg {
 }
 .hero-background img,
 .hero-background::before {
+  --portrait-base-y: -50%;
   position: absolute;
   top: 50%;
   right: max(40px, calc((100% - 1200px) / 2 + 45px));
@@ -232,7 +233,17 @@ svg {
   height: 320px;
   display: block;
   border-radius: 44% 44% 16% 44%;
-  transform: translateY(-50%);
+  transform: translateY(var(--portrait-base-y));
+  animation: portrait-float 4.8s ease-in-out infinite;
+}
+@keyframes portrait-float {
+  0%,
+  100% {
+    transform: translateY(var(--portrait-base-y));
+  }
+  50% {
+    transform: translateY(calc(var(--portrait-base-y) - 6px));
+  }
 }
 .hero-background::before {
   content: "";
@@ -1385,12 +1396,13 @@ h1 > span {
   }
   .hero-background img,
   .hero-background::before {
+    --portrait-base-y: 0px;
     top: auto;
     bottom: 24px;
     right: calc(50% - 90px);
     width: 180px;
     height: 180px;
-    transform: none;
+    transform: translateY(var(--portrait-base-y));
   }
   .hero-background::before {
     translate: 7px 7px;
