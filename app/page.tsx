@@ -296,18 +296,21 @@ const credentials = [
   {
     title: "Google IT Support",
     issuer: "Google",
+    logo: "/google-logo.png",
     date: "Aug 2023",
     href: "https://www.coursera.org/account/accomplishments/specialization/certificate/3NTLBERKZJZM",
   },
   {
     title: "Penetration Testing Intern",
-    issuer: "Google",
+    issuer: "Secuna",
+    logo: "/secuna-logo.png",
     date: "Mar 2022",
     href: "https://www.credential.net/400e40f0-5af3-43c8-8277-081dd7e07ac5",
   },
   {
     title: "Web Application Penetration Testing",
-    issuer: "Secuna",
+    issuer: "Udemy",
+    logo: "/udemy-logo.svg",
     date: "Dec 2021",
     href: "https://www.udemy.com/certificate/UC-bfd57ece-8b96-4afc-a44e-0a43221d4b5e/",
   },
@@ -886,9 +889,17 @@ export default function Home() {
                     className="certification-item"
                     key={`${item.issuer}-${item.title}`}
                   >
-                    <div>
-                      <strong>{item.title}</strong>
-                      <span>{item.issuer}</span>
+                    <div className="certification-summary">
+                      <span
+                        className={`certification-logo${item.issuer === "Secuna" ? " secuna" : ""}`}
+                        aria-hidden="true"
+                      >
+                        <img src={item.logo} alt="" width="32" height="32" loading="lazy" />
+                      </span>
+                      <div className="certification-text">
+                        <strong>{item.title}</strong>
+                        <span>{item.issuer}</span>
+                      </div>
                     </div>
                     <div className="certification-action">
                       <time>{item.date}</time>

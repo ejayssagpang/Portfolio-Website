@@ -822,6 +822,39 @@ h1 > span {
 .certification-item > div:first-child {
   min-width: 0;
 }
+.certification-summary {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.certification-text {
+  min-width: 0;
+}
+.certification-item .certification-logo {
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
+  place-items: center;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #fff;
+}
+.certification-logo img {
+  width: 32px;
+  height: 32px;
+  display: block;
+  object-fit: contain;
+}
+.certification-logo.secuna img {
+  width: 64px;
+  height: 64px;
+  max-width: none;
+}
 .certification-action {
   flex: 0 0 auto;
   display: grid;
@@ -1144,6 +1177,7 @@ h1 > span {
 .tool-icon,
 .service-logo,
 .credential-icon,
+.certification-logo,
 .project-topline svg,
 .contact-card svg,
 .button svg,
@@ -1195,6 +1229,9 @@ h1 > span {
   .modern-card:hover .service-logo,
   .education-panel:hover .credential-icon {
     transform: translateY(-2px);
+  }
+  .certification-item:hover .certification-logo {
+    transform: scale(1.06);
   }
   .experience-card:hover::before {
     background: var(--primary);
@@ -1816,6 +1853,7 @@ h1 > .hero-name-accent {
   .tool-icon,
   .service-logo,
   .credential-icon,
+  .certification-logo,
   .project-topline svg,
   .contact-card svg,
   .button svg,
