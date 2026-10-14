@@ -66,7 +66,6 @@ const toolGroups: ToolGroup[] = [
   {
     title: "Automation & AI",
     tools: [
-      { name: "GoHighLevel", icon: "/gohighlevel-logo.png" },
       { name: "Zapier", icon: "https://cdn.simpleicons.org/zapier" },
       { name: "Omnisend", icon: "/omnisend-logo.png", tone: "bright" },
       {
@@ -85,9 +84,12 @@ const toolGroups: ToolGroup[] = [
   {
     title: "CRM & Operations",
     tools: [
+      { name: "GoHighLevel", icon: "/gohighlevel-logo.png" },
       { name: "Close CRM", icon: "/close-crm-logo.png" },
       { name: "Zoho CRM", icon: "https://cdn.simpleicons.org/zoho", tone: "muted" },
-      { name: "Microsoft", initials: "MS", color: "#00a4ef" },
+      { name: "HubSpot", icon: "/hubspot-logo.svg", tone: "bright" },
+      { name: "Monday.com", icon: "/monday-logo.svg", tone: "bright" },
+      { name: "Notion", icon: "/notion-logo.svg", tone: "monochrome" },
     ],
   },
   {
