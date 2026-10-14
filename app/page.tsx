@@ -528,7 +528,7 @@ export default function Home() {
             aria-label="Elijah Jake Sagpang home"
           >
             <span className="logo-mark" aria-hidden="true">
-              es.
+              <img src="/brand-logo.png" alt="" width="38" height="38" />
             </span>
             <span>Elijah Sagpang</span>
           </a>
