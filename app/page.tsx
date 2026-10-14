@@ -29,7 +29,7 @@ type Tool = {
   icon?: string;
   initials?: string;
   color?: string;
-  tone?: "monochrome" | "bright" | "muted";
+  tone?: "monochrome" | "bright" | "muted" | "pale";
 };
 
 type ToolGroup = {
@@ -65,9 +65,9 @@ const toolGroups: ToolGroup[] = [
   {
     title: "Automation & AI",
     tools: [
-      { name: "GoHighLevel", initials: "HL", color: "#20c997" },
+      { name: "GoHighLevel", icon: "/gohighlevel-logo.png" },
       { name: "Zapier", icon: "https://cdn.simpleicons.org/zapier" },
-      { name: "Omnisend", initials: "O", color: "#5f46f7" },
+      { name: "Omnisend", icon: "/omnisend-logo.png", tone: "bright" },
       {
         name: "Google Tags",
         icon: "https://cdn.simpleicons.org/googletagmanager",
@@ -78,13 +78,13 @@ const toolGroups: ToolGroup[] = [
         icon: "https://cdn.simpleicons.org/googlegemini",
       },
       { name: "Claude", icon: "https://cdn.simpleicons.org/claude" },
-      { name: "Relevance AI", initials: "RA", color: "#5b5ff0" },
+      { name: "Relevance AI", icon: "/relevance-ai-logo.png", tone: "pale" },
     ],
   },
   {
     title: "CRM & Operations",
     tools: [
-      { name: "Close CRM", initials: "C", color: "#0057ff" },
+      { name: "Close CRM", icon: "/close-crm-logo.png" },
       { name: "Zoho CRM", icon: "https://cdn.simpleicons.org/zoho", tone: "muted" },
       { name: "Microsoft", initials: "MS", color: "#00a4ef" },
     ],
@@ -93,26 +93,26 @@ const toolGroups: ToolGroup[] = [
     title: "Communication",
     tools: [
       { name: "Discord", icon: "https://cdn.simpleicons.org/discord" },
-      { name: "Microsoft Teams", initials: "T", color: "#6264a7" },
+      { name: "Microsoft Teams", icon: "/microsoft-teams-logo.png" },
       { name: "Zoom", icon: "https://cdn.simpleicons.org/zoom" },
       { name: "WhatsApp", icon: "https://cdn.simpleicons.org/whatsapp", tone: "bright" },
-      { name: "Google Workspace", initials: "G", color: "#4285f4" },
+      { name: "Google Workspace", icon: "/google-workspace-logo.png" },
       { name: "Slack", icon: "/slack-logo.svg" },
     ],
   },
   {
     title: "Website & Dev",
     tools: [
-      { name: "Swipe Pages", initials: "SP", color: "#2f7df6" },
-      { name: "Typeform", icon: "https://cdn.simpleicons.org/typeform", tone: "monochrome" },
+      { name: "Swipe Pages", icon: "/swipe-pages-logo.png" },
+      { name: "Typeform", icon: "/typeform-logo.png", tone: "monochrome" },
       { name: "GoDaddy", icon: "https://cdn.simpleicons.org/godaddy", tone: "bright" },
-      { name: "Wix", icon: "https://cdn.simpleicons.org/wix" },
+      { name: "Wix", icon: "/wix-logo.png" },
     ],
   },
   {
     title: "Security",
     tools: [
-      { name: "NordPass", initials: "N", color: "#00a3ff" },
+      { name: "NordPass", icon: "/nordpass-logo.png", tone: "bright" },
       { name: "LastPass", icon: "https://cdn.simpleicons.org/lastpass" },
       { name: "1Password", icon: "https://cdn.simpleicons.org/1password", tone: "muted" },
     ],

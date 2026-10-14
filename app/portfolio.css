@@ -539,6 +539,9 @@ h1 > span {
 [data-theme="light"] .tool-icon.logo-muted img {
   filter: none;
 }
+[data-theme="light"] .tool-icon.logo-pale img {
+  filter: brightness(0.55);
+}
 .service-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
