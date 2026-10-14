@@ -514,16 +514,30 @@ h1 > span {
   flex: 0 0 22px;
   display: grid;
   place-items: center;
-  border-radius: 3px;
-  background: #ffffff;
-  color: var(--logo-color, #0e0e12);
-  font-size: 9px;
+  background: transparent;
+  color: color-mix(in srgb, var(--logo-color, var(--foreground)) 60%, var(--foreground));
+  font-size: 10px;
   font-weight: 750;
 }
 .tool-icon img {
-  width: 18px;
-  height: 18px;
+  width: 22px;
+  height: 22px;
   object-fit: contain;
+}
+.tool-icon.logo-monochrome img {
+  filter: brightness(0) invert(1);
+}
+[data-theme="light"] .tool-icon.logo-monochrome img {
+  filter: brightness(0);
+}
+[data-theme="light"] .tool-icon.logo-bright img {
+  filter: brightness(0.65);
+}
+.tool-icon.logo-muted img {
+  filter: brightness(1.35);
+}
+[data-theme="light"] .tool-icon.logo-muted img {
+  filter: none;
 }
 .service-grid {
   display: grid;
@@ -840,9 +854,7 @@ h1 > span {
   place-items: center;
   margin: 0;
   overflow: hidden;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  background: #fff;
+  background: transparent;
 }
 .certification-logo img {
   width: 32px;
@@ -851,9 +863,12 @@ h1 > span {
   object-fit: contain;
 }
 .certification-logo.secuna img {
-  width: 64px;
-  height: 64px;
-  max-width: none;
+  width: 32px;
+  height: 40px;
+  filter: brightness(1.2);
+}
+[data-theme="light"] .certification-logo.secuna img {
+  filter: none;
 }
 .certification-action {
   flex: 0 0 auto;

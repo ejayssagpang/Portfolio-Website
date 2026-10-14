@@ -29,6 +29,7 @@ type Tool = {
   icon?: string;
   initials?: string;
   color?: string;
+  tone?: "monochrome" | "bright" | "muted";
 };
 
 type ToolGroup = {
@@ -84,7 +85,7 @@ const toolGroups: ToolGroup[] = [
     title: "CRM & Operations",
     tools: [
       { name: "Close CRM", initials: "C", color: "#0057ff" },
-      { name: "Zoho CRM", icon: "https://cdn.simpleicons.org/zoho" },
+      { name: "Zoho CRM", icon: "https://cdn.simpleicons.org/zoho", tone: "muted" },
       { name: "Microsoft", initials: "MS", color: "#00a4ef" },
     ],
   },
@@ -94,7 +95,7 @@ const toolGroups: ToolGroup[] = [
       { name: "Discord", icon: "https://cdn.simpleicons.org/discord" },
       { name: "Microsoft Teams", initials: "T", color: "#6264a7" },
       { name: "Zoom", icon: "https://cdn.simpleicons.org/zoom" },
-      { name: "WhatsApp", icon: "https://cdn.simpleicons.org/whatsapp" },
+      { name: "WhatsApp", icon: "https://cdn.simpleicons.org/whatsapp", tone: "bright" },
       { name: "Google Workspace", initials: "G", color: "#4285f4" },
       { name: "Slack", icon: "/slack-logo.svg" },
     ],
@@ -103,8 +104,8 @@ const toolGroups: ToolGroup[] = [
     title: "Website & Dev",
     tools: [
       { name: "Swipe Pages", initials: "SP", color: "#2f7df6" },
-      { name: "Typeform", icon: "https://cdn.simpleicons.org/typeform" },
-      { name: "GoDaddy", icon: "https://cdn.simpleicons.org/godaddy" },
+      { name: "Typeform", icon: "https://cdn.simpleicons.org/typeform", tone: "monochrome" },
+      { name: "GoDaddy", icon: "https://cdn.simpleicons.org/godaddy", tone: "bright" },
       { name: "Wix", icon: "https://cdn.simpleicons.org/wix" },
     ],
   },
@@ -113,17 +114,17 @@ const toolGroups: ToolGroup[] = [
     tools: [
       { name: "NordPass", initials: "N", color: "#00a3ff" },
       { name: "LastPass", icon: "https://cdn.simpleicons.org/lastpass" },
-      { name: "1Password", icon: "https://cdn.simpleicons.org/1password" },
+      { name: "1Password", icon: "https://cdn.simpleicons.org/1password", tone: "muted" },
     ],
   },
   {
     title: "Technical Stack",
     tools: [
-      { name: "MySQL", icon: "https://cdn.simpleicons.org/mysql" },
+      { name: "MySQL", icon: "https://cdn.simpleicons.org/mysql", tone: "muted" },
       { name: "Python", icon: "https://cdn.simpleicons.org/python" },
-      { name: "JavaScript", icon: "https://cdn.simpleicons.org/javascript" },
+      { name: "JavaScript", icon: "https://cdn.simpleicons.org/javascript", tone: "bright" },
       { name: "HTML/CSS", icon: "https://cdn.simpleicons.org/html5" },
-      { name: "Linux", icon: "https://cdn.simpleicons.org/linux" },
+      { name: "Linux", icon: "https://cdn.simpleicons.org/linux", tone: "bright" },
     ],
   },
 ];
@@ -303,7 +304,7 @@ const credentials = [
   {
     title: "Penetration Testing Intern",
     issuer: "Secuna",
-    logo: "/secuna-logo.png",
+    logo: "/secuna-logo.svg",
     date: "Mar 2022",
     href: "https://www.credential.net/400e40f0-5af3-43c8-8277-081dd7e07ac5",
   },
@@ -673,7 +674,7 @@ export default function Home() {
                   {group.tools.map((tool) => (
                     <span className="tool-chip" key={tool.name}>
                       <span
-                        className="tool-icon"
+                        className={`tool-icon${tool.tone ? ` logo-${tool.tone}` : ""}`}
                         style={{ "--logo-color": tool.color } as CSSProperties}
                         aria-hidden="true"
                       >
