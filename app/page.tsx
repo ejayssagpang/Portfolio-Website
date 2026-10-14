@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type CSSProperties } from "react";
+import RotatingSpecialties from "./rotating-specialties";
 import {
   ArrowDown,
   ArrowDownToLine,
@@ -616,6 +617,7 @@ export default function Home() {
               <br />
               <span className="hero-name-line hero-name-accent">Sagpang.</span>
             </h1>
+            <RotatingSpecialties />
             <p className="hero-role">
               IT Service Manager & Automation Specialist
             </p>
@@ -647,11 +649,6 @@ export default function Home() {
                   </a>
                 );
               })}
-            </div>
-            <div className="hero-specialties">
-              <span>Automation</span>
-              <span>CRM Systems</span>
-              <span>IT Operations</span>
             </div>
           </div>
         </div>

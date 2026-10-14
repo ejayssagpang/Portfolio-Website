@@ -308,11 +308,39 @@ h1 {
 h1 > span {
   color: var(--primary);
 }
+.hero-typing {
+  height: 34px;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  color: var(--primary);
+  font-family: var(--font-geist-mono, "Consolas"), monospace;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+.typing-visual {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+}
+.typing-cursor {
+  width: 2px;
+  height: 1em;
+  margin-left: 4px;
+  background: currentColor;
+  animation: typing-caret 0.9s step-end infinite;
+}
+@keyframes typing-caret {
+  0%,
+  100% { opacity: 1; }
+  50% { opacity: 0; }
+}
 .hero-role {
-  margin-top: 24px;
+  margin-top: 10px;
   font-size: 15px;
   font-weight: 600;
-  color: var(--accent);
+  color: var(--muted-text);
 }
 .lead {
   max-width: 440px;
@@ -357,22 +385,6 @@ h1 > span {
 }
 .button.secondary:hover {
   color: var(--primary);
-}
-.hero-specialties {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  color: var(--muted-text);
-  font-size: 11px;
-}
-.hero-specialties span + span {
-  position: relative;
-}
-.hero-specialties span + span::before {
-  content: "/";
-  position: absolute;
-  left: -12px;
-  color: var(--detail);
 }
 .quick-contact {
   display: flex;
@@ -1170,8 +1182,7 @@ h1 > span {
 .credential-link,
 .footer a,
 .tag-row span,
-.credential-tags span,
-.hero-specialties span {
+.credential-tags span {
   transition:
     color 0.18s ease,
     border-color 0.18s ease,
@@ -1274,13 +1285,11 @@ h1 > span {
   }
   .footer a:hover,
   .tag-row span:hover,
-  .credential-tags span:hover,
-  .hero-specialties span:hover {
+  .credential-tags span:hover {
     color: var(--primary);
   }
   .tag-row span:hover,
-  .credential-tags span:hover,
-  .hero-specialties span:hover {
+  .credential-tags span:hover {
     transform: translateY(-1px);
   }
   .theme-toggle:hover,
@@ -1317,18 +1326,18 @@ h1 > .hero-name-accent {
   color: var(--primary);
   animation-delay: 0.15s;
 }
+.hero-typing,
 .hero-role,
 .hero .lead,
 .hero-actions,
-.hero .quick-contact,
-.hero-specialties {
+.hero .quick-contact {
   animation: hero-enter 0.75s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
-.hero-role { animation-delay: 0.25s; }
-.hero .lead { animation-delay: 0.35s; }
-.hero-actions { animation-delay: 0.45s; }
-.hero .quick-contact { animation-delay: 0.55s; }
-.hero-specialties { animation-delay: 0.65s; }
+.hero-typing { animation-delay: 0.25s; }
+.hero-role { animation-delay: 0.35s; }
+.hero .lead { animation-delay: 0.45s; }
+.hero-actions { animation-delay: 0.55s; }
+.hero .quick-contact { animation-delay: 0.65s; }
 
 .scroll-reveal {
   opacity: 1;
@@ -1640,7 +1649,11 @@ h1 > .hero-name-accent {
   }
   .hero-role {
     max-width: none;
-    margin-top: 20px;
+    margin-top: 8px;
+  }
+  .hero-typing {
+    margin-top: 16px;
+    font-size: 20px;
   }
   .lead {
     max-width: 360px;
@@ -1651,10 +1664,6 @@ h1 > .hero-name-accent {
   .hero-actions {
     margin: 22px 0 14px;
     gap: 10px;
-  }
-  .hero-specialties {
-    font-size: 10px;
-    gap: 18px;
   }
   .button {
     font-size: 12px;
@@ -1832,6 +1841,9 @@ h1 > .hero-name-accent {
   }
 }
 @media (prefers-reduced-motion: reduce) {
+  .typing-cursor {
+    display: none;
+  }
   .scroll-reveal {
     opacity: 1 !important;
     translate: none !important;
@@ -1863,7 +1875,6 @@ h1 > .hero-name-accent {
   .footer a:hover,
   .tag-row span:hover,
   .credential-tags span:hover,
-  .hero-specialties span:hover,
   .project-card:active,
   .button:active,
   .credential-link:active,
