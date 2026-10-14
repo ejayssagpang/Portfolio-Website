@@ -1115,6 +1115,7 @@ h1 > span {
 .theme-toggle,
 .menu-toggle,
 .nav-cta,
+.nav-links .mobile-cv,
 .credential-link,
 .footer a,
 .tag-row span,
@@ -1327,7 +1328,40 @@ h1 > .hero-name-accent {
 .project-image-button img {
   transition: transform 0.35s ease;
 }
+.nav-cta:focus-visible,
+.nav-links .mobile-cv:focus-visible {
+  background: var(--action);
+  border-color: var(--action);
+  color: var(--button-ink);
+  box-shadow: 0 8px 24px rgba(255, 94, 0, 0.22);
+}
+.nav-cta:focus-visible svg,
+.nav-links .mobile-cv:focus-visible svg {
+  animation: cv-download-bounce 0.6s ease-in-out;
+}
+@keyframes cv-download-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(3px);
+  }
+}
 @media (hover: hover) and (pointer: fine) {
+  .nav-cta:hover,
+  .nav-links .mobile-cv:hover {
+    background: var(--action);
+    border-color: var(--action);
+    color: var(--button-ink);
+    box-shadow: 0 8px 24px rgba(255, 94, 0, 0.22);
+    transform: translateY(-3px);
+  }
+  .nav-cta:hover svg,
+  .nav-links .mobile-cv:hover svg {
+    transform: none;
+    animation: cv-download-bounce 0.6s ease-in-out;
+  }
   .tool-chip:hover,
   .modern-card:hover,
   .project-card:hover {
@@ -1770,6 +1804,7 @@ h1 > .hero-name-accent {
   .quick-contact a:hover,
   .button:hover,
   .nav-cta:hover,
+  .nav-links .mobile-cv:hover,
   .footer a:hover,
   .tag-row span:hover,
   .credential-tags span:hover,
