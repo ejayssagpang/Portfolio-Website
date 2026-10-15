@@ -67,11 +67,8 @@ const toolGroups: ToolGroup[] = [
     title: "Automation & AI",
     tools: [
       { name: "Zapier", icon: "https://cdn.simpleicons.org/zapier" },
-      { name: "Omnisend", icon: "/omnisend-logo.png", tone: "bright" },
-      {
-        name: "Google Tags",
-        icon: "https://cdn.simpleicons.org/googletagmanager",
-      },
+      { name: "Make", icon: "/make-logo.png" },
+      { name: "n8n", icon: "/n8n-logo.png" },
       { name: "OpenAI", icon: "/openai-logo.svg" },
       {
         name: "Google Gemini",
@@ -90,6 +87,8 @@ const toolGroups: ToolGroup[] = [
       { name: "HubSpot", icon: "/hubspot-logo.svg", tone: "bright" },
       { name: "Monday.com", icon: "/monday-logo.svg", tone: "bright" },
       { name: "Notion", icon: "/notion-logo.svg", tone: "monochrome" },
+      { name: "Omnisend", icon: "/omnisend-logo.png", tone: "bright" },
+      { name: "Instantly", icon: "/instantly-logo.png" },
     ],
   },
   {
@@ -106,6 +105,10 @@ const toolGroups: ToolGroup[] = [
   {
     title: "Website & Dev",
     tools: [
+      {
+        name: "Google Tags",
+        icon: "https://cdn.simpleicons.org/googletagmanager",
+      },
       { name: "Swipe Pages", icon: "/swipe-pages-logo.png" },
       { name: "Typeform", icon: "/typeform-logo.png", tone: "monochrome" },
       { name: "GoDaddy", icon: "https://cdn.simpleicons.org/godaddy", tone: "bright" },
