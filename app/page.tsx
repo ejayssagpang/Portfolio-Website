@@ -82,6 +82,10 @@ const toolGroups: ToolGroup[] = [
       { name: "OpenAI", icon: "/openai-logo.svg" },
       { name: "Claude", icon: "https://cdn.simpleicons.org/claude" },
       { name: "Relevance AI", icon: "/relevance-ai-logo.png", tone: "pale" },
+      { name: "Lovable", icon: "/lovable-logo.png" },
+      { name: "Replit", icon: "/replit-logo.png" },
+      { name: "Vercel", icon: "/vercel-logo.png", tone: "monochrome" },
+      { name: "Netlify", icon: "/netlify-logo.png", tone: "pale" },
     ],
   },
   {
