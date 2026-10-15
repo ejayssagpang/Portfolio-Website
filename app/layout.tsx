@@ -18,12 +18,11 @@ export const metadata: Metadata = {
     "Portfolio for Elijah Jake Sagpang, an IT service management, automation, CRM, and cybersecurity professional based in Davao City.",
   icons: {
     icon: [
-      { url: "/favicon.ico?v=2", sizes: "16x16 32x32 48x48", type: "image/x-icon" },
-      { url: "/favicon-light.png", sizes: "64x64", type: "image/png", media: "(prefers-color-scheme: light)" },
-      { url: "/favicon.png?v=2", sizes: "64x64", type: "image/png", media: "(prefers-color-scheme: dark)" },
+      { url: "/favicon.ico?v=3", sizes: "16x16 32x32 48x48", type: "image/x-icon" },
+      { url: "/favicon.png?v=3", sizes: "64x64", type: "image/png" },
     ],
-    shortcut: "/favicon.ico?v=2",
-    apple: { url: "/apple-touch-icon.png?v=2", sizes: "180x180", type: "image/png" },
+    shortcut: "/favicon.ico?v=3",
+    apple: { url: "/apple-touch-icon.png?v=3", sizes: "180x180", type: "image/png" },
   },
 };
 
