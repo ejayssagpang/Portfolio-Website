@@ -175,34 +175,120 @@ const experience = [
     role: "Information Technology Service Management I",
     period: "Mar 2025 - Apr 2026",
     highlights: [
-      "Managed IT infrastructure from planning and deployment through ongoing maintenance.",
-      "Built GoHighLevel workflows and pipelines to streamline client onboarding and offboarding.",
-      "Maintained accurate request, incident, problem, and change records for reliable service delivery.",
-      "Built knowledge bases, technical documentation, and customer portals to strengthen support and transparency.",
-      "Evaluated systems against best practices and aligned process improvements with business goals.",
-      "Delivered cost-conscious IT solutions while upholding data security, privacy, and retention requirements.",
+      {
+        label: "Infrastructure",
+        description: "Managed IT systems from planning and deployment through ongoing maintenance.",
+      },
+      {
+        label: "Workflow Automation",
+        description: "Built GoHighLevel workflows and pipelines to streamline client onboarding and offboarding.",
+      },
+      {
+        label: "Service Delivery",
+        description: "Maintained accurate request, incident, problem, and change records to support reliable service.",
+      },
+      {
+        label: "Knowledge Management",
+        description: "Built knowledge bases, technical documentation, and customer portals to improve support and transparency.",
+      },
+      {
+        label: "Process Optimization",
+        description: "Evaluated systems against best practices and aligned improvements with business goals.",
+      },
+      {
+        label: "Compliance",
+        description: "Delivered cost-conscious IT solutions while upholding data security, privacy, and retention requirements.",
+      },
     ],
   },
   {
     company: "Living Mulch, LLC",
     role: "IT Virtual Assistant",
     period: "Mar 2025 - Aug 2025",
-    description:
-      "Configured GoHighLevel environments, built automations, connected third-party tools, troubleshot campaigns, and optimized pipeline performance.",
+    highlights: [
+      {
+        label: "CRM Architecture",
+        description: "Tailored GoHighLevel environments to business models and operational needs.",
+      },
+      {
+        label: "Workflow Engineering",
+        description: "Built end-to-end automations to reduce manual work and improve team productivity.",
+      },
+      {
+        label: "Ecosystem Integration",
+        description: "Connected GHL with third-party applications through APIs and native integrations.",
+      },
+      {
+        label: "Technical Troubleshooting",
+        description: "Resolved complex technical issues to keep sales pipelines and marketing campaigns running reliably.",
+      },
+      {
+        label: "Performance Optimization",
+        description: "Audited and refined automations to support conversions, ROI, and scalable growth.",
+      },
+    ],
   },
   {
     company: "Simply Earth",
     role: "System Administrator",
     period: "Apr 2024 - Mar 2025",
-    description:
-      "Led technical support, access management, systems integration, project launch tech stacks, and CRM automation platform maintenance.",
+    highlights: [
+      {
+        label: "Technical Leadership",
+        description: "Guided web development teams through urgent system fixes under tight deadlines.",
+      },
+      {
+        label: "Access Management",
+        description: "Centralized administration of credentials and platform permissions across the organization.",
+      },
+      {
+        label: "Systems Integration",
+        description: "Deployed connected toolsets to reduce silos and improve cross-functional productivity.",
+      },
+      {
+        label: "Technology Advisory",
+        description: "Partnered with the CEO to design and implement custom tech stacks for new project launches.",
+      },
+      {
+        label: "Infrastructure Oversight",
+        description: "Maintained the company's technical ecosystem, including CRMs, automation platforms, and middleware.",
+      },
+    ],
   },
   {
     company: "Coredev Solutions, Inc.",
     role: "Jr. Software Implementer",
     period: "Sep 2022 - Apr 2024",
-    description:
-      "Installed enterprise software, tested systems, migrated MySQL datasets, documented implementations, and managed least-privilege access.",
+    highlights: [
+      {
+        label: "Systems Deployment",
+        description: "Installed and configured enterprise applications to meet operational requirements.",
+      },
+      {
+        label: "Quality Assurance",
+        description: "Performed functional testing to validate software performance and reliability before deployment.",
+      },
+      {
+        label: "Database Migration",
+        description: "Extracted and migrated complex datasets into MySQL while preserving data integrity and optimizing structure.",
+      },
+      {
+        label: "Technical Support",
+        description: "Troubleshot critical system issues and provided advanced user support.",
+      },
+      {
+        label: "Implementation Documentation",
+        description: "Authored implementation guides and recommendations to support ongoing system monitoring.",
+      },
+      {
+        label: "Access Governance",
+        description: "Administered credentials and permissions using least-privilege access to protect systems.",
+      },
+      {
+        label: "Technology Integration",
+        description: "Researched and integrated emerging software to keep the tech stack current and secure.",
+      },
+    ],
   },
 ];
 
@@ -764,15 +850,13 @@ export default function Home() {
                   <h3>{job.role}</h3>
                   <span>{job.company}</span>
                 </div>
-                {job.highlights ? (
-                  <ul className="experience-highlights">
-                    {job.highlights.map((highlight) => (
-                      <li key={highlight}>{highlight}</li>
-                    ))}
-                  </ul>
-                ) : (
-                  <p>{job.description}</p>
-                )}
+                <ul className="experience-highlights">
+                  {job.highlights.map((highlight) => (
+                    <li key={highlight.label}>
+                      <strong>{highlight.label}:</strong> {highlight.description}
+                    </li>
+                  ))}
+                </ul>
               </article>
             ))}
           </div>

@@ -676,6 +676,10 @@ h1 > span {
 .experience-highlights li::marker {
   color: var(--primary);
 }
+.experience-highlights strong {
+  color: var(--foreground);
+  font-weight: 600;
+}
 
 .project-grid {
   display: grid;
