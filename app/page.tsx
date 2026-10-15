@@ -38,6 +38,16 @@ type ToolGroup = {
   tools: Tool[];
 };
 
+type Experience = {
+  company: string;
+  role: string;
+  period: string;
+  address: string;
+  email?: string;
+  phone?: { value: string; href: string };
+  highlights: { label: string; description: string }[];
+};
+
 type Project = {
   title: string;
   description: string;
@@ -169,11 +179,12 @@ const serviceIcons = {
   systems: Server,
 };
 
-const experience = [
+const experience: Experience[] = [
   {
     company: "Outsourcing and Recruitment Company",
     role: "Information Technology Service Management I",
     period: "Mar 2025 - Apr 2026",
+    address: "Sheridan, Wyoming, USA",
     highlights: [
       {
         label: "Infrastructure",
@@ -205,6 +216,9 @@ const experience = [
     company: "Living Mulch, LLC",
     role: "IT Virtual Assistant",
     period: "Mar 2025 - Aug 2025",
+    address: "1914 Midland Avenue, Syracuse, NY 13205",
+    email: "imyourcoo@livingmulch.co",
+    phone: { value: "(315) 802 5425", href: "tel:+13158025425" },
     highlights: [
       {
         label: "CRM Architecture",
@@ -232,6 +246,9 @@ const experience = [
     company: "Simply Earth",
     role: "System Administrator",
     period: "Apr 2024 - Mar 2025",
+    address: "W4228 Church Rd, Waldo, WI 53093, United States",
+    email: "help@simplyearth.com",
+    phone: { value: "+1 866-330-8165", href: "tel:+18663308165" },
     highlights: [
       {
         label: "Technical Leadership",
@@ -259,6 +276,9 @@ const experience = [
     company: "Coredev Solutions, Inc.",
     role: "Jr. Software Implementer",
     period: "Sep 2022 - Apr 2024",
+    address: "11B, Cherry Tree Street, Palm Drive, Buhangin Davao City, Davao Del Sur 8000, Philippines",
+    email: "info@coredev.ph",
+    phone: { value: "+639985831612", href: "tel:+639985831612" },
     highlights: [
       {
         label: "Systems Deployment",
@@ -849,6 +869,24 @@ export default function Home() {
                   <p>{job.period}</p>
                   <h3>{job.role}</h3>
                   <span>{job.company}</span>
+                  <address className="employer-contact" aria-label={`${job.company} contact details`}>
+                    <div>
+                      <MapPin size={16} aria-hidden="true" />
+                      <span>{job.address}</span>
+                    </div>
+                    {job.email && (
+                      <a href={`mailto:${job.email}`} aria-label={`${job.company} email: ${job.email}`}>
+                        <Mail size={16} aria-hidden="true" />
+                        <span>{job.email}</span>
+                      </a>
+                    )}
+                    {job.phone && (
+                      <a href={job.phone.href} aria-label={`${job.company} phone: ${job.phone.value}`}>
+                        <Phone size={16} aria-hidden="true" />
+                        <span>{job.phone.value}</span>
+                      </a>
+                    )}
+                  </address>
                 </div>
                 <ul className="experience-highlights">
                   {job.highlights.map((highlight) => (

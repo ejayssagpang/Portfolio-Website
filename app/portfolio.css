@@ -663,6 +663,49 @@ h1 > span {
 .experience-card > p {
   align-self: center;
 }
+.employer-contact {
+  display: grid;
+  gap: 2px;
+  margin-top: 14px;
+  font-style: normal;
+  color: var(--muted-text);
+}
+.employer-contact > div,
+.employer-contact a {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  min-height: 36px;
+  padding-block: 6px;
+  border-radius: 4px;
+  color: inherit;
+}
+.employer-contact span {
+  min-width: 0;
+  color: inherit;
+  font-size: 12px;
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+.employer-contact svg {
+  flex: 0 0 16px;
+  margin-top: 2px;
+  color: var(--foreground);
+}
+.employer-contact a,
+.employer-contact svg {
+  transition: color 0.18s ease;
+}
+.employer-contact a:hover,
+.employer-contact a:hover svg,
+.employer-contact a:focus-visible,
+.employer-contact a:focus-visible svg {
+  color: var(--primary);
+}
+.employer-contact a:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+}
 .experience-highlights {
   display: grid;
   gap: 8px;
