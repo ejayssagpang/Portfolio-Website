@@ -80,10 +80,6 @@ const toolGroups: ToolGroup[] = [
       { name: "Make", icon: "/make-logo.png" },
       { name: "n8n", icon: "/n8n-logo.png" },
       { name: "OpenAI", icon: "/openai-logo.svg" },
-      {
-        name: "Google Gemini",
-        icon: "https://cdn.simpleicons.org/googlegemini",
-      },
       { name: "Claude", icon: "https://cdn.simpleicons.org/claude" },
       { name: "Relevance AI", icon: "/relevance-ai-logo.png", tone: "pale" },
     ],
@@ -98,7 +94,8 @@ const toolGroups: ToolGroup[] = [
       { name: "Monday.com", icon: "/monday-logo.svg", tone: "bright" },
       { name: "Notion", icon: "/notion-logo.svg", tone: "monochrome" },
       { name: "Omnisend", icon: "/omnisend-logo.png", tone: "bright" },
-      { name: "Instantly", icon: "/instantly-logo.png" },
+      { name: "Typeform", icon: "/typeform-logo.png", tone: "monochrome" },
+      { name: "Jotform", icon: "/jotform-logo.png" },
     ],
   },
   {
@@ -120,7 +117,6 @@ const toolGroups: ToolGroup[] = [
         icon: "https://cdn.simpleicons.org/googletagmanager",
       },
       { name: "Swipe Pages", icon: "/swipe-pages-logo.png" },
-      { name: "Typeform", icon: "/typeform-logo.png", tone: "monochrome" },
       { name: "GoDaddy", icon: "https://cdn.simpleicons.org/godaddy", tone: "bright" },
       { name: "Wix", icon: "/wix-logo.png" },
       { name: "Cloudflare", icon: "/cloudflare-logo.png" },
