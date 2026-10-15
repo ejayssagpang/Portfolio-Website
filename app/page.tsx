@@ -174,8 +174,14 @@ const experience = [
     company: "Outsourcing and Recruitment Company",
     role: "Information Technology Service Management I",
     period: "Mar 2025 - Apr 2026",
-    description:
-      "Managed infrastructure lifecycle, GHL workflows, service records, technical documentation, portals, process improvements, and compliance-aware solutions.",
+    highlights: [
+      "Managed IT infrastructure from planning and deployment through ongoing maintenance.",
+      "Built GoHighLevel workflows and pipelines to streamline client onboarding and offboarding.",
+      "Maintained accurate request, incident, problem, and change records for reliable service delivery.",
+      "Built knowledge bases, technical documentation, and customer portals to strengthen support and transparency.",
+      "Evaluated systems against best practices and aligned process improvements with business goals.",
+      "Delivered cost-conscious IT solutions while upholding data security, privacy, and retention requirements.",
+    ],
   },
   {
     company: "Living Mulch, LLC",
@@ -758,7 +764,15 @@ export default function Home() {
                   <h3>{job.role}</h3>
                   <span>{job.company}</span>
                 </div>
-                <p>{job.description}</p>
+                {job.highlights ? (
+                  <ul className="experience-highlights">
+                    {job.highlights.map((highlight) => (
+                      <li key={highlight}>{highlight}</li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p>{job.description}</p>
+                )}
               </article>
             ))}
           </div>

@@ -663,6 +663,19 @@ h1 > span {
 .experience-card > p {
   align-self: center;
 }
+.experience-highlights {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding-left: 18px;
+  color: var(--muted-text);
+  font-size: 13px;
+  line-height: 1.75;
+  list-style: disc;
+}
+.experience-highlights li::marker {
+  color: var(--primary);
+}
 
 .project-grid {
   display: grid;
@@ -1743,7 +1756,8 @@ h1 > .hero-name-accent {
     font-size: 17px;
   }
   .experience-card span,
-  .experience-card > p {
+  .experience-card > p,
+  .experience-highlights {
     font-size: 12px;
   }
   .project-grid {
