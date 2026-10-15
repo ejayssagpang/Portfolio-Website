@@ -57,7 +57,7 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-geist-sans, "Segoe UI"), Arial, sans-serif;
-  font-size: 15px;
+  font-size: 16px;
   -webkit-font-smoothing: antialiased;
 }
 a {
@@ -159,7 +159,7 @@ svg {
   display: flex;
   gap: 26px;
   color: var(--muted-text);
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
 }
 .nav-links a {
@@ -247,7 +247,7 @@ svg {
   display: block;
   border-radius: 44% 44% 16% 44%;
   transform: translateY(var(--portrait-base-y));
-  animation: portrait-float 4.8s ease-in-out infinite;
+  animation: portrait-float 6s ease-in-out infinite;
 }
 @keyframes portrait-float {
   0%,
@@ -255,22 +255,20 @@ svg {
     transform: translateY(var(--portrait-base-y));
   }
   50% {
-    transform: translateY(calc(var(--portrait-base-y) - 6px));
+    transform: translateY(calc(var(--portrait-base-y) - 4px));
   }
 }
 .hero-background::before {
   content: "";
   background: var(--action);
-  translate: 10px 10px;
+  translate: 4px 4px;
 }
 .hero-background img {
   object-fit: cover;
   object-position: center 36%;
   background: #fff;
-  box-shadow: 0 0 0 2px rgba(255, 94, 0, 0.55);
-  animation:
-    portrait-float 4.8s ease-in-out infinite,
-    portrait-border-pulse 3.6s ease-in-out infinite;
+  box-shadow: 0 0 0 1px rgba(255, 94, 0, 0.55);
+  animation: portrait-float 6s ease-in-out infinite;
 }
 @keyframes portrait-border-pulse {
   0%,
@@ -350,17 +348,17 @@ h1 > span {
   50% { opacity: 0; }
 }
 .hero-role {
-  margin-top: 10px;
-  font-size: 15px;
+  margin-top: 22px;
+  font-size: 17px;
   font-weight: 600;
-  color: var(--muted-text);
+  color: var(--foreground);
 }
 .lead {
-  max-width: 440px;
+  max-width: 480px;
   margin-top: 14px;
   color: var(--muted-text);
-  font-size: 15px;
-  line-height: 1.8;
+  font-size: 17px;
+  line-height: 1.75;
 }
 .hero-actions {
   display: flex;
@@ -377,7 +375,7 @@ h1 > span {
   gap: 12px;
   border: 1px solid transparent;
   border-radius: 8px;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
   transition:
     background 0.2s ease,
@@ -425,7 +423,7 @@ h1 > span {
   background: var(--border);
 }
 .quick-contact span {
-  font-size: 12px;
+  font-size: 13px;
   white-space: nowrap;
 }
 .quick-contact svg {
@@ -477,7 +475,7 @@ h1 > span {
   margin-top: 14px;
   max-width: 610px;
   color: var(--muted-text);
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.8;
 }
 .section-heading.centered {
@@ -494,6 +492,86 @@ h1 > span {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 40px 36px;
   align-items: start;
+}
+.core-toolkit-heading {
+  margin-bottom: 14px;
+  font-size: 15px;
+  font-weight: 600;
+}
+.core-tools {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px 32px;
+  margin-bottom: 28px;
+}
+.core-tools .core-tool {
+  height: auto;
+  min-height: 76px;
+  padding: 14px 0;
+  border: 0;
+  border-bottom: 1px solid var(--border);
+  border-radius: 0;
+  background: transparent;
+}
+.tool-copy {
+  min-width: 0;
+  display: grid;
+  gap: 5px;
+}
+.tool-copy small {
+  color: var(--muted-text);
+  font-size: 13px;
+  line-height: 1.5;
+}
+summary {
+  cursor: pointer;
+  list-style: none;
+}
+summary::-webkit-details-marker {
+  display: none;
+}
+summary > svg {
+  transition: transform 0.2s ease;
+}
+details[open] > summary > svg {
+  transform: rotate(180deg);
+}
+details > summary .when-open,
+details[open] > summary .when-closed {
+  display: none;
+}
+details[open] > summary .when-open {
+  display: inline;
+}
+.tool-catalog > summary {
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-block: 18px;
+  border-block: 1px solid var(--border);
+  font-size: 16px;
+  font-weight: 600;
+}
+.tool-catalog > summary > span {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+}
+.tool-catalog > summary small {
+  color: var(--muted-text);
+  font-size: 13px;
+  font-weight: 400;
+}
+.tool-catalog > summary:hover,
+.responsibility-details summary:hover,
+.employer-details summary:hover {
+  color: var(--primary);
+}
+.tool-catalog .tool-groups {
+  padding-top: 32px;
 }
 .tool-group {
   min-width: 0;
@@ -573,7 +651,8 @@ h1 > span {
   gap: 30px;
 }
 .modern-card {
-  padding: 22px;
+  padding: 24px 0 0;
+  border-top: 1px solid var(--border);
 }
 .service-topline {
   display: flex;
@@ -583,7 +662,7 @@ h1 > span {
 }
 .service-number {
   font-size: 11px;
-  color: var(--detail);
+  color: var(--muted-text);
   font-family: var(--font-geist-mono, "Consolas"), monospace;
 }
 .service-logo {
@@ -612,7 +691,7 @@ h1 > span {
 }
 .modern-card p {
   color: var(--muted-text);
-  font-size: 12px;
+  font-size: 15px;
   line-height: 1.85;
 }
 .experience-list {
@@ -623,10 +702,11 @@ h1 > span {
 }
 .experience-card {
   position: relative;
-  padding: 24px 22px;
+  padding: 28px 0;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
   gap: 56px;
+  border-bottom: 1px solid var(--border);
 }
 .experience-card::before {
   content: "";
@@ -643,10 +723,10 @@ h1 > span {
 .experience-card:first-child::before {
   background: var(--accent);
 }
-.experience-card div p {
+.experience-meta .experience-date {
   margin-bottom: 10px;
   color: var(--accent);
-  font-size: 11px;
+  font-size: 13px;
 }
 .experience-card h3 {
   margin-bottom: 8px;
@@ -654,14 +734,40 @@ h1 > span {
   font-weight: 550;
   line-height: 1.4;
 }
-.experience-card span,
-.experience-card > p {
+.employer-name {
   color: var(--muted-text);
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.85;
 }
-.experience-card > p {
-  align-self: center;
+.experience-meta,
+.experience-summary {
+  min-width: 0;
+}
+.employer-location {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 12px;
+  color: var(--muted-text);
+  font-size: 13px;
+  line-height: 1.6;
+}
+.employer-details summary,
+.responsibility-details summary {
+  width: fit-content;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--muted-text);
+}
+.responsibility-details summary {
+  margin-top: 10px;
+  color: var(--foreground);
+}
+.responsibility-details[open] .experience-highlights {
+  margin-top: 10px;
 }
 .employer-contact {
   display: grid;
@@ -683,7 +789,7 @@ h1 > span {
 .employer-contact span {
   min-width: 0;
   color: inherit;
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1.65;
   overflow-wrap: anywhere;
 }
@@ -708,11 +814,11 @@ h1 > span {
 }
 .experience-highlights {
   display: grid;
-  gap: 8px;
+  gap: 10px;
   margin: 0;
   padding-left: 18px;
   color: var(--muted-text);
-  font-size: 13px;
+  font-size: 15px;
   line-height: 1.75;
   list-style: disc;
 }
@@ -727,11 +833,11 @@ h1 > span {
 .project-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 36px 30px;
+  gap: 28px 24px;
 }
 .project-card {
   min-width: 0;
-  padding: 16px;
+  padding: 18px;
   display: flex;
   flex-direction: column;
   cursor: pointer;
@@ -781,27 +887,101 @@ h1 > span {
   color: var(--accent);
 }
 .project-topline span {
-  color: var(--accent);
+  color: var(--muted-text);
   font-family: var(--font-geist-mono, "Consolas"), monospace;
-  font-size: 10px;
+  font-size: 12px;
+}
+.project-preview {
+  width: 100%;
+  height: 164px;
+  min-width: 0;
+  padding: 14px 12px;
+  margin-bottom: 18px;
+  border-radius: 4px;
+  background: var(--muted);
+}
+.preview-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 18px;
+  color: var(--muted-text);
+  font-size: 11px;
+  line-height: 1.4;
+}
+.preview-heading > span:last-child {
+  white-space: nowrap;
+}
+.preview-flow {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  text-align: center;
+}
+.preview-flow li {
+  position: relative;
+  min-width: 0;
+}
+.preview-step-icon {
+  height: 34px;
+  margin-bottom: 6px;
+  display: grid;
+  place-items: center;
+  color: var(--foreground);
+}
+.preview-flow li:last-child .preview-step-icon {
+  color: var(--primary);
+}
+.preview-flow strong {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+.preview-flow small {
+  display: block;
+  margin-top: 3px;
+  color: var(--muted-text);
+  font-size: 11px;
+  line-height: 1.4;
+}
+.preview-arrow {
+  position: absolute;
+  top: 10px;
+  right: -14px;
+  color: var(--muted-text);
+}
+.project-outcome {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  min-height: 66px;
+  margin-top: 4px;
+  color: var(--muted-text);
+  font-size: 15px;
+  line-height: 1.65;
+}
+.project-outcome svg {
+  margin-top: 4px;
+  color: var(--primary);
 }
 .project-card h3 {
-  min-height: 66px;
+  min-height: 48px;
   margin-bottom: 10px;
   color: var(--ink);
-  font-size: 17px;
+  font-size: 18px;
   font-weight: 600;
   line-height: 1.3;
   overflow-wrap: anywhere;
 }
 .project-card > p {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  overflow: hidden;
-  min-height: 42px;
+  min-height: 66px;
   color: var(--muted-text);
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.75;
 }
 .tag-row {
@@ -815,7 +995,7 @@ h1 > span {
   padding: 0;
   border: 0;
   color: var(--muted-text);
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 500;
   line-height: 1.3;
 }
@@ -1078,9 +1258,9 @@ h1 > span {
 }
 .project-modal-close,
 .image-modal-header button {
-  width: 34px;
-  height: 34px;
-  flex: 0 0 34px;
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
   display: grid;
   place-items: center;
   border: 0;
@@ -1101,7 +1281,29 @@ h1 > span {
 .project-modal-media {
   min-width: 0;
   display: flex;
-  align-items: stretch;
+  align-items: flex-start;
+  padding-top: 12px;
+}
+.project-modal-media .project-preview {
+  height: auto;
+  min-height: 260px;
+  padding: 28px 20px;
+}
+.project-modal-media .preview-heading {
+  font-size: 13px;
+  margin-bottom: 36px;
+}
+.project-modal-media .preview-flow strong {
+  font-size: 15px;
+}
+.project-modal-media .preview-flow small {
+  font-size: 13px;
+}
+.project-modal-media .preview-step-icon {
+  height: 48px;
+}
+.project-modal-media .preview-arrow {
+  top: 16px;
 }
 .project-modal-image {
   position: relative;
@@ -1162,13 +1364,36 @@ h1 > span {
 .project-modal-sections h4,
 .project-modal-tools h4 {
   margin-bottom: 8px;
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 600;
 }
 .project-modal-sections p {
   color: var(--muted-text);
-  font-size: 12px;
-  line-height: 1.9;
+  font-size: 15px;
+  line-height: 1.75;
+}
+.process-comparison {
+  margin: 0;
+  display: grid;
+  gap: 16px;
+}
+.process-comparison > div {
+  padding-left: 14px;
+  border-left: 2px solid var(--border);
+}
+.process-comparison > div:last-child {
+  border-color: var(--primary);
+}
+.process-comparison dt {
+  margin-bottom: 5px;
+  font-size: 13px;
+  font-weight: 600;
+}
+.process-comparison dd {
+  margin: 0;
+  color: var(--muted-text);
+  font-size: 15px;
+  line-height: 1.75;
 }
 .project-modal-tools {
   margin-top: 24px;
@@ -1227,8 +1452,6 @@ h1 > span {
   border-radius: 4px;
 }
 
-.modern-card,
-.experience-card,
 .project-card,
 .education-panel,
 .certification-item,
@@ -1303,8 +1526,6 @@ h1 > span {
 
 @media (hover: hover) and (pointer: fine) {
   .tool-chip:hover,
-  .modern-card:hover,
-  .experience-card:hover,
   .project-card:hover,
   .education-panel:hover,
   .certification-item:hover,
@@ -1330,7 +1551,7 @@ h1 > span {
   }
   .modern-card:hover .service-logo,
   .education-panel:hover .credential-icon {
-    transform: translateY(-2px);
+    transform: translateY(-1px);
   }
   .certification-item:hover .certification-logo {
     transform: scale(1.06);
@@ -1447,16 +1668,14 @@ h1 > .hero-name-accent {
   background: rgba(255, 255, 255, 0.4);
   opacity: 0;
   pointer-events: none;
-  animation: button-sweep 5.5s ease-in-out 1.6s infinite;
+  animation: none;
 }
 @keyframes button-sweep {
-  0%,
-  72% {
+  0% {
     opacity: 0;
     transform: translateX(0) skewX(-18deg);
   }
-  78% { opacity: 1; }
-  93%,
+  20% { opacity: 0.6; }
   100% {
     opacity: 0;
     transform: translateX(650%) skewX(-18deg);
@@ -1500,16 +1719,26 @@ h1 > .hero-name-accent {
     animation: cv-download-bounce 0.6s ease-in-out;
   }
   .tool-chip:hover,
-  .modern-card:hover,
   .project-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 12px 28px rgba(255, 94, 0, 0.16);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
   }
   .tool-chip:hover .tool-icon {
-    transform: scale(1.14) rotate(-6deg);
+    transform: scale(1.04);
   }
   .modern-card:hover .service-logo {
-    transform: translateY(-3px) rotate(-8deg) scale(1.08);
+    transform: translateY(-1px);
+  }
+  .modern-card:hover {
+    border-color: var(--primary);
+  }
+  .core-tools .core-tool:hover {
+    background: transparent;
+    box-shadow: none;
+    transform: none;
+  }
+  .button.primary:hover::after {
+    animation: button-sweep 0.8s ease-in-out;
   }
   .project-card:hover .project-image-button img {
     transform: scale(1.05);
@@ -1566,6 +1795,10 @@ h1 > .hero-name-accent {
   }
 }
 @media (max-width: 900px) {
+  .core-tools {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px 24px;
+  }
   .container,
   .nav {
     width: calc(100% - 48px);
@@ -1721,7 +1954,8 @@ h1 > .hero-name-accent {
   }
   .hero-role {
     max-width: none;
-    margin-top: 8px;
+    margin-top: 20px;
+    font-size: 16px;
   }
   .hero-typing {
     margin-top: 16px;
@@ -1730,7 +1964,7 @@ h1 > .hero-name-accent {
   .lead {
     max-width: 360px;
     margin-top: 12px;
-    font-size: 13px;
+    font-size: 16px;
     line-height: 1.75;
   }
   .hero-actions {
@@ -1738,7 +1972,7 @@ h1 > .hero-name-accent {
     gap: 10px;
   }
   .button {
-    font-size: 12px;
+    font-size: 14px;
     padding: 11px 14px;
     gap: 8px;
   }
@@ -1751,7 +1985,7 @@ h1 > .hero-name-accent {
     display: none;
   }
   .quick-contact span {
-    font-size: 12px;
+    font-size: 13px;
   }
   .section,
   .tools-section {
@@ -1766,7 +2000,7 @@ h1 > .hero-name-accent {
   }
   .section-heading > p:not(.section-kicker),
   .contact-grid > div > p:not(.section-kicker) {
-    font-size: 13px;
+    font-size: 15px;
   }
   .tool-groups {
     grid-template-columns: 1fr;
@@ -1788,24 +2022,23 @@ h1 > .hero-name-accent {
     display: none;
   }
   .modern-card h3 {
-    font-size: 15px;
+    font-size: 18px;
     min-height: 42px;
   }
   .modern-card p {
-    font-size: 11px;
+    font-size: 15px;
   }
   .experience-card {
     grid-template-columns: 1fr;
     gap: 12px;
-    padding: 20px 16px;
+    padding: 24px 0;
   }
   .experience-card h3 {
     font-size: 17px;
   }
-  .experience-card span,
-  .experience-card > p,
+  .employer-name,
   .experience-highlights {
-    font-size: 12px;
+    font-size: 14px;
   }
   .project-grid {
     grid-template-columns: 1fr;
@@ -1813,6 +2046,7 @@ h1 > .hero-name-accent {
   }
   .project-card h3 {
     min-height: 0;
+    font-size: 18px;
   }
   .project-image-button,
   .project-illustration {
@@ -1829,7 +2063,7 @@ h1 > .hero-name-accent {
   }
   .credential-link {
     min-height: 40px;
-    font-size: 11px;
+    font-size: 13px;
   }
   .footer a {
     position: static;
@@ -1868,10 +2102,28 @@ h1 > .hero-name-accent {
     min-height: 0;
     margin-bottom: 0;
     align-self: center;
-    font-size: 16px;
+    font-size: 18px;
   }
   .modern-card p {
     grid-column: 2;
+    font-size: 15px;
+  }
+  .core-tools {
+    grid-template-columns: 1fr;
+  }
+  .project-card {
+    padding: 16px;
+  }
+  .project-outcome {
+    min-height: 0;
+  }
+  .project-preview {
+    height: 176px;
+  }
+  .project-modal-media .preview-flow strong {
+    font-size: 13px;
+  }
+  .project-modal-media .preview-flow small {
     font-size: 12px;
   }
   .certification-item {

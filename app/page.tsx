@@ -1,7 +1,9 @@
 "use client";
 
-import { useEffect, useRef, useState, type CSSProperties } from "react";
-import RotatingSpecialties from "./rotating-specialties";
+import { useEffect, useRef, useState } from "react";
+import ToolChip, { type Tool } from "./tool-chip";
+import ExperienceEntry, { type Experience } from "./experience-entry";
+import ProjectPreview, { type ProjectStep } from "./project-preview";
 import {
   ArrowDown,
   ArrowDownToLine,
@@ -9,47 +11,44 @@ import {
   ArrowUpRight,
   Award,
   CalendarDays,
+  ChartNoAxesCombined,
+  Check,
+  ChevronDown,
+  ClipboardList,
+  FileSpreadsheet,
   GraduationCap,
-  LayoutDashboard,
+  GitBranch,
   Mail,
   MapPin,
   Menu,
   Moon,
+  MousePointerClick,
   Network,
   Phone,
   Server,
   ShieldCheck,
   Sun,
+  Tag,
+  UserRoundCheck,
+  Users,
+  MessageSquare,
   Workflow,
   X,
   ZoomIn,
 } from "lucide-react";
-
-type Tool = {
-  name: string;
-  icon?: string;
-  initials?: string;
-  color?: string;
-  tone?: "monochrome" | "bright" | "muted" | "pale";
-};
 
 type ToolGroup = {
   title: string;
   tools: Tool[];
 };
 
-type Experience = {
-  company: string;
-  role: string;
-  period: string;
-  address: string;
-  email?: string;
-  phone?: { value: string; href: string };
-  highlights: { label: string; description: string }[];
-};
-
 type Project = {
   title: string;
+  cardTitle: string;
+  previewLabel: string;
+  steps: ProjectStep[];
+  before: string;
+  after: string;
   description: string;
   details: string;
   problem: string;
@@ -80,11 +79,9 @@ const toolGroups: ToolGroup[] = [
       { name: "Lovable", icon: "/lovable-logo.png" },
       { name: "Make", icon: "/make-logo.png" },
       { name: "n8n", icon: "/n8n-logo.png" },
-      { name: "Netlify", icon: "/netlify-logo.png", tone: "pale" },
       { name: "OpenAI", icon: "/openai-logo.svg" },
       { name: "Relevance AI", icon: "/relevance-ai-logo.png", tone: "pale" },
       { name: "Replit", icon: "/replit-logo.png" },
-      { name: "Vercel", icon: "/vercel-logo.png", tone: "monochrome" },
       { name: "Zapier", icon: "https://cdn.simpleicons.org/zapier" },
     ],
   },
@@ -123,8 +120,10 @@ const toolGroups: ToolGroup[] = [
         name: "Google Tags",
         icon: "https://cdn.simpleicons.org/googletagmanager",
       },
+      { name: "Netlify", icon: "/netlify-logo.png", tone: "pale" },
       { name: "Supabase", icon: "/supabase-logo.png" },
       { name: "Swipe Pages", icon: "/swipe-pages-logo.png" },
+      { name: "Vercel", icon: "/vercel-logo.png", tone: "monochrome" },
       { name: "Wix", icon: "/wix-logo.png" },
     ],
   },
@@ -147,6 +146,18 @@ const toolGroups: ToolGroup[] = [
     ],
   },
 ];
+
+const coreTools = [
+  { name: "GoHighLevel", caption: "CRM workflows & pipelines" },
+  { name: "Google Workspace", caption: "Team collaboration" },
+  { name: "MySQL", caption: "Data migration" },
+  { name: "Notion", caption: "Knowledge management" },
+  { name: "Slack", caption: "Team communication" },
+  { name: "Zapier", caption: "Cross-app automation" },
+].flatMap((focus) => {
+  const tool = toolGroups.flatMap((group) => group.tools).find((item) => item.name === focus.name);
+  return tool ? [{ tool, caption: focus.caption }] : [];
+});
 
 const services = [
   {
@@ -187,6 +198,7 @@ const experience: Experience[] = [
     company: "Outsourcing and Recruitment Company",
     role: "Information Technology Service Management I",
     period: "Mar 2025 - Apr 2026",
+    location: "Sheridan, Wyoming, USA",
     address: "Sheridan, Wyoming, USA",
     highlights: [
       {
@@ -219,6 +231,7 @@ const experience: Experience[] = [
     company: "Living Mulch, LLC",
     role: "IT Virtual Assistant",
     period: "Mar 2025 - Aug 2025",
+    location: "Syracuse, New York, USA",
     address: "1914 Midland Avenue, Syracuse, NY 13205",
     email: "imyourcoo@livingmulch.co",
     phone: { value: "(315) 802 5425", href: "tel:+13158025425" },
@@ -249,6 +262,7 @@ const experience: Experience[] = [
     company: "Simply Earth",
     role: "System Administrator",
     period: "Apr 2024 - Mar 2025",
+    location: "Waldo, Wisconsin, USA",
     address: "W4228 Church Rd, Waldo, WI 53093, United States",
     email: "help@simplyearth.com",
     phone: { value: "+1 866-330-8165", href: "tel:+18663308165" },
@@ -279,6 +293,7 @@ const experience: Experience[] = [
     company: "Coredev Solutions, Inc.",
     role: "Jr. Software Implementer",
     period: "Sep 2022 - Apr 2024",
+    location: "Davao City, Philippines",
     address: "11B, Cherry Tree Street, Palm Drive, Buhangin Davao City, Davao Del Sur 8000, Philippines",
     email: "info@coredev.ph",
     phone: { value: "+639985831612", href: "tel:+639985831612" },
@@ -318,8 +333,17 @@ const experience: Experience[] = [
 const projects: Project[] = [
   {
     title: "Swipe Pages -> Attentive Lead Sync",
+    cardTitle: "Landing Page Lead Sync",
+    previewLabel: "Subscriber flow",
+    steps: [
+      { label: "Capture", detail: "Swipe Pages form", icon: ClipboardList },
+      { label: "Subscribe", detail: "Attentive contact", icon: UserRoundCheck },
+      { label: "Enrich", detail: "Custom attributes", icon: Tag },
+    ],
+    before: "Copy form submissions into Attentive and enter lead attributes by hand.",
+    after: "A form submission triggers subscription and maps the lead's custom attributes.",
     description:
-      "Built an automation that captures new Swipe Pages form submissions, subscribes the lead in Attentive, and applies custom attributes so marketing follow-up starts with clean subscriber data.",
+      "Connect landing-page forms to subscriber records without copying lead data by hand.",
     details:
       "A lead-capture workflow connecting Swipe Pages form submissions to Attentive so new contacts move into the right marketing system without manual entry.",
     problem:
@@ -327,7 +351,7 @@ const projects: Project[] = [
     fixed:
       "Connected the form trigger to Attentive subscription actions, then mapped custom attributes so every new subscriber arrives with useful context for segmentation.",
     impact:
-      "Reduced manual subscriber entry and made new lead records more complete before marketing follow-up begins.",
+      "New leads arrive in Attentive with mapped subscriber details.",
     image: "/swipe-pages-attentive-lead-sync.png",
     imageAlt:
       "Automation workflow showing Swipe Pages new form submission followed by Attentive subscribe user and custom attributes steps.",
@@ -335,8 +359,17 @@ const projects: Project[] = [
   },
   {
     title: "Instagram #imadethis -> Manychat Auto-Tagging",
+    cardTitle: "Instagram Campaign Tagging",
+    previewLabel: "Campaign segmentation",
+    steps: [
+      { label: "Detect", detail: "Tagged media", icon: MousePointerClick },
+      { label: "Qualify", detail: "Campaign filters", icon: GitBranch },
+      { label: "Tag", detail: "Manychat contact", icon: Tag },
+    ],
+    before: "Review campaign posts and locate and tag matching contacts manually.",
+    after: "Filters qualify tagged posts, locate the Manychat user, and apply the campaign tag.",
     description:
-      "Built an automation that detects new tagged Instagram media, filters posts using the #imadethis condition, finds the matching Manychat user, and applies the right tag for follow-up segmentation.",
+      "Turn qualifying Instagram campaign activity into organized Manychat audience segments.",
     details:
       "An Instagram-to-Manychat automation that watches tagged media, checks for campaign-specific conditions, and updates the matching contact for follow-up.",
     problem:
@@ -344,7 +377,7 @@ const projects: Project[] = [
     fixed:
       "Added filtering steps to qualify posts, found the matching Manychat user by name, and applied the correct tag automatically for cleaner follow-up flows.",
     impact:
-      "Improved campaign tracking by making participant tagging faster, cleaner, and less dependent on manual review.",
+      "Qualified campaign participants receive the right Manychat tag.",
     image: "/instagram-imadethis-manychat-auto-tagging.png",
     imageAlt:
       "Automation workflow showing Instagram tagged media, Zapier filters, Manychat find user by name, and Manychat add tag to user steps.",
@@ -352,8 +385,17 @@ const projects: Project[] = [
   },
   {
     title: "Google Sheets -> GHL Lead Sync with Team Notification",
+    cardTitle: "Lead Sync & Team Alerts",
+    previewLabel: "Lead handoff",
+    steps: [
+      { label: "Update", detail: "Google Sheets row", icon: FileSpreadsheet },
+      { label: "Sync", detail: "GHL contact", icon: Users },
+      { label: "Notify", detail: "Google Chat", icon: MessageSquare },
+    ],
+    before: "Check spreadsheets for lead updates, copy changes to the CRM, and notify the team.",
+    after: "A new or updated row creates or updates the GHL contact and triggers a Google Chat message.",
     description:
-      "Built an automation that watches for new or updated spreadsheet rows, creates or updates the matching lead in GoHighLevel, and sends a Google Chat notification so the team can act quickly.",
+      "Keep spreadsheet leads, CRM records, and team notifications connected.",
     details:
       "A lead-sync system that uses Google Sheets as the intake source, keeps GoHighLevel contacts updated, and alerts the team when action is needed.",
     problem:
@@ -361,7 +403,7 @@ const projects: Project[] = [
     fixed:
       "Synced new and updated spreadsheet rows into GoHighLevel, then added a Google Chat notification so the team receives timely updates after each change.",
     impact:
-      "Kept the CRM and team alerts aligned so lead changes could be acted on quickly without checking spreadsheets repeatedly.",
+      "Lead updates reach GHL and trigger a team notification.",
     image: "/google-sheets-ghl-lead-sync-team-notification.png",
     imageAlt:
       "Automation workflow showing Google Sheets new or updated spreadsheet row, LeadConnector add or update contact, and Google Chat create message steps.",
@@ -369,8 +411,17 @@ const projects: Project[] = [
   },
   {
     title: "GHL Email Campaign Follow-up & Pipeline Cleanup",
+    cardTitle: "Email Follow-up & Cleanup",
+    previewLabel: "Engagement follow-up",
+    steps: [
+      { label: "Engage", detail: "Opened or clicked", icon: MousePointerClick },
+      { label: "Follow up", detail: "Timed emails", icon: Mail },
+      { label: "Clean up", detail: "Remove campaign tag", icon: Tag },
+    ],
+    before: "Manually track engaged contacts, send follow-ups, and remove completed campaign tags.",
+    after: "Engagement starts timed email follow-ups; the final step removes the campaign tag.",
     description:
-      "Automated a GoHighLevel follow-up path that sends timed email touches after engagement, waits between steps, and removes the campaign tag once the sequence is complete to keep the pipeline clean.",
+      "Follow up on email engagement and keep completed campaign tags out of the pipeline.",
     details:
       "A GoHighLevel sequence that handles engagement-based email follow-ups and removes completed campaign tags at the end of the workflow.",
     problem:
@@ -378,7 +429,7 @@ const projects: Project[] = [
     fixed:
       "Built a timed follow-up path with wait steps, multiple email touches, and a final tag-removal step to keep campaign status and pipeline data clean.",
     impact:
-      "Created a more reliable follow-up process while keeping campaign tags and pipeline reporting easier to maintain.",
+      "Timed follow-ups end with automatic campaign-tag removal.",
     image: "/ghl-email-followup-pipeline-cleanup.png",
     imageAlt:
       "GoHighLevel workflow showing clicked or opened trigger, first follow-up, wait, second follow-up, wait, third follow-up, and remove tag steps.",
@@ -386,8 +437,17 @@ const projects: Project[] = [
   },
   {
     title: "Scale Smart Dashboard",
+    cardTitle: "CRM Reporting Dashboard",
+    previewLabel: "Reporting structure",
+    steps: [
+      { label: "Collect", detail: "Lead & campaign data", icon: Users },
+      { label: "Organize", detail: "Pipeline & KPIs", icon: GitBranch },
+      { label: "Review", detail: "One reporting view", icon: ChartNoAxesCombined },
+    ],
+    before: "Switch between separate CRM and campaign views to piece together performance.",
+    after: "Review lead, campaign, pipeline, and KPI information in one reporting dashboard.",
     description:
-      "A GoHighLevel dashboard for real-time lead visibility, campaign performance, pipeline health, KPI tracking, and integrated business reporting.",
+      "Bring lead activity, campaign performance, and pipeline health into a shared reporting view.",
     details:
       "A CRM reporting dashboard built around pipeline visibility, lead performance, and operational metrics that teams can review quickly.",
     problem:
@@ -395,13 +455,22 @@ const projects: Project[] = [
     fixed:
       "Organized lead, campaign, pipeline, and KPI views into one dashboard so reporting is easier to scan and decisions can be made with cleaner context.",
     impact:
-      "Gave operators a faster way to review sales and campaign health without jumping between disconnected CRM screens.",
+      "Lead, campaign, and pipeline reporting in one view.",
     tags: ["Dashboard", "CRM", "Analytics"],
   },
   {
     title: "Onboarding Automation",
+    cardTitle: "Client Onboarding Workflow",
+    previewLabel: "Onboarding sequence",
+    steps: [
+      { label: "Welcome", detail: "Client messages", icon: Mail },
+      { label: "Prepare", detail: "Intake & scheduling", icon: CalendarDays },
+      { label: "Assign", detail: "Team tasks", icon: ClipboardList },
+    ],
+    before: "Repeat welcome messages, intake requests, scheduling, and task assignments for each client.",
+    after: "An onboarding sequence coordinates messages, information collection, calls, and task routing.",
     description:
-      "A structured onboarding workflow that sends welcome messages, collects client details, schedules calls, and assigns tasks automatically.",
+      "Connect welcome messages, client intake, call scheduling, and team handoffs.",
     details:
       "A client onboarding workflow designed to reduce repetitive admin work and give each new client a consistent start.",
     problem:
@@ -409,7 +478,7 @@ const projects: Project[] = [
     fixed:
       "Created an automated onboarding sequence for welcome messages, information collection, call scheduling, and task routing so the process stays consistent.",
     impact:
-      "Reduced kickoff delays and helped every new client receive the same organized onboarding experience.",
+      "One consistent sequence from welcome message to team handoff.",
     tags: ["Automation", "Zapier", "Client Ops"],
   },
 ];
@@ -478,8 +547,7 @@ export default function Home() {
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     if (!root || reducedMotion.matches || !window.IntersectionObserver) return;
 
-    const selector =
-      ".section-heading, .tool-group h3, .tool-chip, .modern-card, .experience-card, .project-card, .education-panel, .certification-item, .contact-grid > div:first-child, .contact-card";
+    const selector = ".section-heading";
     const elements = Array.from(root.querySelectorAll<HTMLElement>(selector));
     const reveal = (element: HTMLElement) => {
       element.dataset.reveal = "visible";
@@ -571,11 +639,13 @@ export default function Home() {
     window.addEventListener("scroll", scheduleUpdate, { passive: true });
     window.addEventListener("resize", scheduleUpdate);
     window.addEventListener("hashchange", scheduleUpdate);
+    document.addEventListener("toggle", scheduleUpdate, true);
     return () => {
       if (frame !== null) window.cancelAnimationFrame(frame);
       window.removeEventListener("scroll", scheduleUpdate);
       window.removeEventListener("resize", scheduleUpdate);
       window.removeEventListener("hashchange", scheduleUpdate);
+      document.removeEventListener("toggle", scheduleUpdate, true);
     };
   }, []);
 
@@ -738,14 +808,12 @@ export default function Home() {
               <br />
               <span className="hero-name-line hero-name-accent">Sagpang.</span>
             </h1>
-            <RotatingSpecialties />
             <p className="hero-role">
               IT Service Manager & Automation Specialist
             </p>
             <p className="lead">
-              I build cleaner systems for growing teams. From CRM workflows to
-              IT operations, I turn everyday complexity into processes that
-              work.
+              I build GoHighLevel workflows and reliable IT systems that reduce
+              manual work for growing teams.
             </p>
             <div className="hero-actions">
               <a
@@ -780,41 +848,36 @@ export default function Home() {
             <p className="section-kicker">The toolkit</p>
             <h2>Tools & Technologies</h2>
             <p>
-              Platforms and technologies I use to build, automate, and support
-              operations.
+              CRM automation, connected workflows, and dependable IT operations.
             </p>
           </div>
-          <div className="tool-groups">
-            {toolGroups.map((group) => (
-              <article className="tool-group" key={group.title}>
-                <h3>{group.title}</h3>
-                <div>
-                  {group.tools.map((tool) => (
-                    <span className="tool-chip" key={tool.name}>
-                      <span
-                        className={`tool-icon${tool.tone ? ` logo-${tool.tone}` : ""}`}
-                        style={{ "--logo-color": tool.color } as CSSProperties}
-                        aria-hidden="true"
-                      >
-                        {tool.icon ? (
-                          <img
-                            src={tool.icon}
-                            alt=""
-                            width="20"
-                            height="20"
-                            loading="lazy"
-                          />
-                        ) : (
-                          tool.initials
-                        )}
-                      </span>
-                      <span className="tool-name">{tool.name}</span>
-                    </span>
-                  ))}
-                </div>
-              </article>
+          <h3 className="core-toolkit-heading">Core toolkit</h3>
+          <div className="core-tools">
+            {coreTools.map(({ tool, caption }) => (
+              <ToolChip key={tool.name} tool={tool} caption={caption} />
             ))}
           </div>
+          <details className="tool-catalog">
+            <summary>
+              <span>
+                Full toolkit
+                <small>
+                  {toolGroups.reduce((count, group) => count + group.tools.length, 0)} tools across {toolGroups.length} categories
+                </small>
+              </span>
+              <ChevronDown size={20} aria-hidden="true" />
+            </summary>
+            <div className="tool-groups">
+              {toolGroups.map((group) => (
+                <article className="tool-group" key={group.title}>
+                  <h3>{group.title}</h3>
+                  <div>
+                    {group.tools.map((tool) => <ToolChip key={tool.name} tool={tool} />)}
+                  </div>
+                </article>
+              ))}
+            </div>
+          </details>
         </div>
       </section>
 
@@ -864,41 +927,7 @@ export default function Home() {
           </div>
           <div className="experience-list">
             {experience.map((job) => (
-              <article
-                className="experience-card"
-                key={`${job.company}-${job.role}`}
-              >
-                <div>
-                  <p>{job.period}</p>
-                  <h3>{job.role}</h3>
-                  <span>{job.company}</span>
-                  <address className="employer-contact" aria-label={`${job.company} contact details`}>
-                    <div>
-                      <MapPin size={16} aria-hidden="true" />
-                      <span>{job.address}</span>
-                    </div>
-                    {job.email && (
-                      <a href={`mailto:${job.email}`} aria-label={`${job.company} email: ${job.email}`}>
-                        <Mail size={16} aria-hidden="true" />
-                        <span>{job.email}</span>
-                      </a>
-                    )}
-                    {job.phone && (
-                      <a href={job.phone.href} aria-label={`${job.company} phone: ${job.phone.value}`}>
-                        <Phone size={16} aria-hidden="true" />
-                        <span>{job.phone.value}</span>
-                      </a>
-                    )}
-                  </address>
-                </div>
-                <ul className="experience-highlights">
-                  {job.highlights.map((highlight) => (
-                    <li key={highlight.label}>
-                      <strong>{highlight.label}:</strong> {highlight.description}
-                    </li>
-                  ))}
-                </ul>
-              </article>
+              <ExperienceEntry key={`${job.company}-${job.role}`} job={job} />
             ))}
           </div>
         </div>
@@ -910,8 +939,7 @@ export default function Home() {
             <p className="section-kicker">03 / Selected work</p>
             <h2>Featured Projects</h2>
             <p>
-              Practical automation work built around business operations and
-              measurable workflows.
+              Real workflows, clear handoffs, and the process changes behind them.
             </p>
           </div>
           <div className="project-grid">
@@ -930,34 +958,16 @@ export default function Home() {
                 }}
                 aria-label={`Open project details for ${project.title}`}
               >
-                {project.image ? (
-                  <div className="project-image-button" aria-hidden="true">
-                    <img
-                      src={project.image}
-                      alt={
-                        project.imageAlt ?? `${project.title} project preview`
-                      }
-                      loading="lazy"
-                    />
-                  </div>
-                ) : (
-                  <div className="project-illustration" aria-hidden="true">
-                    {index === 4 ? (
-                      <LayoutDashboard size={46} strokeWidth={1.2} />
-                    ) : (
-                      <Workflow size={46} strokeWidth={1.2} />
-                    )}
-                    <span>
-                      {index === 4 ? "CRM & Analytics" : "Client Operations"}
-                    </span>
-                  </div>
-                )}
+                <ProjectPreview label={project.previewLabel} steps={project.steps} />
                 <div className="project-topline">
                   <span>Case Study / 0{index + 1}</span>
                   <ArrowUpRight size={18} aria-hidden="true" />
                 </div>
-                <h3>{project.title}</h3>
-                <p>{project.description}</p>
+                <h3>{project.cardTitle}</h3>
+                <div className="project-outcome">
+                  <Check size={16} aria-hidden="true" />
+                  <span>{project.impact}</span>
+                </div>
                 <div className="tag-row">
                   {project.tags.map((tag) => (
                     <span key={tag}>{tag}</span>
@@ -1172,9 +1182,7 @@ export default function Home() {
                   </span>
                 </button>
               ) : (
-                <div className="project-modal-placeholder" aria-hidden="true">
-                  <span>{activeProject.title}</span>
-                </div>
+                <ProjectPreview label={activeProject.previewLabel} steps={activeProject.steps} />
               )}
             </div>
             <div className="project-modal-body">
@@ -1189,15 +1197,24 @@ export default function Home() {
                   <p>{activeProject.details}</p>
                 </section>
                 <section>
-                  <h4>Problem</h4>
-                  <p>{activeProject.problem}</p>
+                  <h4>Process change</h4>
+                  <dl className="process-comparison">
+                    <div>
+                      <dt>Before</dt>
+                      <dd>{activeProject.before}</dd>
+                    </div>
+                    <div>
+                      <dt>After</dt>
+                      <dd>{activeProject.after}</dd>
+                    </div>
+                  </dl>
                 </section>
                 <section>
-                  <h4>Solution</h4>
+                  <h4>Implementation</h4>
                   <p>{activeProject.fixed}</p>
                 </section>
                 <section>
-                  <h4>Results & Impact</h4>
+                  <h4>Outcome</h4>
                   <p>{activeProject.impact}</p>
                 </section>
               </div>
