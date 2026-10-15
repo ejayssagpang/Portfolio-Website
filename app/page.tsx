@@ -123,6 +123,8 @@ const toolGroups: ToolGroup[] = [
       { name: "Typeform", icon: "/typeform-logo.png", tone: "monochrome" },
       { name: "GoDaddy", icon: "https://cdn.simpleicons.org/godaddy", tone: "bright" },
       { name: "Wix", icon: "/wix-logo.png" },
+      { name: "Cloudflare", icon: "/cloudflare-logo.png" },
+      { name: "Supabase", icon: "/supabase-logo.png" },
     ],
   },
   {
