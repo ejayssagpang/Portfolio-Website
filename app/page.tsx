@@ -147,18 +147,6 @@ const toolGroups: ToolGroup[] = [
   },
 ];
 
-const coreTools = [
-  { name: "GoHighLevel", caption: "CRM workflows & pipelines" },
-  { name: "Google Workspace", caption: "Team collaboration" },
-  { name: "MySQL", caption: "Data migration" },
-  { name: "Notion", caption: "Knowledge management" },
-  { name: "Slack", caption: "Team communication" },
-  { name: "Zapier", caption: "Cross-app automation" },
-].flatMap((focus) => {
-  const tool = toolGroups.flatMap((group) => group.tools).find((item) => item.name === focus.name);
-  return tool ? [{ tool, caption: focus.caption }] : [];
-});
-
 const services = [
   {
     title: "Workflow Automation",
@@ -850,12 +838,6 @@ export default function Home() {
             <p>
               CRM automation, connected workflows, and dependable IT operations.
             </p>
-          </div>
-          <h3 className="core-toolkit-heading">Core toolkit</h3>
-          <div className="core-tools">
-            {coreTools.map(({ tool, caption }) => (
-              <ToolChip key={tool.name} tool={tool} caption={caption} />
-            ))}
           </div>
           <details className="tool-catalog">
             <summary>

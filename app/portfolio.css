@@ -493,36 +493,6 @@ h1 > span {
   gap: 40px 36px;
   align-items: start;
 }
-.core-toolkit-heading {
-  margin-bottom: 14px;
-  font-size: 15px;
-  font-weight: 600;
-}
-.core-tools {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 8px 32px;
-  margin-bottom: 28px;
-}
-.core-tools .core-tool {
-  height: auto;
-  min-height: 76px;
-  padding: 14px 0;
-  border: 0;
-  border-bottom: 1px solid var(--border);
-  border-radius: 0;
-  background: transparent;
-}
-.tool-copy {
-  min-width: 0;
-  display: grid;
-  gap: 5px;
-}
-.tool-copy small {
-  color: var(--muted-text);
-  font-size: 13px;
-  line-height: 1.5;
-}
 summary {
   cursor: pointer;
   list-style: none;
@@ -1732,11 +1702,6 @@ h1 > .hero-name-accent {
   .modern-card:hover {
     border-color: var(--primary);
   }
-  .core-tools .core-tool:hover {
-    background: transparent;
-    box-shadow: none;
-    transform: none;
-  }
   .button.primary:hover::after {
     animation: button-sweep 0.8s ease-in-out;
   }
@@ -1795,10 +1760,6 @@ h1 > .hero-name-accent {
   }
 }
 @media (max-width: 900px) {
-  .core-tools {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 8px 24px;
-  }
   .container,
   .nav {
     width: calc(100% - 48px);
@@ -2107,9 +2068,6 @@ h1 > .hero-name-accent {
   .modern-card p {
     grid-column: 2;
     font-size: 15px;
-  }
-  .core-tools {
-    grid-template-columns: 1fr;
   }
   .project-card {
     padding: 16px;
