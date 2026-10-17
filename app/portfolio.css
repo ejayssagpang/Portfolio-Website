@@ -513,35 +513,9 @@ details[open] > summary .when-closed {
 details[open] > summary .when-open {
   display: inline;
 }
-.tool-catalog > summary {
-  min-height: 64px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  padding-block: 18px;
-  border-block: 1px solid var(--border);
-  font-size: 16px;
-  font-weight: 600;
-}
-.tool-catalog > summary > span {
-  display: flex;
-  align-items: baseline;
-  flex-wrap: wrap;
-  gap: 6px 16px;
-}
-.tool-catalog > summary small {
-  color: var(--muted-text);
-  font-size: 13px;
-  font-weight: 400;
-}
-.tool-catalog > summary:hover,
 .responsibility-details summary:hover,
 .employer-details summary:hover {
   color: var(--primary);
-}
-.tool-catalog .tool-groups {
-  padding-top: 32px;
 }
 .tool-group {
   min-width: 0;

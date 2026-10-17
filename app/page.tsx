@@ -13,7 +13,6 @@ import {
   CalendarDays,
   ChartNoAxesCombined,
   Check,
-  ChevronDown,
   ClipboardList,
   FileSpreadsheet,
   GraduationCap,
@@ -839,27 +838,16 @@ export default function Home() {
               CRM automation, connected workflows, and dependable IT operations.
             </p>
           </div>
-          <details className="tool-catalog">
-            <summary>
-              <span>
-                Full toolkit
-                <small>
-                  {toolGroups.reduce((count, group) => count + group.tools.length, 0)} tools across {toolGroups.length} categories
-                </small>
-              </span>
-              <ChevronDown size={20} aria-hidden="true" />
-            </summary>
-            <div className="tool-groups">
-              {toolGroups.map((group) => (
-                <article className="tool-group" key={group.title}>
-                  <h3>{group.title}</h3>
-                  <div>
-                    {group.tools.map((tool) => <ToolChip key={tool.name} tool={tool} />)}
-                  </div>
-                </article>
-              ))}
-            </div>
-          </details>
+          <div className="tool-groups">
+            {toolGroups.map((group) => (
+              <article className="tool-group" key={group.title}>
+                <h3>{group.title}</h3>
+                <div>
+                  {group.tools.map((tool) => <ToolChip key={tool.name} tool={tool} />)}
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
