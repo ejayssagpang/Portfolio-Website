@@ -247,7 +247,7 @@ svg {
   display: block;
   border-radius: 44% 44% 16% 44%;
   transform: translateY(var(--portrait-base-y));
-  animation: portrait-float 6s ease-in-out infinite;
+  animation: portrait-float 4.6s ease-in-out infinite;
 }
 @keyframes portrait-float {
   0%,
@@ -255,7 +255,7 @@ svg {
     transform: translateY(var(--portrait-base-y));
   }
   50% {
-    transform: translateY(calc(var(--portrait-base-y) - 4px));
+    transform: translateY(calc(var(--portrait-base-y) - 12px));
   }
 }
 .hero-background::before {
@@ -267,22 +267,24 @@ svg {
   object-fit: cover;
   object-position: center 36%;
   background: #fff;
-  box-shadow: 0 0 0 1px rgba(255, 94, 0, 0.55);
-  animation: portrait-float 6s ease-in-out infinite;
+  box-shadow: 0 0 0 2px rgba(255, 94, 0, 0.7);
+  animation:
+    portrait-float 4.6s ease-in-out infinite,
+    portrait-border-pulse 3.2s ease-in-out infinite;
 }
 @keyframes portrait-border-pulse {
   0%,
   100% {
     box-shadow:
-      0 0 0 2px rgba(255, 94, 0, 0.55),
+      0 0 0 2px rgba(255, 94, 0, 0.7),
       0 0 0 2px rgba(255, 94, 0, 0),
-      0 0 12px rgba(255, 94, 0, 0.06);
+      0 0 16px rgba(255, 94, 0, 0.1);
   }
   50% {
     box-shadow:
-      0 0 0 2px rgba(255, 94, 0, 1),
-      0 0 0 6px rgba(255, 94, 0, 0.08),
-      0 0 26px rgba(255, 94, 0, 0.18);
+      0 0 0 3px rgba(255, 94, 0, 1),
+      0 0 0 10px rgba(255, 94, 0, 0.12),
+      0 0 34px rgba(255, 94, 0, 0.3);
   }
 }
 .hero-grid {
@@ -1794,8 +1796,9 @@ h1 > .hero-name-accent {
   }
   .hero-background img,
   .hero-background::before {
-    width: 220px;
-    height: 220px;
+    width: min(220px, calc(40% - 48px));
+    height: auto;
+    aspect-ratio: 1;
     right: 24px;
   }
   .tool-groups {
@@ -1862,7 +1865,7 @@ h1 > .hero-name-accent {
     align-items: start;
     min-height: 620px;
     padding-top: 42px;
-    padding-bottom: 220px;
+    padding-bottom: 244px;
   }
   .hero-copy {
     width: 100%;
@@ -2082,7 +2085,7 @@ h1 > .hero-name-accent {
   }
   .hero-grid {
     padding-top: 36px;
-    padding-bottom: 220px;
+    padding-bottom: 244px;
   }
   .hero-background img,
   .hero-background::before {
