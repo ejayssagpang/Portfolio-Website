@@ -532,10 +532,12 @@ export default function Home() {
   useEffect(() => {
     const root = pageRoot.current;
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (!root || reducedMotion.matches || !window.IntersectionObserver) return;
+    if (!root || !window.IntersectionObserver) return;
 
-    const selector = ".section-heading";
+    const selector =
+      ".section-heading, .tool-group h3, .tool-chip, .modern-card, .experience-card, .project-card, .education-panel, .certification-item, .contact-grid > div:first-child, .contact-card, .footer .container";
     const elements = Array.from(root.querySelectorAll<HTMLElement>(selector));
+    const regions = Array.from(root.querySelectorAll<HTMLElement>(":scope > section, .footer"));
     const reveal = (element: HTMLElement) => {
       element.dataset.reveal = "visible";
       observer.unobserve(element);
@@ -548,19 +550,29 @@ export default function Home() {
       },
       { threshold: 0.08, rootMargin: "0px 0px -24px 0px" },
     );
+    const regionObserver = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          (entry.target as HTMLElement).dataset.motion = entry.isIntersecting ? "active" : "idle";
+        }
+      },
+      { threshold: 0, rootMargin: "60px 0px" },
+    );
 
-    for (const element of elements) {
+    for (const [index, element] of elements.entries()) {
       const siblings = Array.from(element.parentElement?.children ?? []).filter(
         (sibling) => sibling.matches(selector),
       );
       element.style.setProperty(
         "--reveal-delay",
-        `${Math.min(siblings.indexOf(element) * 75, 375)}ms`,
+        `${Math.min(siblings.indexOf(element) * 80, 400)}ms`,
       );
+      element.style.setProperty("--ambient-delay", `${-(index % 6) * 0.6}s`);
       element.classList.add("scroll-reveal");
-      element.dataset.reveal = "pending";
-      observer.observe(element);
+      element.dataset.reveal = reducedMotion.matches ? "visible" : "pending";
+      if (!reducedMotion.matches) observer.observe(element);
     }
+    regions.forEach((region) => regionObserver.observe(region));
 
     function revealFocused(event: FocusEvent) {
       if (!(event.target instanceof Element)) return;
@@ -572,16 +584,26 @@ export default function Home() {
       elements.forEach(reveal);
       observer.disconnect();
     }
+    function syncVisibility() {
+      root?.setAttribute("data-motion-paused", String(document.hidden));
+    }
+    syncVisibility();
     root.addEventListener("focusin", revealFocused);
     reducedMotion.addEventListener("change", honorReducedMotion);
+    document.addEventListener("visibilitychange", syncVisibility);
     return () => {
       observer.disconnect();
+      regionObserver.disconnect();
       root.removeEventListener("focusin", revealFocused);
       reducedMotion.removeEventListener("change", honorReducedMotion);
+      document.removeEventListener("visibilitychange", syncVisibility);
+      delete root.dataset.motionPaused;
+      regions.forEach((region) => delete region.dataset.motion);
       for (const element of elements) {
         element.classList.remove("scroll-reveal");
         delete element.dataset.reveal;
         element.style.removeProperty("--reveal-delay");
+        element.style.removeProperty("--ambient-delay");
       }
     };
   }, []);
@@ -594,6 +616,9 @@ export default function Home() {
 
     function updateActiveSection() {
       frame = null;
+      const scrollRange = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = scrollRange > 0 ? window.scrollY / scrollRange : 0;
+      pageRoot.current?.style.setProperty("--page-progress", String(Math.max(0, Math.min(1, progress))));
       const activationLine =
         (document.querySelector(".site-header")?.getBoundingClientRect()
           .bottom ?? 80) + 32;

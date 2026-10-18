@@ -115,6 +115,19 @@ svg {
   background: var(--header-bg);
   backdrop-filter: blur(16px);
 }
+.site-header::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--action);
+  transform: scaleX(var(--page-progress, 0));
+  transform-origin: left;
+  transition: transform 0.12s linear;
+  pointer-events: none;
+}
 .nav {
   width: min(1200px, calc(100% - 80px));
   min-height: 80px;
@@ -248,6 +261,7 @@ svg {
   border-radius: 44% 44% 16% 44%;
   transform: translateY(var(--portrait-base-y));
   animation: portrait-float 4.6s ease-in-out infinite;
+  animation-play-state: var(--ambient-play-state, running);
 }
 @keyframes portrait-float {
   0%,
@@ -271,6 +285,7 @@ svg {
   animation:
     portrait-float 4.6s ease-in-out infinite,
     portrait-border-pulse 3.2s ease-in-out infinite;
+  animation-play-state: var(--ambient-play-state, running);
 }
 @keyframes portrait-border-pulse {
   0%,
@@ -1602,6 +1617,125 @@ h1 > .hero-name-accent {
   transition-delay: 0s;
 }
 
+[data-motion="active"] {
+  --ambient-play-state: running;
+}
+[data-motion="idle"] {
+  --ambient-play-state: paused;
+}
+.section-heading h2,
+.contact-grid h2 {
+  position: relative;
+  width: fit-content;
+  padding-bottom: 12px;
+}
+.section-heading h2::after,
+.contact-grid h2::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 56px;
+  height: 2px;
+  background: var(--primary);
+  transform-origin: left;
+  animation: heading-line-breathe 4.8s ease-in-out infinite;
+  animation-play-state: var(--ambient-play-state, running);
+}
+.tool-chip .tool-icon {
+  animation: tool-idle-float 5.4s ease-in-out var(--ambient-delay, 0s) infinite;
+  animation-play-state: var(--ambient-play-state, running);
+}
+.service-logo,
+.credential-icon {
+  animation: service-idle-float 5s ease-in-out var(--ambient-delay, 0s) infinite;
+  animation-play-state: var(--ambient-play-state, running);
+}
+.experience-card::before {
+  animation: timeline-node-pulse 3.6s ease-in-out var(--ambient-delay, 0s) infinite;
+  animation-play-state: var(--ambient-play-state, running);
+}
+.preview-flow li {
+  --step-delay: 0s;
+}
+.preview-flow li:nth-child(2) {
+  --step-delay: 1.2s;
+}
+.preview-flow li:nth-child(3) {
+  --step-delay: 2.4s;
+}
+.preview-step-icon {
+  animation: workflow-step-beat 4.8s ease-in-out var(--step-delay) infinite;
+  animation-play-state: var(--ambient-play-state, running);
+}
+.preview-arrow {
+  animation: workflow-arrow-travel 2.4s ease-in-out var(--step-delay) infinite;
+  animation-play-state: var(--ambient-play-state, running);
+}
+.certification-logo {
+  animation: credential-idle-breathe 5.4s ease-in-out var(--ambient-delay, 0s) infinite;
+  animation-play-state: var(--ambient-play-state, running);
+}
+.contact-card > svg,
+.footer a svg {
+  animation: contact-arrow-nudge 4s ease-in-out var(--ambient-delay, 0s) infinite;
+  animation-play-state: var(--ambient-play-state, running);
+}
+.responsibility-details[open] > .experience-highlights > li,
+.employer-details[open] > .employer-contact {
+  animation: disclosure-enter 0.4s ease-out both;
+}
+.responsibility-details[open] > .experience-highlights > li:nth-child(2) {
+  animation-delay: 60ms;
+}
+.responsibility-details[open] > .experience-highlights > li:nth-child(3) {
+  animation-delay: 120ms;
+}
+.responsibility-details[open] > .experience-highlights > li:nth-child(4) {
+  animation-delay: 180ms;
+}
+[data-motion-paused="true"] *,
+[data-motion-paused="true"] *::before,
+[data-motion-paused="true"] *::after {
+  animation-play-state: paused !important;
+}
+@keyframes heading-line-breathe {
+  0%, 100% { scale: 0.55 1; opacity: 0.45; }
+  50% { scale: 1 1; opacity: 1; }
+}
+@keyframes tool-idle-float {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -4px; }
+}
+@keyframes service-idle-float {
+  0%, 100% { translate: 0 0; rotate: 0deg; }
+  50% { translate: 0 -5px; rotate: -4deg; }
+}
+@keyframes timeline-node-pulse {
+  0%, 100% { scale: 1; box-shadow: 0 0 0 1px var(--border); }
+  50% { scale: 1.25; box-shadow: 0 0 0 5px color-mix(in srgb, var(--action) 14%, transparent); }
+}
+@keyframes workflow-step-beat {
+  0%, 55%, 100% { scale: 1; }
+  20% { scale: 1.12; }
+}
+@keyframes workflow-arrow-travel {
+  0%, 100% { translate: -2px 0; opacity: 0.45; }
+  50% { translate: 3px 0; opacity: 1; }
+}
+@keyframes credential-idle-breathe {
+  0%, 100% { scale: 1; }
+  50% { scale: 1.07; }
+}
+@keyframes contact-arrow-nudge {
+  0%, 70%, 100% { translate: 0 0; }
+  35% { translate: 3px -3px; }
+}
+@keyframes disclosure-enter {
+  from { opacity: 0; translate: 0 8px; }
+  to { opacity: 1; translate: 0 0; }
+}
+
 .button.primary {
   position: relative;
   overflow: hidden;
@@ -1614,7 +1748,13 @@ h1 > .hero-name-accent {
   background: rgba(255, 255, 255, 0.4);
   opacity: 0;
   pointer-events: none;
-  animation: none;
+  animation: button-idle-sweep 7s ease-in-out 1.2s infinite;
+  animation-play-state: var(--ambient-play-state, running);
+}
+@keyframes button-idle-sweep {
+  0%, 80% { opacity: 0; transform: translateX(0) skewX(-18deg); }
+  86% { opacity: 0.45; }
+  100% { opacity: 0; transform: translateX(650%) skewX(-18deg); }
 }
 @keyframes button-sweep {
   0% {
@@ -2098,6 +2238,18 @@ h1 > .hero-name-accent {
   }
   .modern-card h3 {
     min-height: 0;
+  }
+}
+@media print {
+  .scroll-reveal {
+    opacity: 1 !important;
+    translate: none !important;
+  }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
   }
 }
 @media (prefers-reduced-motion: reduce) {
